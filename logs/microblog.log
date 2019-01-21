@@ -1,0 +1,48 @@
+2019-01-20 05:40:44,134 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
+2019-01-20 05:40:48,594 ERROR: Exception on /edit_profile [POST] [in /home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/linus/flaskApps/microblog/app/routes.py", line 75, in edit_profile
+    form = EditProfileForm()
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+TypeError: __init__() missing 1 required positional argument: 'original_username'
+2019-01-20 05:40:57,082 ERROR: Exception on /edit_profile [GET] [in /home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/linus/flaskApps/microblog/app/routes.py", line 75, in edit_profile
+    form = EditProfileForm()
+  File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+TypeError: __init__() missing 1 required positional argument: 'original_username'
+2019-01-20 05:43:24,752 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
+2019-01-20 06:00:26,849 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
+2019-01-20 06:00:31,546 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
+2019-01-20 06:00:43,439 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
+2019-01-20 06:00:46,798 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
