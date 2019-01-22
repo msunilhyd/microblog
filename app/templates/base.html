@@ -5,6 +5,11 @@
       {% else %}
       <title>Welcome to Microblog</title>
       {% endif %}
+      
+      <script type='text/javascript' src='{{ url_for('static', filename='js/jquery.js')}}'></script>
+
+      {{ moment.include_moment(local_js='/static/js/moment.js') }}
+
     </head>
     <body>
         <div>
