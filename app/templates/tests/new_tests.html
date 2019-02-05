@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+
+
+{% block app_content %}
+
+
+
+
+<h1></h1>
+
+  <head>
+    <title> Quiz Project</title>
+    <link rel="text/css" type="text/css" href=" {{ url_for('static', filename='css/stylesheet.css')}} " >
+  </head>
+     <div id='container' class='container'>
+      <div id='title'>
+        <h1>{{ test.test_name }}</h1>
+      </div>
+              <span id="timerCount" class="timerCount"></span>
+        <br/>
+
+
+        <div id='test_instr_div'> {{ test.instructions }} </div>
+
+        <div id='total_marks_div'> {{ test.total_marks }} </div>
+        
+
+        <div id='test_id_div'> {{ test.id }} </div>
+        <div id='time_in_mins_div'> {{ test.time_in_mins }} </div>
+        <div id='user_id_div'> {{ current_user.id }} </div>
+
+
+        <div id='end_of_test_div' class='end_of_test_div' >Reached End of Test.
+          </div>
+        <div id='quiz' > </div>
+        <div class='button' id='startQuiz'><a href='#'>Start Test</a></div>
+        <div class='submitQuiz' id='submitQuiz'><a href='#'>Submit</a></div>
+
+        <!-- <button class='' id='next'>Next</a></button>
+        <button class='' id='prev'>Prev</a></button>
+        <button class='' id='start'> Start Over</a></button> -->
+      
+      </div>
+ 
+     <div id='container' class='container'>
+    
+        <div id='ques_buttons_div' > This is ques_buttons_div </div>
+  </div>
+<script>
+
+
+
+</script>
+    <script type='text/javascript' src='{{ url_for('static', filename='js/jquery.min.js')}}'></script>
+    <script type='text/javascript' src='{{ url_for('static', filename='js/jsquiz.js')}}'></script>
+    <script>
+   
+    </script>
+
+{% endblock app_content %}
