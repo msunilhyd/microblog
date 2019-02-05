@@ -335,13 +335,15 @@ th, td {
   text-align: left;    
 }
 
-
 .form-control {
     font-size: 18px;
   }
 
-
-
-  .navbar-brand {
+.navbar-brand {
     font-size: 28px;
 }
+
+#tick {
+  color: green;
+}
+
