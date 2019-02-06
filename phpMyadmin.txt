@@ -1,0 +1,21 @@
+sudo apt-get update
+sudo apt-get install phpmyadmin php-mbstring php-gettext
+sudo phpenmod mcrypt
+sudo phpenmod mbstring
+sudo apt install php7.1-mcrypt
+sudo apt install php7.0-mcrypt && sudo apt install php7.0-mbstring
+sudo apt-add-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php7.0
+sudo apt install php7.0-mcrypt && sudo apt install php7.0-mbstring
+sudo a2enmod mcrypt
+sudo a2enmod mbstring
+sudo phpenmod mcrypt
+sudo phpenmod mbstring
+sudo systemctl restart apache2
+vim sudo -H gedit /etc/apache2/apache2.conf
+sudo -H gedit /etc/apache2/apache2.conf
+sudo service apache2 restart
+sudo nano /usr/share/phpmyadmin/libraries/sql.lib.php
+sudo vim /usr/share/phpmyadmin/libraries/sql.lib.php
+sudo service apache2 restart

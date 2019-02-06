@@ -6,3 +6,6 @@ DATABASE_URL=mysql+pymysql://microblog:kumar@localhost:3306/microblog
 JSON_ADD_STATUS = False
 JSON_DATETIME_FORMAT = '%d/%m/%Y %H:%M:%S'
 
+
+
+mysqldump -u root -p microblog > db_backup.sql

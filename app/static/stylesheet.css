@@ -68,7 +68,6 @@ h1, h2, h3, h4, h5, h6 {
 .content-section {
   background: #ffffff;
   padding: 10px 20px;
-  border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
 }
@@ -322,18 +321,10 @@ label {
     display: inline-block;
     margin-bottom: .5rem;
     font-size: 20px;
-    cursor: pointer;
+    cursor: pointer;    
+    vertical-align: middle;
 }
 
-
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-  text-align: left;    
-}
 
 .form-control {
     font-size: 18px;
@@ -344,6 +335,8 @@ th, td {
 }
 
 #tick {
-  color: green;
+    color: green;
+    vertical-align: middle;
+    font-size: 23px;
 }
 

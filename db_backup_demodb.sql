@@ -65,21 +65,23 @@ UNLOCK TABLES;
 --
 -- Table structure for table `post`
 --
+--
+-- Table structure for table `post`
+--
 
 DROP TABLE IF EXISTS `post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `date_posted` datetime NOT NULL,
-  `content` text NOT NULL,
-  `post_image_file` varchar(30) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
+  `body` varchar(140) COLLATE utf8_bin DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
+  KEY `ix_post_timestamp` (`timestamp`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,10 +90,9 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'1st Post','2019-01-06 06:55:59','Hello',NULL,1),(2,'1st Post','2019-01-06 06:56:35','Hello',NULL,1),(3,'1st Post','2019-01-06 22:48:35','ndnd',NULL,1),(4,'Sunils Post ','2019-01-07 09:03:03','Hello Everyone',NULL,1),(5,'Rajesh\'s First Post','2019-01-07 09:05:14','Hello All. This is Rajesh.','bae0a43f51fa996d.png',3),(6,'sds','2019-01-08 01:11:39','dsdsd',NULL,5),(7,'1st Post','2019-01-08 22:29:50','dfswfwds',NULL,5);
+INSERT INTO `post` VALUES (1,'Hi THis is Lunis.\r\nSomce c Lorem Ipsuem','2019-01-24 09:55:34',1),(2,'This is cuser.\r\nBelwo is my poost','2019-01-25 11:57:02',2),(3,'dsfds','2019-01-25 12:50:10',1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
-
 --
 -- Table structure for table `question`
 --

@@ -79,7 +79,7 @@ def show_questions(test_id):
 		print("Questions added already")
 
 	flash('Your test is not empty! You can add more questions', 'success')
-	return redirect(url_for('new_test_question', test_id=test_id))
+	return redirect(url_for('tests.new_test_question', test_id=test_id))
 
 
 @bp.route("/take_test/<int:test_id>",  methods=['GET', 'POST'])

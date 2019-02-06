@@ -199,9 +199,7 @@
         var input = '';
         for (var i = 0; i < questions[index].choices.length; i++) {
             item = $('<li> style="height: 1.8em;"');
-    
-              console.log('isSubmit is = ' + isSubmit);
-              input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                  input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
               input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';      
             if(isSubmit === 1)
             {
@@ -243,8 +241,7 @@
                 let parsedData = JSON.parse(data);
                 questions = parsedData;
                 displayNext();
-                createRandomButtons()
-
+                createRandomButtons();
             },
             error: function(data) {
                 alert("Error getting questions from server");
@@ -267,7 +264,8 @@ window.randomQuesFun  = function(i) {
         }
 
         questionCounter = i;
-        displayNext();       
+        displayNext(); 
+              
 }
 
 window.selectradio = function (event) {
@@ -323,6 +321,12 @@ window.displayNext  = function() {
                 $('#end_of_test_div').show();
 
             }
+
+          var math = MathJax.Hub.getAllJax("question");
+          console.log('printing question from getQuestions')
+          console.log(math);
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+
         });
     }
 
