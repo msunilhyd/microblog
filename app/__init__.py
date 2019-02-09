@@ -11,9 +11,6 @@ from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
 from config import Config
 from elasticsearch import Elasticsearch
-from dotenv import find_dotenv, load_dotenv
-
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 
 
 db = SQLAlchemy()
@@ -41,10 +38,6 @@ def create_app(config_class=Config):
     moment.init_app(app)
     babel.init_app(app)
 
-    print('Printing dotenv_path')
-    print(dotenv_path)
-
-
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
@@ -56,8 +49,6 @@ def create_app(config_class=Config):
 
     from app.tests import bp as tests_bp
     app.register_blueprint(tests_bp)
-
-    load_dotenv(dotenv_path)
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:

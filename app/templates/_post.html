@@ -5,6 +5,7 @@
                     <!-- 
                        {# <img src="{{ post.user_id.avatar(70) }}" /> #}
                     -->
+                    <img class="rounded-circle article-img" src="{{url_for('static', filename='profile_pics/' + post.user.image_file)}}">
                 </a>
             </td>
             <td>

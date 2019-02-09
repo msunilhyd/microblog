@@ -6,6 +6,8 @@ from app import db
 from app.main.forms import EditProfileForm, PostForm
 from app.models import User, Post, UserTest, Test
 from app.main import bp
+import os
+import secrets
 
 
 @bp.before_request
@@ -33,7 +35,7 @@ def index():
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False) 
 
-    user_tests = UserTest.query.filter_by(user_id=current_user.id).order_by(UserTest.timestamp.desc()).paginate(
+    user_tests = UserTest.query.order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
    
     print('Printing user tests as below')
@@ -43,10 +45,10 @@ def index():
         
 
    
-    next_url = url_for('main.index', page=posts.next_num) \
-            if posts.has_next else None
-    prev_url = url_for('main.index', page=posts.prev_num) \
-            if posts.has_prev else None
+    next_url = url_for('main.index', page=user_tests.next_num) \
+            if user_tests.has_next else None
+    prev_url = url_for('main.index', page=user_tests.prev_num) \
+            if user_tests.has_prev else None
     return render_template('index.html', title='Home Page', form=form, posts=user_tests.items, next_url=next_url, prev_url=prev_url)
 
 
@@ -76,6 +78,10 @@ def user(username):
     user_tests = UserTest.query.filter_by(user_id=current_user.id).order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
    
+    if len(user.image_file) == 0:
+        user.image_file='default.jpg'
+        print('user.image_file is None')
+    
     print('Printing user tests as below')
     for user_test in user_tests.items:
         print(user_test.user)
@@ -112,7 +118,7 @@ def save_profile_picture(form_picture):
 	random_hex = secrets.token_hex(8)
 	_, f_ext = os.path.splitext(form_picture.filename)
 	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+	picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
 	form_picture.save(picture_path)
 
 	return picture_fn

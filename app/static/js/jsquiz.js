@@ -283,7 +283,7 @@ window.selectradio = function (event) {
         $radio.data('waschecked', true); // remove was checked from other radio
                console.log('radio = data not waschecked');
  
-        document.getElementById('random' + questionCounter).style.background='yellow';
+        document.getElementById('random' + questionCounter).style.background='lightseagreen';
     }
     // $radio.siblings('input[name="rad"]').data('waschecked', false);
     $radio.closest("ul").find('input').each(function(index, elem) {
@@ -342,7 +342,6 @@ window.displayNext  = function() {
 
         var test_id = $('#test_id_div').text();
         getAnswers(test_id);
-
     });
 
     var questionsAns;
@@ -360,6 +359,8 @@ window.displayNext  = function() {
                 questionsAns = parsedData;
                 var scoreElem = displayScore(questionsAns);
                 quiz.append(scoreElem).fadeIn();
+                document.getElementById('ques_buttons_div').insertAdjacentHTML('afterbegin', "You can use the below Navigations for " + 
+                "checking correct answers. <br>");
             },
             error: function(data) {
                 console.log("Error getting questions from server");
@@ -424,7 +425,6 @@ window.displayNext  = function() {
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
         $('#next').hide();
-
         updateUserScore(finalScore, positive_score, negative_score,
             no_of_correct_ans_ques, no_of_wrong_ans_ques, no_of_not_ans_ques, no_of_attempted_ans_ques);
         return score;
