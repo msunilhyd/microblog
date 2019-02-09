@@ -19,3 +19,10 @@ sudo service apache2 restart
 sudo nano /usr/share/phpmyadmin/libraries/sql.lib.php
 sudo vim /usr/share/phpmyadmin/libraries/sql.lib.php
 sudo service apache2 restart
+<<<<<<< Updated upstream
+=======
+
+
+
+./ngrok http 5000
+>>>>>>> Stashed changes

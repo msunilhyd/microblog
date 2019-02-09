@@ -128,7 +128,6 @@ def load_user(id):
 
 
 class Post(db.Model):
-    __searchable__ = ['body']
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -148,6 +147,7 @@ class Test(db.Model):
     time_in_mins = db.Column(db.Integer, nullable=False, default=180)
     date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now)   
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    questions = db.relationship('TestQuestion', backref='NameOfTest', lazy=True)
 
     def __repr__(self):
         return "Test('{}','{}''{}')".format(self.id,self.test_name, self.category, self.no_of_questions, self.user_id)
@@ -172,7 +172,6 @@ class TestQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    questions = db.relationship('Question', backref='NameOfTest', lazy=True)
     
     def __repr__(self):
         return "TestQuestion('{}','{}')".format(self.test_id, self.id)
@@ -189,10 +188,13 @@ class UserTest(db.Model):
     wrong_answers = db.Column(db.Integer, nullable=False, default=0)
     no_answers = db.Column(db.Integer, nullable=False, default=0)
     attempted_ques = db.Column(db.Integer, nullable=False, default=0)
-    test_taken_on_date = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now)    
+    timestamp = db.Column(db.DateTime(timezone=True), index=True, nullable=False, default=datetime.utcnow)
+    test = db.relationship(Test, backref=db.backref("test_assoc"))
+    user = db.relationship(User, backref=db.backref("user_assoc"))
+
     __table_args__ = (db.UniqueConstraint('test_id', 'user_id'), )
 
     def __repr__(self):
-        return "UserTest('{}','{}''{}')".format(self.id, self.test_id, self.user_id, self.user_score)
+        return "UserTest('{}','{}''{}')".format(self.id, self.test_id, self.user_id, self.user_score, self.test, self.user)
 
 

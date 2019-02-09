@@ -1,0 +1,13 @@
+1. .flaskenv
+
+	Create the above file and just put the env variables in it to run flask run.
+	No need of doing anything extra.
+
+2. Target database not upto data:
+	flask db stamp heads
+
+3. flask shell : 
+	from app import models
+	users = User.query.all()
+
+

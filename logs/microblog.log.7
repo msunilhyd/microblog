@@ -1,4 +1,4 @@
-2019-01-21 03:27:45,267 ERROR: Exception on /favicon.ico [GET] [in /home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py:1761]
+2019-01-21 03:31:17,581 ERROR: Exception on / [GET] [in /home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1230, in _execute_context
     cursor, statement, parameters, context
@@ -67,6 +67,4 @@ Traceback (most recent call last):
     cursor, statement, parameters, context
   File "/home/linus/flaskApps/microblog/venv/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 536, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked [SQL: 'UPDATE user SET last_seen=? WHERE user.id = ?'] [parameters: ('2019-01-21 11:27:40.221402', 3)] (Background on this error at: http://sqlalche.me/e/e3q8)
-2019-01-21 03:30:49,672 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
-2019-01-21 03:31:10,890 INFO: Microblog startup [in /home/linus/flaskApps/microblog/app/__init__.py:51]
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked [SQL: 'UPDATE user SET last_seen=? WHERE user.id = ?'] [parameters: ('2019-01-21 11:31:12.541109', 3)] (Background on this error at: http://sqlalche.me/e/e3q8)

@@ -14,6 +14,7 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
+
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
@@ -30,12 +31,23 @@ def index():
     # Currently hiding the user_test activity
     #posts = current_user.user_tests().paginate(page, current_app.config['POSTS_PER_PAGE'], False)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False)    
+        page, current_app.config['POSTS_PER_PAGE'], False) 
+
+    user_tests = UserTest.query.filter_by(user_id=current_user.id).order_by(UserTest.timestamp.desc()).paginate(
+        page, current_app.config['POSTS_PER_PAGE'], False)
+   
+    print('Printing user tests as below')
+    for user_test in user_tests.items:
+        print(user_test.user)
+        print(user_test.test)
+        
+
+   
     next_url = url_for('main.index', page=posts.next_num) \
             if posts.has_next else None
     prev_url = url_for('main.index', page=posts.prev_num) \
             if posts.has_prev else None
-    return render_template('index.html', title='Home Page', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('index.html', title='Home Page', form=form, posts=user_tests.items, next_url=next_url, prev_url=prev_url)
 
 
 
@@ -61,14 +73,19 @@ def user(username):
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
-    user_tests = UserTest.query.filter_by(user_id=current_user.id).order_by(UserTest.test_taken_on_date.desc()).paginate(
+    user_tests = UserTest.query.filter_by(user_id=current_user.id).order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
    
+    print('Printing user tests as below')
+    for user_test in user_tests.items:
+        print(user_test.user)
+        print(user_test.test)
+
     next_url = url_for('main.user', username=user.username,
                        page=user_tests.next_num) if user_tests.has_next else None
     prev_url = url_for('main.user', username=user.username,
                        page=user_tests.prev_num) if user_tests.has_prev else None
-    return render_template('user.html', user=user, posts=posts.items,
+    return render_template('user.html', user=user, posts=user_tests.items,
                            next_url=next_url, prev_url=prev_url)
 
 
