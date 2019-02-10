@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .taken-test-p{
-  color: #00BFFF;
+  color: lightseagreen;
 }
 
 .navbar-nav{
@@ -118,6 +118,7 @@ h1, h2, h3, h4, h5, h6 {
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
+    background-color: lightseagreen;
 }
 
 a.article-title {
@@ -205,8 +206,7 @@ p {
     padding-right: 5px;
     position: relative;
     float:left;
-    background-color: #DCDCDC;
-    color: blue;
+    color: lightseagreen;
     margin: 12px 2px 0 2px;
     left: 1%;
     cursor: pointer;
@@ -258,7 +258,7 @@ button {
     float:left;
 }
 
-.button a, submitQuiz {
+.submitQuiz {
     text-decoration: none;
     color: black;
 }
@@ -340,3 +340,38 @@ label {
     font-size: 23px;
 }
 
+
+.score-sheet.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.score-sheet.td, .score-sheet.th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+.score-sheet.tr:nth-child(even) {
+  background-color: lightseagreen;
+}
+
+
+#score-sheet {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#score-sheet td, #score-sheet th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#score-sheet tr:nth-child(odd){background-color: lightseagreen; color: white}
+#score-sheet tr:nth-child(even){background-color: #ddd; color: black}
+
+#score-sheet th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
