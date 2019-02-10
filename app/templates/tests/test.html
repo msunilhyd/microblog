@@ -45,7 +45,7 @@
               <td>{{ usertest.wrong_answers }}</td>
               <td>{{ usertest.no_answers }}</td>
               <td>
-                {{ moment(usertest.timestamp).fromNow() }}
+                {{ moment(usertest.timestamp).calendar() }}
 
                 {{ moment.include_jquery() }}
                 {{ moment.include_moment() }}

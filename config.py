@@ -1,6 +1,8 @@
 
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
@@ -24,6 +26,7 @@ class Config(object):
     POSTS_PER_PAGE = 5
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     BOOTSTRAP_SERVE_LOCAL = True
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=185)
 
 
 
