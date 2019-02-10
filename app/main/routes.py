@@ -38,13 +38,6 @@ def index():
     user_tests = UserTest.query.order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
    
-    print('Printing user tests as below')
-    for user_test in user_tests.items:
-        print(user_test.user)
-        print(user_test.test)
-        
-
-   
     next_url = url_for('main.index', page=user_tests.next_num) \
             if user_tests.has_next else None
     prev_url = url_for('main.index', page=user_tests.prev_num) \
@@ -75,17 +68,11 @@ def user(username):
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
-    user_tests = UserTest.query.filter_by(user_id=current_user.id).order_by(UserTest.timestamp.desc()).paginate(
+    user_tests = UserTest.query.filter_by(user_id=user.id).order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
    
     if len(user.image_file) == 0:
         user.image_file='default.jpg'
-        print('user.image_file is None')
-    
-    print('Printing user tests as below')
-    for user_test in user_tests.items:
-        print(user_test.user)
-        print(user_test.test)
 
     next_url = url_for('main.user', username=user.username,
                        page=user_tests.next_num) if user_tests.has_next else None

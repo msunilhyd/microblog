@@ -8,7 +8,7 @@ from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User
-from app.auth.email import send_password_reset_email
+from app.auth.email import send_password_reset_email, send_confirm_email
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -20,11 +20,16 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash(_('Invalid username or password'))
             return redirect(url_for('auth.login'))
-        login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('main.index')
-        return redirect(next_page)
+        if user.is_confirmed == 0:
+            send_confirm_email(user)
+            flash('A Confirmation mail has been sent to your email, Please check it to complete Registration.', 'info')
+            return redirect(url_for('auth.login'))
+        else:  
+            login_user(user, remember=form.remember_me.data)
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('main.index')
+            return redirect(next_page)
     return render_template('auth/login.html', title=_('Sign In'), form=form)
 
 
@@ -44,7 +49,8 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash(_('Congratulations, you are now a registered user!'))
+        send_confirm_email(user)
+        flash('A Confirmation mail has been sent to your email, Please check it to complete Registration.', 'info')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title=_('Register'),
                            form=form)
@@ -59,8 +65,7 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash(
-            _('Check your email for the instructions to reset your password'))
+        flash('Check your email for the instructions to reset your password', 'info')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request.html',
                            title=_('Reset Password'), form=form)
@@ -77,6 +82,23 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash(_('Your password has been reset.'))
+        flash('Your password has been reset.', 'info')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
+
+@bp.route('/confirm_email/<token>', methods=['GET', 'POST'])
+def confirm_email(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    user = User.verify_confirm_email_token(token)
+    if not user:
+        return redirect(url_for('main.index'))
+    user.is_confirmed = 1;
+    db.session.commit()
+
+    login_user(user)
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for('main.index')
+    flash('Welcome to EQuizzy, Your account has been verified.','info')
+    return redirect(next_page)

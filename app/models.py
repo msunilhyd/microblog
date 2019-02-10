@@ -61,6 +61,7 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     tests = db.relationship('Test', backref='creator', lazy='dynamic')
     is_admin = db.Column(db.Integer, nullable=False, default=0)
+    is_confirmed = db.Column(db.Integer, nullable=False, default=0)
     about_me = db.Column(db.Text)
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     image_file = db.Column(db.String(64), nullable=False, default='default.jpg')
@@ -114,6 +115,21 @@ class User(UserMixin, db.Model):
         try:
             id = jwt.decode(token, current_app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
+
+    def get_confirm_email_token(self, expires_in=600):
+        return jwt.encode(
+        {'confirm_email': self.id, 'exp': time() + expires_in},
+        current_app.config['SECRET_KEY'],
+        algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_confirm_email_token(token):
+        try:
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['confirm_email']
         except:
             return
         return User.query.get(id)
