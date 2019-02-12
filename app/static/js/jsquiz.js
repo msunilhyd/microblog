@@ -382,6 +382,8 @@ var section_positive_score_map = new Map();
 var section_negative_score_map = new Map(); 
 var section_attempted_questions_map = new Map(); 
 var section_un_attempted_questions_map = new Map(); 
+var section_correct_attempted_questions_map = new Map(); 
+var section_wrong_attempted_questions_map = new Map(); 
   
 // adding some elements to the map  
 section_total_score_map.set("Maths", 0); 
@@ -404,6 +406,14 @@ section_un_attempted_questions_map.set("Maths", 0);
 section_un_attempted_questions_map.set("Physics", 0);
 section_un_attempted_questions_map.set("Chemistry", 0);
 
+section_correct_attempted_questions_map.set("Maths", 0); 
+section_correct_attempted_questions_map.set("Physics", 0);
+section_correct_attempted_questions_map.set("Chemistry", 0);
+
+section_wrong_attempted_questions_map.set("Maths", 0); 
+section_wrong_attempted_questions_map.set("Physics", 0);
+section_wrong_attempted_questions_map.set("Chemistry", 0);
+
         var i = 0;
         for (i; i < selections.length; i++) {
 
@@ -424,6 +434,11 @@ section_un_attempted_questions_map.set("Chemistry", 0);
                 section_attempted_questions += 1;
                 section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
 
+                var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].section);
+                section_correct_attempted_questions += 1;
+                section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
+
+
                 positive_score += questionsAns[i].positive_marks;
                 no_of_correct_ans_ques += 1;
             } else if (userAns !== undefined) {
@@ -440,6 +455,10 @@ section_un_attempted_questions_map.set("Chemistry", 0);
                 var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
                 section_attempted_questions += 1;
                 section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                var section_wrong_attempted_questions = section_wrong_attempted_questions_map.get(questionsAns[i].section);
+                section_wrong_attempted_questions += 1;
+                section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
 
                 negative_score += questionsAns[i].negative_marks;
                 no_of_wrong_ans_ques += 1;
@@ -461,6 +480,27 @@ section_un_attempted_questions_map.set("Chemistry", 0);
                 section_un_attempted_questions_map.set(questionsAns[j].section, section_un_attempted_questions);
             }
         }
+
+console.log("printing updated section_total_score_map below :"); 
+console.log(section_total_score_map); 
+
+console.log("printing updated section_positive_score_map below :"); 
+console.log(section_positive_score_map); 
+
+console.log("printing updated section_negative_score_map below :"); 
+console.log(section_negative_score_map); 
+
+console.log("printing updated section_attempted_questions_map below :"); 
+console.log(section_attempted_questions_map); 
+
+console.log("printing updated section_un_attempted_questions_map below :"); 
+console.log(section_un_attempted_questions_map); 
+
+console.log("printing updated section_correct_attempted_questions_map below :"); 
+console.log(section_correct_attempted_questions_map); 
+
+console.log("printing updated section_wrong_attempted_questions_map below :"); 
+console.log(section_wrong_attempted_questions_map); 
 
         var color_of_report_heading   = '<font color="lightseagreen">';
         var color_of_report_details   = '<font color="#000099">';
@@ -493,7 +533,10 @@ section_un_attempted_questions_map.set("Chemistry", 0);
             section_positive_score_map,
             section_negative_score_map,
             section_attempted_questions_map,
-            section_un_attempted_questions_map
+            section_un_attempted_questions_map,
+            section_correct_attempted_questions_map,
+            section_wrong_attempted_questions_map
+
         );
         return score;
     }
@@ -511,7 +554,9 @@ section_un_attempted_questions_map.set("Chemistry", 0);
         section_positive_score_map,
         section_negative_score_map,
         section_attempted_questions_map,
-        section_un_attempted_questions_map
+        section_un_attempted_questions_map,
+        section_correct_attempted_questions_map,
+        section_wrong_attempted_questions_map
         ) {
 
         var test_id = $('#test_id_div').text();
@@ -536,7 +581,9 @@ section_un_attempted_questions_map.set("Chemistry", 0);
                 "map_positive_score" : JSON.stringify(Array.from(section_positive_score_map.entries())),
                 "map_negative_score" : JSON.stringify(Array.from(section_negative_score_map.entries())),
                 "map_attempted" : JSON.stringify(Array.from(section_attempted_questions_map.entries())),
-                "map_un_attempted" : JSON.stringify(Array.from(section_un_attempted_questions_map.entries()))
+                "map_un_attempted" : JSON.stringify(Array.from(section_un_attempted_questions_map.entries())),
+                "map_correct_attempted" : JSON.stringify(Array.from(section_correct_attempted_questions_map.entries())),
+                "map_wrong_attempted" : JSON.stringify(Array.from(section_wrong_attempted_questions_map.entries()))  
             },
             success: function(data) {},
             error: function(data) {
