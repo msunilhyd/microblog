@@ -11,6 +11,7 @@ from app.auth.forms import LoginForm, RegistrationForm, \
 from app.models import User, Test, TestQuestion, Question, UserTest
 from app.auth.email import send_password_reset_email
 from app.tests import bp
+import ast
 
 from app.tests.forms import TestForm, TestQuestionForm
 
@@ -175,44 +176,41 @@ def test_update_user_score():
 	map_attempted = request.form['map_attempted']
 	map_un_attempted = request.form['map_un_attempted']
 
-	print('Printing json:')
-	print(type(map_total_score))
-	print(map_total_score[0])
-	print(map_positive_score)
-	print(map_negative_score)
-	print(map_attempted)
-	print(map_un_attempted)
+	map_total_score_list = ast.literal_eval(map_total_score)
+	total_score_maths = map_total_score_list[0][1]
+	total_score_physics = map_total_score_list[0][1]
+	total_score_chemistry = map_total_score_list[0][1]
 
-
-	string = "[[0,0,0],[0,0,1],[1,1,0]]"
-	strs = string.replace('[','').split('],')
-	lists = [map(int, s.replace(']','').split(',')) for s in strs]
-	print('Printing lists : ')
-	print(lists[0])
-	print(lists[1])
-	print(lists[2])
-
-	string = map_total_score
-	strs = string.replace('[','').split('],')
-	lists = [map(int, s.replace(']','').split(',')) for s in strs]
-
-	print('type(lists) is : ')
-	print(type(lists))
-
-	print('Printing map_total_score lists : ')
-	print((lists))
-	print(lists[1])
-	print(lists[2])
-
-	print("Hello")
-	print(list(map(min, [1,2,3,4], [0,10,0,10])))
+	map_positive_score_list = ast.literal_eval(map_positive_score)
+	positive_score_maths = map_positive_score_list[0][1]
+	positive_score_physics = map_positive_score_list[0][1]
+	positive_score_chemistry = map_positive_score_list[0][1]
 	
-	
+	map_negative_score_list = ast.literal_eval(map_negative_score)
+	negative_score_maths = map_negative_score_list[0][1]
+	negative_score_physics = map_negative_score_list[0][1]
+	negative_score_chemistry = map_negative_score_list[0][1]
 
-	print('Printing len : ')
-	print(len(map_total_score))
+	map_attempted_list = ast.literal_eval(map_attempted)
+	attempted_maths = map_attempted_list[0][1]
+	attempted_physics = map_attempted_list[0][1]
+	attempted_chemistry = map_attempted_list[0][1]
 
-	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques )
+	map_un_attempted_list = ast.literal_eval(map_un_attempted)
+	un_attempted_maths = map_un_attempted_list[0][1]
+	un_attempted_physics = map_un_attempted_list[0][1]
+	un_attempted_chemistry = map_un_attempted_list[0][1]
+
+	print('un_attempted_maths')
+	print(un_attempted_maths)
+
+	print('un_attempted_physics')
+	print(un_attempted_physics)
+
+	print('un_attempted_chemistry')
+	print(un_attempted_chemistry)
+
+	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques,total_score_maths = total_score_maths,total_score_physics = total_score_physics,total_score_chemistry = total_score_chemistry,positive_score_maths = positive_score_maths,positive_score_physics = positive_score_physics,positive_score_chemistry = positive_score_chemistry,negative_score_maths = negative_score_maths,negative_score_physics = negative_score_physics,negative_score_chemistry = negative_score_chemistry,attempted_maths = attempted_maths,attempted_physics = attempted_physics,attempted_chemistry = attempted_chemistry,un_attempted_maths = un_attempted_maths,un_attempted_physics = un_attempted_physics,un_attempted_chemistry = un_attempted_chemistry)
 	db.session.add(usertest)
 	db.session.commit()
 

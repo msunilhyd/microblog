@@ -370,8 +370,6 @@ window.displayNext  = function() {
     var no_of_not_ans_ques = 0;
     var no_of_attempted_ans_ques = 0;
 
-
-
     // Computes score and returns a paragraph element to be displayed
     function displayScore(questionsAns) {
 
@@ -432,13 +430,12 @@ console.log(section_total_score_map);
         var i = 0;
         for (i; i < selections.length; i++) {
 
+            console.log('for loop running for questions[i]' + questions[i]);
 
-            if (!isNaN(selections[i])) {
-                no_of_attempted_ans_ques += 1;
-            }
             var ans = questions[i].choices;
             var userAns = ans[selections[i]];
             if (userAns === questionsAns[i].correctAnswer) {
+                no_of_attempted_ans_ques += 1;
 
                 console.log('correct for question = ' + questionsAns[i].correctAnswer);
                 console.log('correct for section = ' + questionsAns[i].section);
@@ -458,6 +455,7 @@ console.log(section_total_score_map);
                 positive_score += questionsAns[i].positive_marks;
                 no_of_correct_ans_ques += 1;
             } else if (userAns !== undefined) {
+                no_of_attempted_ans_ques += 1;
                 var section_score = section_total_score_map.get(questionsAns[i].section);
                 section_score -= questionsAns[i].negative_marks;
                 section_total_score_map.set(questionsAns[i].section, section_score);
@@ -480,7 +478,12 @@ console.log(section_total_score_map);
                 no_of_not_ans_ques += 1;
             }
         }
-        if (i < questionsAns.length - 1) {
+
+        console.log('i after for loop is : ' + i);
+
+        if (i <= questionsAns.length - 1) {
+            console.log('entering the if block ');
+        
             no_of_not_ans_ques += questionsAns.length - i;
 
             for(var j=i;j<=questionsAns.length - 1;j++)
