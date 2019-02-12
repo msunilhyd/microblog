@@ -315,8 +315,6 @@ window.displayNext  = function() {
             }
 
           var math = MathJax.Hub.getAllJax("question");
-          console.log('printing question from getQuestions')
-          console.log(math);
           MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
 
         });
@@ -379,23 +377,11 @@ window.displayNext  = function() {
         });
         var totalMarks = $('#total_marks_div').text();
 
-        console.log('printing questions below : ');
-        console.log(questions);
-
-        console.log('printing selections below : ');
-        console.log(selections);
-
-        
-        console.log('printing questionsAns below : ');
-        console.log(questionsAns);
-
 var section_total_score_map = new Map(); 
 var section_positive_score_map = new Map(); 
 var section_negative_score_map = new Map(); 
 var section_attempted_questions_map = new Map(); 
 var section_un_attempted_questions_map = new Map(); 
-
-
   
 // adding some elements to the map  
 section_total_score_map.set("Maths", 0); 
@@ -418,28 +404,14 @@ section_un_attempted_questions_map.set("Maths", 0);
 section_un_attempted_questions_map.set("Physics", 0);
 section_un_attempted_questions_map.set("Chemistry", 0);
 
-// map1 contains  
-// "first name" => "sumit" 
-// "last name" => "ghosh" 
-// "website" => "geeksforgeeks" 
-// "friend 1" => "gourav" 
-// "friend 2" => "sourav" 
-
-console.log(section_total_score_map); 
-
         var i = 0;
         for (i; i < selections.length; i++) {
-
-            console.log('for loop running for questions[i]' + questions[i]);
 
             var ans = questions[i].choices;
             var userAns = ans[selections[i]];
             if (userAns === questionsAns[i].correctAnswer) {
                 no_of_attempted_ans_ques += 1;
 
-                console.log('correct for question = ' + questionsAns[i].correctAnswer);
-                console.log('correct for section = ' + questionsAns[i].section);
-                
                 var section_score = section_total_score_map.get(questionsAns[i].section);
                 section_score += questionsAns[i].positive_marks;
                 section_total_score_map.set(questionsAns[i].section, section_score);
@@ -479,11 +451,7 @@ console.log(section_total_score_map);
             }
         }
 
-        console.log('i after for loop is : ' + i);
-
-        if (i <= questionsAns.length - 1) {
-            console.log('entering the if block ');
-        
+        if (i <= questionsAns.length - 1) {        
             no_of_not_ans_ques += questionsAns.length - i;
 
             for(var j=i;j<=questionsAns.length - 1;j++)
@@ -493,21 +461,6 @@ console.log(section_total_score_map);
                 section_un_attempted_questions_map.set(questionsAns[j].section, section_un_attempted_questions);
             }
         }
-console.log("printing updated section_total_score_map below :"); 
-console.log(section_total_score_map); 
-
-console.log("printing updated section_positive_score_map below :"); 
-console.log(section_positive_score_map); 
-
-console.log("printing updated section_negative_score_map below :"); 
-console.log(section_negative_score_map); 
-
-console.log("printing updated section_attempted_questions_map below :"); 
-console.log(section_attempted_questions_map); 
-
-console.log("printing updated section_un_attempted_questions_map below :"); 
-console.log(section_un_attempted_questions_map); 
-
 
         var color_of_report_heading   = '<font color="lightseagreen">';
         var color_of_report_details   = '<font color="#000099">';
@@ -524,9 +477,6 @@ console.log(section_un_attempted_questions_map);
             ' <br> Answers Correct : ' + color_of_report_values + no_of_correct_ans_ques + color_of_report_details + 
             ' <br> Answers Wrong : ' + color_of_report_values + no_of_wrong_ans_ques
             );
-
-console.log("Sending section_total_score_map for update as  below :"); 
-console.log(section_total_score_map); 
 
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
@@ -563,12 +513,6 @@ console.log(section_total_score_map);
         section_attempted_questions_map,
         section_un_attempted_questions_map
         ) {
-
-
-        jsonText = JSON.stringify(Array.from(section_total_score_map.entries()));
-
-        console.log('section_total_score_map is = ' +  jsonText);
-
 
         var test_id = $('#test_id_div').text();
         test_id = test_id.replace(/ /g, '');
