@@ -481,27 +481,6 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
             }
         }
 
-console.log("printing updated section_total_score_map below :"); 
-console.log(section_total_score_map); 
-
-console.log("printing updated section_positive_score_map below :"); 
-console.log(section_positive_score_map); 
-
-console.log("printing updated section_negative_score_map below :"); 
-console.log(section_negative_score_map); 
-
-console.log("printing updated section_attempted_questions_map below :"); 
-console.log(section_attempted_questions_map); 
-
-console.log("printing updated section_un_attempted_questions_map below :"); 
-console.log(section_un_attempted_questions_map); 
-
-console.log("printing updated section_correct_attempted_questions_map below :"); 
-console.log(section_correct_attempted_questions_map); 
-
-console.log("printing updated section_wrong_attempted_questions_map below :"); 
-console.log(section_wrong_attempted_questions_map); 
-
         var color_of_report_heading   = '<font color="lightseagreen">';
         var color_of_report_details   = '<font color="#000099">';
         var color_of_report_values   = '<font color="green">';
