@@ -184,6 +184,11 @@ p {
     display:none;
 }
 
+#ques_buttons_div
+{
+  color: #444444;
+}
+
 
 #end_of_test_div {
     text-indent: 10px;

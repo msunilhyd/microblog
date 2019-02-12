@@ -149,7 +149,8 @@ def test_get_answers():
 		empDict = {
 		'correctAnswer': emp.Question.ans,
 		'positive_marks' : emp.Question.positive_marks,
-		'negative_marks' : emp.Question.negative_marks
+		'negative_marks' : emp.Question.negative_marks,
+		'section' : emp.Question.section
 		}
 		empList.append(empDict)
 	return json.dumps(empList)
@@ -157,6 +158,7 @@ def test_get_answers():
 
 @bp.route("/test_update_user_score/", methods=['GET','POST'])
 def test_update_user_score():
+
 	test_id = request.form['test_id']
 	user_id = request.form['user_id']
 	user_score = request.form['user_score']
@@ -166,9 +168,53 @@ def test_update_user_score():
 	wrong_answers = request.form['wrong_answers']
 	no_answers = request.form['no_answers']
 	attempted_ques = request.form['no_of_attempted_ans_ques']
+
+	map_total_score = request.form['map_total_score']
+	map_positive_score = request.form['map_positive_score']
+	map_negative_score = request.form['map_negative_score']
+	map_attempted = request.form['map_attempted']
+	map_un_attempted = request.form['map_un_attempted']
+
+	print('Printing json:')
+	print(type(map_total_score))
+	print(map_total_score[0])
+	print(map_positive_score)
+	print(map_negative_score)
+	print(map_attempted)
+	print(map_un_attempted)
+
+
+	string = "[[0,0,0],[0,0,1],[1,1,0]]"
+	strs = string.replace('[','').split('],')
+	lists = [map(int, s.replace(']','').split(',')) for s in strs]
+	print('Printing lists : ')
+	print(lists[0])
+	print(lists[1])
+	print(lists[2])
+
+	string = map_total_score
+	strs = string.replace('[','').split('],')
+	lists = [map(int, s.replace(']','').split(',')) for s in strs]
+
+	print('type(lists) is : ')
+	print(type(lists))
+
+	print('Printing map_total_score lists : ')
+	print((lists))
+	print(lists[1])
+	print(lists[2])
+
+	print("Hello")
+	print(list(map(min, [1,2,3,4], [0,10,0,10])))
 	
+	
+
+	print('Printing len : ')
+	print(len(map_total_score))
+
 	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques )
 	db.session.add(usertest)
 	db.session.commit()
 
 	return "Succesfully updated user score"
+

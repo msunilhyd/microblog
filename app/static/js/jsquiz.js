@@ -249,23 +249,15 @@
         });
     }
 
-
-
 window.randomQuesFun  = function(i) {
-
-    console.log("print i as below")
-    console.log(i);
-
     
         $('#prev').show();
 
         if (i < questions.length) {
             choose();
         }
-
         questionCounter = i;
-        displayNext(); 
-              
+        displayNext();               
 }
 
 window.selectradio = function (event) {
@@ -389,50 +381,191 @@ window.displayNext  = function() {
         });
         var totalMarks = $('#total_marks_div').text();
 
-        for (var i = 0; i < selections.length; i++) {
+        console.log('printing questions below : ');
+        console.log(questions);
+
+        console.log('printing selections below : ');
+        console.log(selections);
+
+        
+        console.log('printing questionsAns below : ');
+        console.log(questionsAns);
+
+var section_total_score_map = new Map(); 
+var section_positive_score_map = new Map(); 
+var section_negative_score_map = new Map(); 
+var section_attempted_questions_map = new Map(); 
+var section_un_attempted_questions_map = new Map(); 
+
+
+  
+// adding some elements to the map  
+section_total_score_map.set("Maths", 0); 
+section_total_score_map.set("Physics", 0);
+section_total_score_map.set("Chemistry", 0);
+
+section_positive_score_map.set("Maths", 0); 
+section_positive_score_map.set("Physics", 0);
+section_positive_score_map.set("Chemistry", 0);
+
+section_negative_score_map.set("Maths", 0); 
+section_negative_score_map.set("Physics", 0);
+section_negative_score_map.set("Chemistry", 0);
+
+section_attempted_questions_map.set("Maths", 0); 
+section_attempted_questions_map.set("Physics", 0);
+section_attempted_questions_map.set("Chemistry", 0);
+
+section_un_attempted_questions_map.set("Maths", 0); 
+section_un_attempted_questions_map.set("Physics", 0);
+section_un_attempted_questions_map.set("Chemistry", 0);
+
+// map1 contains  
+// "first name" => "sumit" 
+// "last name" => "ghosh" 
+// "website" => "geeksforgeeks" 
+// "friend 1" => "gourav" 
+// "friend 2" => "sourav" 
+
+console.log(section_total_score_map); 
+
+        var i = 0;
+        for (i; i < selections.length; i++) {
+
+
             if (!isNaN(selections[i])) {
                 no_of_attempted_ans_ques += 1;
             }
             var ans = questions[i].choices;
             var userAns = ans[selections[i]];
             if (userAns === questionsAns[i].correctAnswer) {
+
+                console.log('correct for question = ' + questionsAns[i].correctAnswer);
+                console.log('correct for section = ' + questionsAns[i].section);
+                
+                var section_score = section_total_score_map.get(questionsAns[i].section);
+                section_score += questionsAns[i].positive_marks;
+                section_total_score_map.set(questionsAns[i].section, section_score);
+
+                var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
+                section_score_positive += questionsAns[i].positive_marks;
+                section_positive_score_map.set(questionsAns[i].section, section_score_positive);
+
+                var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                section_attempted_questions += 1;
+                section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
                 positive_score += questionsAns[i].positive_marks;
                 no_of_correct_ans_ques += 1;
             } else if (userAns !== undefined) {
+                var section_score = section_total_score_map.get(questionsAns[i].section);
+                section_score -= questionsAns[i].negative_marks;
+                section_total_score_map.set(questionsAns[i].section, section_score);
+                
+
+                var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
+                section_score_negative += questionsAns[i].negative_marks;
+                section_negative_score_map.set(questionsAns[i].section, section_score_negative);
+
+                var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                section_attempted_questions += 1;
+                section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
                 negative_score += questionsAns[i].negative_marks;
                 no_of_wrong_ans_ques += 1;
             } else {
+                var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
+                section_un_attempted_questions += 1;
+                section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
                 no_of_not_ans_ques += 1;
             }
         }
         if (i < questionsAns.length - 1) {
             no_of_not_ans_ques += questionsAns.length - i;
+
+            for(var j=i;j<=questionsAns.length - 1;j++)
+            {
+                var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[j].section);
+                section_un_attempted_questions += 1;
+                section_un_attempted_questions_map.set(questionsAns[j].section, section_un_attempted_questions);
+            }
         }
+console.log("printing updated section_total_score_map below :"); 
+console.log(section_total_score_map); 
+
+console.log("printing updated section_positive_score_map below :"); 
+console.log(section_positive_score_map); 
+
+console.log("printing updated section_negative_score_map below :"); 
+console.log(section_negative_score_map); 
+
+console.log("printing updated section_attempted_questions_map below :"); 
+console.log(section_attempted_questions_map); 
+
+console.log("printing updated section_un_attempted_questions_map below :"); 
+console.log(section_un_attempted_questions_map); 
+
+
+        var color_of_report_heading   = '<font color="lightseagreen">';
+        var color_of_report_details   = '<font color="#000099">';
+        var color_of_report_values   = '<font color="green">';
 
         var finalScore = positive_score - negative_score;
-        score.append('&nbsp &nbsp &nbsp Report : ' +
-            ' <br> Total Questions :- ' + questionsAns.length +
-            ' <br> Questions Attempted :- ' + no_of_attempted_ans_ques +
-            ' <br> Questions Not Attempted :- ' + no_of_not_ans_ques +
-            ' <br> Your Score :-  ' + finalScore + ' / ' + totalMarks +
-            ' <br> Positive Marks :- ' + positive_score +
-            ' <br> Negative Marks :- ' + negative_score +
-            ' <br> Answers Correct :- ' + no_of_correct_ans_ques +
-            ' <br> Answers Wrong :- ' + no_of_wrong_ans_ques
-        );
+        score.append(color_of_report_heading + '&nbsp &nbsp &nbsp Report : ' + color_of_report_details + 
+            ' <br> Total Questions : ' + color_of_report_values +  questionsAns.length + color_of_report_details + 
+            ' <br> Questions Attempted : ' + color_of_report_values +  no_of_attempted_ans_ques + color_of_report_details + 
+            ' <br> Questions Not Attempted : ' + color_of_report_values + no_of_not_ans_ques + color_of_report_details + 
+            ' <br> Your Score :   ' + color_of_report_values + finalScore + ' / ' + totalMarks + color_of_report_details + 
+            ' <br> Positive Marks : ' + color_of_report_values + color_of_report_values +  positive_score + color_of_report_details + 
+            ' <br> Negative Marks : ' + color_of_report_values + negative_score + color_of_report_details + 
+            ' <br> Answers Correct : ' + color_of_report_values + no_of_correct_ans_ques + color_of_report_details + 
+            ' <br> Answers Wrong : ' + color_of_report_values + no_of_wrong_ans_ques
+            );
 
+console.log("Sending section_total_score_map for update as  below :"); 
+console.log(section_total_score_map); 
 
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
         $('#next').hide();
-        updateUserScore(finalScore, positive_score, negative_score,
-            no_of_correct_ans_ques, no_of_wrong_ans_ques, no_of_not_ans_ques, no_of_attempted_ans_ques);
+        updateUserScore(
+            finalScore, 
+            positive_score, 
+            negative_score,
+            no_of_correct_ans_ques, 
+            no_of_wrong_ans_ques, 
+            no_of_not_ans_ques, 
+            no_of_attempted_ans_ques,
+            section_total_score_map,
+            section_positive_score_map,
+            section_negative_score_map,
+            section_attempted_questions_map,
+            section_un_attempted_questions_map
+        );
         return score;
     }
 
 
-    function updateUserScore(finalScore, positive_score, negative_score,
-        no_of_correct_ans_ques, no_of_wrong_ans_ques, no_of_not_ans_ques, no_of_attempted_ans_ques) {
+    function updateUserScore(
+        finalScore, 
+        positive_score, 
+        negative_score,
+        no_of_correct_ans_ques, 
+        no_of_wrong_ans_ques, 
+        no_of_not_ans_ques, 
+        no_of_attempted_ans_ques,
+        section_total_score_map,
+        section_positive_score_map,
+        section_negative_score_map,
+        section_attempted_questions_map,
+        section_un_attempted_questions_map
+        ) {
+
+
+        jsonText = JSON.stringify(Array.from(section_total_score_map.entries()));
+
+        console.log('section_total_score_map is = ' +  jsonText);
+
 
         var test_id = $('#test_id_div').text();
         test_id = test_id.replace(/ /g, '');
@@ -451,7 +584,12 @@ window.displayNext  = function() {
                 "correct_answers": no_of_correct_ans_ques,
                 "wrong_answers": no_of_wrong_ans_ques,
                 "no_answers": no_of_not_ans_ques,
-                "no_of_attempted_ans_ques": no_of_attempted_ans_ques
+                "no_of_attempted_ans_ques": no_of_attempted_ans_ques,
+                "map_total_score" : JSON.stringify(Array.from(section_total_score_map.entries())),
+                "map_positive_score" : JSON.stringify(Array.from(section_positive_score_map.entries())),
+                "map_negative_score" : JSON.stringify(Array.from(section_negative_score_map.entries())),
+                "map_attempted" : JSON.stringify(Array.from(section_attempted_questions_map.entries())),
+                "map_un_attempted" : JSON.stringify(Array.from(section_un_attempted_questions_map.entries()))
             },
             success: function(data) {},
             error: function(data) {
