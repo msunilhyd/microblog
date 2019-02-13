@@ -24,7 +24,6 @@ class Config(object):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     POSTS_PER_PAGE = 5
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-    BOOTSTRAP_SERVE_LOCAL = True
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=185)
 
 
