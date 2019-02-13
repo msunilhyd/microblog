@@ -1,0 +1,58 @@
+
+
+For database set up, and access remote:
+
+CREATE DATABASE equiz;
+
+CREATE USER 'equizuser'@'localhost' IDENTIFIED BY 'Sudheer123';
+
+GRANT ALL PRIVILEGES ON *.* TO 'equizuser'@'localhost' WITH GRANT OPTION;
+
+CREATE USER 'equizuser'@'%' IDENTIFIED BY 'Sudheer123';
+
+GRANT ALL PRIVILEGES ON *.* TO 'equizuser'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+
+
+
+If you get this error : 
+	ERROR 1396 (HY000): Operation CREATE USER failed for 'equizuser'@'localhost'
+
+Do this : 
+	drop user 'equizuser'@'localhost';
+	flush privileges;
+
+Recreate the user ad below:
+
+
+mysql>
+mysql> CREATE USER 'equizuser'@'localhost' IDENTIFIED BY 'Sudheer123';
+ERROR 1396 (HY000): Operation CREATE USER failed for 'equizuser'@'localhost'
+mysql> drop user 'equizuser'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE USER 'equizuser'@'localhost' IDENTIFIED BY 'Sudheer123';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'equizuser'@'localhost' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE USER 'equizuser'@'%' IDENTIFIED BY 'Sudheer123';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'equizuser'@'%' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+
+
+
