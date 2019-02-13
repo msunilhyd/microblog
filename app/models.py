@@ -182,6 +182,7 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     section = db.Column(db.String(100), nullable=False)
     question_content = db.Column(db.String(500), nullable=False)
+    question_image = db.Column(db.String(100))
     a = db.Column(db.String(100), nullable=False)
     b = db.Column(db.String(100), nullable=False)
     c = db.Column(db.String(100), nullable=False)
@@ -189,6 +190,8 @@ class Question(db.Model):
     ans = db.Column(db.String(100), nullable=False)
     positive_marks = db.Column(db.Integer, nullable=False)
     negative_marks = db.Column(db.Integer, nullable=False)
+    sub_section = db.Column(db.String(100))
+    level = db.Column(db.Integer)
     date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now)   
 
     def __repr__(self):

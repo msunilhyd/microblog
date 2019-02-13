@@ -180,10 +180,14 @@
             id: 'question'
         });
 
-        var header = $('<h2>Question ' + (index + 1) + ' : ' + questions[index].section + '</h2>');
+        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:green;"> &nbsp Section : ' + questions[index].section + 
+            '<span style="float:right; color:#444444; font-size: 24px;"> Sub-section : <font color="green">' + questions[index].sub_section + '<br>  &nbsp <font color="#444444"> Level : <font color="green">' + questions[index].level + '</span></h2>' );
+
+
+
         qElement.append(header);
 
-        var question = $('<p>').append(questions[index].question);
+        var question = $('<br><p>').append(questions[index].question);
         qElement.append(question);
 
         var radioButtons = createRadios(index);
