@@ -171,7 +171,7 @@ class Test(db.Model):
     author_maths = db.Column(db.String(120))
     author_physics = db.Column(db.String(120))
     author_chemistry = db.Column(db.String(120))
-    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now)   
+    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)  
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     questions = db.relationship('TestQuestion', backref='NameOfTest', lazy=True)
 
@@ -192,7 +192,7 @@ class Question(db.Model):
     negative_marks = db.Column(db.Integer, nullable=False)
     sub_section = db.Column(db.String(100))
     level = db.Column(db.Integer)
-    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now)   
+    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
         return "Question('{}','{}''{}')".format(self.id, self.question_content, self.positive_marks)

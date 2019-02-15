@@ -19,11 +19,11 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash(_('Invalid username or password'))
+            flash('Invalid username or password', 'danger')
             return redirect(url_for('auth.login'))
         if user.is_confirmed == 0:
             send_confirm_email(user)
-            flash('A Confirmation mail has been sent to your email, Please check it to complete Registration.', 'info')
+            flash('A Confirmation mail has been sent to your email, Please check to complete Registration.', 'info')
             return redirect(url_for('auth.login'))
         else:
             session.permanent = True  

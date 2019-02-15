@@ -130,7 +130,8 @@ def test_get_questions():
 		'negative_marks' : emp.Question.negative_marks,
 		'section' : emp.Question.section,
 		'sub_section' : emp.Question.sub_section,
-		'level' : emp.Question.level
+		'level' : emp.Question.level,
+		'question_image' : emp.Question.question_image
 		}
 		choices = []
 		empList.append(empDict)

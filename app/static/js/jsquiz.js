@@ -184,7 +184,6 @@
             '<span style="float:right; color:#444444; font-size: 24px;"> Sub-section : <font color="green">' + questions[index].sub_section + '<br>  &nbsp <font color="#444444"> Level : <font color="green">' + questions[index].level + '</span></h2>' );
 
 
-
         qElement.append(header);
 
         var question = $('<br><p>').append(questions[index].question);
@@ -192,6 +191,14 @@
 
         var radioButtons = createRadios(index);
         qElement.append(radioButtons);
+
+        if(typeof questions[index].question_image == "string")
+        {
+            console.log('type is string');
+            console.log(questions[index].question_image);
+            var img_file = '<br><img src="/static/questions/' + questions[index].question_image + '"width="auto" height="auto">'; 
+            qElement.append(img_file);
+        }
 
         return qElement;
     }
