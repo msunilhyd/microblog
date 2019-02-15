@@ -176,7 +176,7 @@ class Test(db.Model):
     questions = db.relationship('TestQuestion', backref='NameOfTest', lazy=True)
 
     def __repr__(self):
-        return "Test('{}','{}''{}')".format(self.id,self.test_name, self.category, self.no_of_questions, self.user_id)
+        return "Test('{}','{}''{}')".format(self.id,self.test_name, self.category, self.total_no_of_questions, self.user_id)
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)

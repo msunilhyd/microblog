@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.score-sheet.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.score-sheet.td, .score-sheet.th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+.score-sheet.tr:nth-child(even) {
+  background-color: lightseagreen;
+}
+
+
+#score-sheet {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#score-sheet td, #score-sheet th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#score-sheet tr:nth-child(odd){background-color: lightseagreen; color: white}
+#score-sheet tr:nth-child(even){background-color: #ddd; color: black}
+
+#score-sheet th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+<p>Hi {{ user.username }},</p>
+<p>Please find the details of your score for test : {{ test.test_name }}   as below : </p>
+          <h2 class="taken-test-p"><strong> Score Sheet </strong></h2>
+
+          <table id="score-sheet">
+
+            <tr>
+              <th>Total</th>
+              <th>Total Qs </th>
+              <th>Your Score</th>
+              <th>Postive </th>
+              <th>Negative </th> 
+              <th>Attempted</th>
+              <th>Un-Attempted</th>
+              <th>Correct</th>
+              <th>Wrong</th>
+
+            <tr>
+              
+              <td>{{ test.total_marks }}</td>
+              <td>{{ test.total_no_of_questions }}</td>
+              <td>{{ usertest.user_score }}</td>
+              <td>{{ usertest.positive_score }}</td>
+              <td>{{ usertest.negative_score }}</td>
+              <td>{{ usertest.attempted_ques }}</td>
+              <td>{{ usertest.no_answers }}</td>
+              <td>{{ usertest.correct_answers }}</td>
+              <td>{{ usertest.wrong_answers }}</td>
+              
+
+            </tr>
+
+          </table>
+<br>
+          <h3 class="taken-test-p"><strong> Maths </strong></h2>
+
+          <table id="score-sheet">
+
+            <tr>
+              <th>Total</th>
+              <th>Total Qs </th>
+              <th>Your Score</th>
+              <th>Postive </th>
+              <th>Negative </th> 
+              <th>Attempted</th>
+              <th>Un-Attempted</th>
+              <th>Correct</th>
+              <th>Wrong</th>            
+
+            <tr>
+
+              <td>{{ test.marks_maths }}</td>
+              <td>{{ test.no_of_questions_maths }}</td>
+              <td>{{ usertest.total_score_maths }}</td>
+              <td>{{ usertest.positive_score_maths }}</td>
+              <td>{{ usertest.negative_score_maths }}</td>
+              <td>{{ usertest.attempted_maths }}</td>
+              <td>{{ usertest.un_attempted_maths }}</td>
+              <td>{{ usertest.correct_attempted_maths }}</td>
+              <td>{{ usertest.wrong_attempted_maths }}</td>
+            
+            </tr>
+
+          </table>
+
+
+<br>
+          <h3 class="taken-test-p"><strong> Physics </strong></h2>
+
+          <table id="score-sheet">
+
+            <tr>
+              <th>Total</th>
+              <th>Total Qs </th>
+              <th>Your Score</th>
+              <th>Postive </th>
+              <th>Negative </th> 
+              <th>Attempted</th>
+              <th>Un-Attempted</th>
+              <th>Correct</th>
+              <th>Wrong</th>            
+
+            <tr>
+
+              <td>{{ test.marks_physics }}</td>
+              <td>{{ test.no_of_questions_physics }}</td>
+              <td>{{ usertest.total_score_physics }}</td>
+              <td>{{ usertest.positive_score_physics }}</td>
+              <td>{{ usertest.negative_score_physics }}</td>
+              <td>{{ usertest.attempted_physics }}</td>
+              <td>{{ usertest.un_attempted_physics }}</td>
+              <td>{{ usertest.correct_attempted_physics }}</td>
+              <td>{{ usertest.wrong_attempted_physics }}</td>
+            
+            </tr>
+
+          </table>
+
+
+<br>
+          <h3 class="taken-test-p"><strong> Chemistry </strong></h2>
+
+          <table id="score-sheet">
+
+            <tr>
+              <th>Total</th>
+              <th>Total Qs </th>
+              <th>Your Score</th>
+              <th>Postive </th>
+              <th>Negative </th> 
+              <th>Attempted</th>
+              <th>Un-Attempted</th>
+              <th>Correct</th>
+              <th>Wrong</th>            
+
+            <tr>
+
+              <td>{{ test.marks_chemistry }}</td>
+              <td>{{ test.no_of_questions_chemistry }}</td>
+              <td>{{ usertest.total_score_chemistry }}</td>
+              <td>{{ usertest.positive_score_chemistry }}</td>
+              <td>{{ usertest.negative_score_chemistry }}</td>
+              <td>{{ usertest.attempted_chemistry }}</td>
+              <td>{{ usertest.un_attempted_chemistry }}</td>
+              <td>{{ usertest.correct_attempted_chemistry }}</td>
+              <td>{{ usertest.wrong_attempted_chemistry }}</td>
+            
+            </tr>
+
+          </table>
+
+</body>
+</html>

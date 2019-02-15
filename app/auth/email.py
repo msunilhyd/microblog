@@ -21,3 +21,17 @@ def send_confirm_email(user):
                                          user=user, token=token),
                html_body=render_template('email/confirm_email.html',
                                          user=user, token=token))
+
+def send_score_sheet_email(user, test, usertest):
+  print('printing from send_score_sheet_email')
+  print(user)
+  print(test)
+  print(usertest)
+  
+  send_email('[EQuizzy] Confirm Your Email',
+               sender=current_app.config['ADMINS'][0],
+               recipients=[user.email],
+               text_body=render_template('email/score_email.txt',
+                                         user=user, test=test, usertest=usertest),
+               html_body=render_template('email/score_email.html',
+                                         user=user, test=test, usertest=usertest))
