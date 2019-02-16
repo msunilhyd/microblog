@@ -214,11 +214,11 @@
               input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';      
             if(isSubmit === 1)
             {
-              if(questions[index].choices[i] == questionsAns[index].correctAnswer) 
+              if(i == questionsAns[index].correctAnswer-1) 
               {
                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
               }
-              else if((questions[index].choices[i] != questionsAns[index].correctAnswer) && (i == selections[questionCounter]))
+              else if((i != questionsAns[index].correctAnswer-1) && (i == selections[questionCounter]))
               {
                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
               }
@@ -428,9 +428,12 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
         var i = 0;
         for (i; i < selections.length; i++) {
 
+            console.log('changing the score validations');
+            console.log('[selections[i]] = ' + [selections[i]]);
             var ans = questions[i].choices;
-            var userAns = ans[selections[i]];
-            if (userAns === questionsAns[i].correctAnswer) {
+            var userAns = selections[i];
+            if (userAns === questionsAns[i].correctAnswer-1) {
+                console.log('user ans is defined');
                 no_of_attempted_ans_ques += 1;
 
                 var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -453,6 +456,8 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
                 positive_score += questionsAns[i].positive_marks;
                 no_of_correct_ans_ques += 1;
             } else if (userAns !== undefined) {
+                console.log('user ans is un defined');
+
                 no_of_attempted_ans_ques += 1;
                 var section_score = section_total_score_map.get(questionsAns[i].section);
                 section_score -= questionsAns[i].negative_marks;
@@ -474,6 +479,8 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
                 negative_score += questionsAns[i].negative_marks;
                 no_of_wrong_ans_ques += 1;
             } else {
+                console.log('user ans is not Attempted');
+
                 var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
                 section_un_attempted_questions += 1;
                 section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
