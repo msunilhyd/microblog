@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ffab90709cbc
+Revision ID: c03a2041b0b1
 Revises: 
-Create Date: 2019-02-13 04:12:51.916082
+Create Date: 2019-02-17 01:29:17.580882
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ffab90709cbc'
+revision = 'c03a2041b0b1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,24 +31,27 @@ def upgrade():
     )
     op.create_table('question',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('section', sa.String(length=100), nullable=False),
-    sa.Column('question_content', sa.String(length=500), nullable=False),
-    sa.Column('question_image', sa.String(length=100), nullable=True),
-    sa.Column('a', sa.String(length=100), nullable=False),
-    sa.Column('b', sa.String(length=100), nullable=False),
-    sa.Column('c', sa.String(length=100), nullable=False),
-    sa.Column('d', sa.String(length=100), nullable=False),
-    sa.Column('ans', sa.String(length=100), nullable=False),
-    sa.Column('positive_marks', sa.Integer(), nullable=False),
-    sa.Column('negative_marks', sa.Integer(), nullable=False),
-    sa.Column('sub_section', sa.String(length=100), nullable=True),
+    sa.Column('section', sa.String(length=20), nullable=False),
+    sa.Column('question_content', sa.String(length=1000), nullable=False),
+    sa.Column('question_image', sa.String(length=20), nullable=True),
+    sa.Column('a', sa.String(length=500), nullable=False),
+    sa.Column('b', sa.String(length=500), nullable=False),
+    sa.Column('c', sa.String(length=500), nullable=False),
+    sa.Column('d', sa.String(length=500), nullable=False),
+    sa.Column('ans', sa.Integer(), nullable=False),
+    sa.Column('sub_section', sa.String(length=50), nullable=True),
     sa.Column('level', sa.Integer(), nullable=True),
     sa.Column('date_posted', sa.DateTime(timezone=True), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_question_section'), 'question', ['section'], unique=False)
+    op.create_index(op.f('ix_question_sub_section'), 'question', ['sub_section'], unique=False)
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=120), nullable=True),
+    sa.Column('username', sa.String(length=60), nullable=True),
+    sa.Column('first_name', sa.String(length=60), nullable=True),
+    sa.Column('last_name', sa.String(length=60), nullable=True),
+    sa.Column('coach', sa.String(length=120), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('is_admin', sa.Integer(), nullable=False),
@@ -58,7 +61,10 @@ def upgrade():
     sa.Column('image_file', sa.String(length=64), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_user_coach'), 'user', ['coach'], unique=False)
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
+    op.create_index(op.f('ix_user_first_name'), 'user', ['first_name'], unique=False)
+    op.create_index(op.f('ix_user_last_name'), 'user', ['last_name'], unique=False)
     op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
     op.create_table('department_employee_link',
     sa.Column('department_id', sa.Integer(), nullable=False),
@@ -97,6 +103,8 @@ def upgrade():
     sa.Column('marks_physics', sa.Integer(), nullable=False),
     sa.Column('marks_chemistry', sa.Integer(), nullable=False),
     sa.Column('time_in_mins', sa.Integer(), nullable=False),
+    sa.Column('positive_marks', sa.Integer(), nullable=False),
+    sa.Column('negative_marks', sa.Integer(), nullable=False),
     sa.Column('author_maths', sa.String(length=120), nullable=True),
     sa.Column('author_physics', sa.String(length=120), nullable=True),
     sa.Column('author_chemistry', sa.String(length=120), nullable=True),
@@ -105,6 +113,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_test_category'), 'test', ['category'], unique=False)
+    op.create_index(op.f('ix_test_test_name'), 'test', ['test_name'], unique=False)
     op.create_table('test_question',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('test_id', sa.Integer(), nullable=False),
@@ -160,14 +170,21 @@ def downgrade():
     op.drop_index(op.f('ix_user_test_timestamp'), table_name='user_test')
     op.drop_table('user_test')
     op.drop_table('test_question')
+    op.drop_index(op.f('ix_test_test_name'), table_name='test')
+    op.drop_index(op.f('ix_test_category'), table_name='test')
     op.drop_table('test')
     op.drop_index(op.f('ix_post_timestamp'), table_name='post')
     op.drop_table('post')
     op.drop_table('followers')
     op.drop_table('department_employee_link')
     op.drop_index(op.f('ix_user_username'), table_name='user')
+    op.drop_index(op.f('ix_user_last_name'), table_name='user')
+    op.drop_index(op.f('ix_user_first_name'), table_name='user')
     op.drop_index(op.f('ix_user_email'), table_name='user')
+    op.drop_index(op.f('ix_user_coach'), table_name='user')
     op.drop_table('user')
+    op.drop_index(op.f('ix_question_sub_section'), table_name='question')
+    op.drop_index(op.f('ix_question_section'), table_name='question')
     op.drop_table('question')
     op.drop_table('employee')
     op.drop_table('department')

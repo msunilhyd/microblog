@@ -28,7 +28,7 @@ def send_score_sheet_email(user, test, usertest):
   print(test)
   print(usertest)
   
-  send_email('[EQuizzy] Confirm Your Email',
+  send_email('[EQuizzy] Test Results in Detail : ',
                sender=current_app.config['ADMINS'][0],
                recipients=[user.email],
                text_body=render_template('email/score_email.txt',

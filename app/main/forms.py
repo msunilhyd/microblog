@@ -7,7 +7,10 @@ from flask_wtf.file import FileField, FileAllowed
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    coach = StringField('Coach', validators=[DataRequired()], render_kw={"placeholder": "Akash IIT-JEE, self etc"})
+    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)], render_kw={"placeholder": "Hello ! I am from Trivandrum, Preparing for JEE 2020, etc"})
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg','png'])])
     submit = SubmitField('Submit')
 

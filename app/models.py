@@ -54,8 +54,12 @@ followers = db.Table(
 
 
 class User(UserMixin, db.Model):
+    __searchable__ = ['username']
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(120), index=True, unique=True)
+    username = db.Column(db.String(60), index=True, unique=True)
+    first_name = db.Column(db.String(60), index=True)
+    last_name = db.Column(db.String(60), index=True)
+    coach = db.Column(db.String(120), index=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
@@ -145,6 +149,7 @@ def load_user(id):
 
 
 class Post(db.Model):
+    __searchable__ = ['body']
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -156,8 +161,8 @@ class Post(db.Model):
 
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    test_name = db.Column(db.String(50), nullable=False)
-    category = db.Column(db.String(50))
+    test_name = db.Column(db.String(50), index=True,nullable=False)
+    category = db.Column(db.String(50), index=True)
     instructions = db.Column(db.String(1000), nullable=False)
     total_no_of_questions = db.Column(db.Integer, nullable=False, default=0)
     no_of_questions_maths = db.Column(db.Integer, nullable=False, default=0)
@@ -168,6 +173,8 @@ class Test(db.Model):
     marks_physics = db.Column(db.Integer, nullable=False, default=0)
     marks_chemistry = db.Column(db.Integer, nullable=False, default=0)
     time_in_mins = db.Column(db.Integer, nullable=False, default=180)
+    positive_marks = db.Column(db.Integer, nullable=False, default=4)
+    negative_marks = db.Column(db.Integer, nullable=False, default=1)
     author_maths = db.Column(db.String(120))
     author_physics = db.Column(db.String(120))
     author_chemistry = db.Column(db.String(120))
@@ -180,17 +187,15 @@ class Test(db.Model):
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    section = db.Column(db.String(100), nullable=False)
-    question_content = db.Column(db.String(500), nullable=False)
-    question_image = db.Column(db.String(100))
-    a = db.Column(db.String(100), nullable=False)
-    b = db.Column(db.String(100), nullable=False)
-    c = db.Column(db.String(100), nullable=False)
-    d = db.Column(db.String(100), nullable=False)
-    ans = db.Column(db.String(100), nullable=False)
-    positive_marks = db.Column(db.Integer, nullable=False)
-    negative_marks = db.Column(db.Integer, nullable=False)
-    sub_section = db.Column(db.String(100))
+    section = db.Column(db.String(20), index=True, nullable=False)
+    question_content = db.Column(db.String(1000), nullable=False)
+    question_image = db.Column(db.String(20))
+    a = db.Column(db.String(500), nullable=False)
+    b = db.Column(db.String(500), nullable=False)
+    c = db.Column(db.String(500), nullable=False)
+    d = db.Column(db.String(500), nullable=False)
+    ans = db.Column(db.Integer, nullable=False)
+    sub_section = db.Column(db.String(50), index=True)
     level = db.Column(db.Integer)
     date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
 

@@ -90,6 +90,9 @@ def edit_profile():
         if form.picture.data:
             current_user.image_file = save_profile_picture(form.picture.data)
         current_user.username = form.username.data
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.coach = form.coach.data
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash('Your changes have been saved', 'info')

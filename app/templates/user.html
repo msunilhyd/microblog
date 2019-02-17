@@ -5,24 +5,35 @@
 		<tr valign="top">
 			<td><img class="rounded-circle article-img" src="{{url_for('static', filename='profile_pics/' + user.image_file)}}"><td>
 			<td>
-				<h1> {{ user.username }} </h1>
+				<h1> Username : {{ user.username }} </h1>
+                        {% if user.first_name %}
+                            {% if user.last_name %}
+                                <p><font color="lightseagreen"> Name : <font color="#333333"> {{ user.first_name }} {{ user.last_name }} </p>
+                            {% else %}
+                                <p><font color="lightseagreen"> Name : <font color="#333333"> {{ user.first_name }}</p>
+                            {% endif %}
+                        {% endif %}
+        
+                        {% if user.coach %}
+                            <p><font color="lightseagreen"> Coach : <font color="#333333"> {{ user.coach }}</p>
+                        {% endif %}
+        
                 		{% if user.about_me %}
-                            <p>{{ user.about_me }}</p>
+                            <p><font color="lightseagreen"> About me : <font color="#333333"> {{ user.about_me }}</p>
                         {% endif %}
                 		
                         {% if user.last_seen %}
-                            <p>
-                                Last seen on: 
-                                    {{ moment(user.last_seen).format('LLL') }}
+                            <p><font color="lightseagreen"> Last seen on : <font color="#333333"> {{ moment(user.last_seen).format('LLL')}}</p>
                                     {{ moment.include_jquery() }}
                                     {{ moment.include_moment() }}
                             </p>
                         {% endif %}
 
                 		{% if user == current_user %}
-                		<p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
+                    		<p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
                 		{% endif %}
-			</td>
+		
+        	</td>
 		</tr>
 	</table>
 	<hr>
