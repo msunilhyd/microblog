@@ -78,13 +78,13 @@
         function timer(count, str) {
             count--;
             if (count != 0 && count < 600) {
-                str = str + "<div id='remain' style='display:block'>Last 10 minutes remaining</div>."
+                str = str + "<div id='remain' style='display:block'>Last 10 minutes remaining</div>"
             } else if (count === 0) {
                 clearInterval(interval);
                 var scoreElem = $('<p>', {
                     id: 'timeUp'
                 });
-                scoreElem.append('Time up. Submitting the quiz Hey');
+                scoreElem.append('Time up. Submitting the quiz.');
                 quiz.append(scoreElem);
                 $('#submitQuiz').click();
                 var x = document.getElementById('submitQuiz');
@@ -210,8 +210,23 @@
         var input = '';
         for (var i = 0; i < questions[index].choices.length; i++) {
             item = $('<li> style="height: 1.8em;"');
-                  input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
-              input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';      
+            input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+           
+            var str = questions[index].choices[i];
+            var n = str.endsWith(".png");
+
+  if(n === true)
+  {
+    console.log('Interstellar');
+    var img_file = '<br><img src="/static/questions/' + questions[index].choices[i] + '"width="auto" height="auto">'; 
+    input += '<label for=' + i + '>' + img_file + '</label>';  
+  }
+  else
+  {
+    input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';  
+  }
+
+    
             if(isSubmit === 1)
             {
               if(i == questionsAns[index].correctAnswer-1) 
@@ -300,6 +315,7 @@ window.selectradio = function (event) {
 
     // Displays next requested element
 window.displayNext  = function() {
+
         quiz.fadeOut(function() {
             $('#question').remove();
             if (questionCounter < questions.length) {
@@ -371,6 +387,25 @@ window.displayNext  = function() {
 
 
 
+
+
+    // Computes score and returns a paragraph element to be displayed
+    function displayScore(questionsAns) {
+
+        console.log('Displaying test details as below');
+        var positive_marks_1 = parseInt($('#positive_marks_div').text());
+        console.log('positive_marks_1 = ' + positive_marks_1);
+
+        var negative_marks_1 = parseInt($('#negative_marks_div').text());
+        console.log('negative_marks_1 = ' + negative_marks_1);
+
+
+        $('#question').hide();
+        var score = $('<p>', {
+            id: 'score'
+        });
+        var totalMarks = $('#total_marks_div').text();
+   
     var positive_score = 0;
     var negative_score = 0;
 
@@ -378,16 +413,6 @@ window.displayNext  = function() {
     var no_of_wrong_ans_ques = 0;
     var no_of_not_ans_ques = 0;
     var no_of_attempted_ans_ques = 0;
-
-    // Computes score and returns a paragraph element to be displayed
-    function displayScore(questionsAns) {
-
-        $('#question').hide();
-        var score = $('<p>', {
-            id: 'score'
-        });
-        var totalMarks = $('#total_marks_div').text();
-
 var section_total_score_map = new Map(); 
 var section_positive_score_map = new Map(); 
 var section_negative_score_map = new Map(); 
@@ -437,11 +462,11 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
                 no_of_attempted_ans_ques += 1;
 
                 var section_score = section_total_score_map.get(questionsAns[i].section);
-                section_score += questionsAns[i].positive_marks;
+                section_score += positive_marks_1;
                 section_total_score_map.set(questionsAns[i].section, section_score);
 
                 var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
-                section_score_positive += questionsAns[i].positive_marks;
+                section_score_positive += positive_marks_1;
                 section_positive_score_map.set(questionsAns[i].section, section_score_positive);
 
                 var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
@@ -453,19 +478,19 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
                 section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
 
 
-                positive_score += questionsAns[i].positive_marks;
+                positive_score += positive_marks_1;
                 no_of_correct_ans_ques += 1;
             } else if (userAns !== undefined) {
                 console.log('user ans is un defined');
 
                 no_of_attempted_ans_ques += 1;
                 var section_score = section_total_score_map.get(questionsAns[i].section);
-                section_score -= questionsAns[i].negative_marks;
+                section_score -= negative_marks_1;
                 section_total_score_map.set(questionsAns[i].section, section_score);
                 
 
                 var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
-                section_score_negative += questionsAns[i].negative_marks;
+                section_score_negative += negative_marks_1;
                 section_negative_score_map.set(questionsAns[i].section, section_score_negative);
 
                 var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
@@ -476,7 +501,7 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
                 section_wrong_attempted_questions += 1;
                 section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
 
-                negative_score += questionsAns[i].negative_marks;
+                negative_score += negative_marks_1;
                 no_of_wrong_ans_ques += 1;
             } else {
                 console.log('user ans is not Attempted');
@@ -504,12 +529,14 @@ section_wrong_attempted_questions_map.set("Chemistry", 0);
         var color_of_report_values   = '<font color="green">';
 
         var finalScore = positive_score - negative_score;
+        console.log('Printing final Score as below : ');
+        console.log(finalScore);
         score.append(color_of_report_heading + '&nbsp &nbsp &nbsp Report : ' + color_of_report_details + 
             ' <br> Total Questions : ' + color_of_report_values +  questionsAns.length + color_of_report_details + 
             ' <br> Questions Attempted : ' + color_of_report_values +  no_of_attempted_ans_ques + color_of_report_details + 
             ' <br> Questions Not Attempted : ' + color_of_report_values + no_of_not_ans_ques + color_of_report_details + 
             ' <br> Your Score :   ' + color_of_report_values + finalScore + ' / ' + totalMarks + color_of_report_details + 
-            ' <br> Positive Marks : ' + color_of_report_values + color_of_report_values +  positive_score + color_of_report_details + 
+            ' <br> Positive Marks : ' + color_of_report_values  +  positive_score + color_of_report_details + 
             ' <br> Negative Marks : ' + color_of_report_values + negative_score + color_of_report_details + 
             ' <br> Answers Correct : ' + color_of_report_values + no_of_correct_ans_ques + color_of_report_details + 
             ' <br> Answers Wrong : ' + color_of_report_values + no_of_wrong_ans_ques

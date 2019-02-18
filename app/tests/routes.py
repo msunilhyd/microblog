@@ -126,8 +126,6 @@ def test_get_questions():
 		empDict = {
 		'question': emp.Question.question_content,
 		'choices' : choices,
-		'positive_marks' : emp.Question.positive_marks,
-		'negative_marks' : emp.Question.negative_marks,
 		'section' : emp.Question.section,
 		'sub_section' : emp.Question.sub_section,
 		'level' : emp.Question.level,
@@ -152,8 +150,6 @@ def test_get_answers():
 	for emp in q:		
 		empDict = {
 		'correctAnswer': emp.Question.ans,
-		'positive_marks' : emp.Question.positive_marks,
-		'negative_marks' : emp.Question.negative_marks,
 		'section' : emp.Question.section
 		}
 		empList.append(empDict)

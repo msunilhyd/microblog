@@ -183,6 +183,16 @@ p {
     text-indent: 10px;
     display:none;
 }
+#positive_marks_div {
+    text-indent: 10px;
+    display:none;
+}
+
+#negative_marks_div {
+    text-indent: 10px;
+    display:none;
+}
+
 
 #ques_buttons_div
 {
