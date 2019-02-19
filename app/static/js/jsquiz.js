@@ -1,13 +1,7 @@
 (function() {
 
     $(window).on('beforeunload', function() {
-        console.log($('#timerCount').text());
-        console.log('remain is : ' + $('#timerCount'));
-
-        console.log('t is  : ' + window.time);
         return 'Are you sure you want to leave?';
-
-
     });
 
 
@@ -35,8 +29,6 @@
         $("a.nav-item").off('click').on('click', function(e) {
 
             if ($('#timerCount').css('display') != 'none') {
-
-                console.log('timerCount is visible');
                 var b = confirm("Your test will auto-submit if you leave with still time left. Select Cancel to go back to the test.");
                 if (!b) {
                     e.preventDefault();
@@ -199,8 +191,6 @@ window.time = t--;
         qElement.append(radioButtons);
 
         if (typeof questions[index].question_image == "string") {
-            console.log('type is string');
-            console.log(questions[index].question_image);
             var img_file = '<br><img src="/static/questions/' + questions[index].question_image + '"width="auto" height="auto">';
             qElement.append(img_file);
         }
@@ -221,7 +211,6 @@ window.time = t--;
             var n = str.endsWith(".png");
 
             if (n === true) {
-                console.log('Interstellar');
                 var img_file = '<br><img src="/static/questions/' + questions[index].choices[i] + '"width="auto" height="auto">';
                 input += '<label for=' + i + '>' + img_file + '</label>';
             } else {
@@ -290,15 +279,12 @@ window.time = t--;
 
         if ($radio.data('waschecked') == true) {
 
-            console.log('radio = data waschecked');
             $radio.prop('checked', false);
             $radio.data('waschecked', false);
             document.getElementById('random' + questionCounter).style.background = 'none';
 
         } else {
             $radio.data('waschecked', true); // remove was checked from other radio
-            console.log('radio = data not waschecked');
-
             document.getElementById('random' + questionCounter).style.background = 'lightseagreen';
         }
         // $radio.siblings('input[name="rad"]').data('waschecked', false);
@@ -393,16 +379,9 @@ window.time = t--;
     // Computes score and returns a paragraph element to be displayed
     function displayScore(questionsAns) {
 
-        console.log('t is  : ' + window.time);
-
-
-        console.log('Displaying test details as below');
         var positive_marks_1 = parseInt($('#positive_marks_div').text());
-        console.log('positive_marks_1 = ' + positive_marks_1);
 
         var negative_marks_1 = parseInt($('#negative_marks_div').text());
-        console.log('negative_marks_1 = ' + negative_marks_1);
-
 
         $('#question').hide();
         var score = $('<p>', {
@@ -457,12 +436,10 @@ window.time = t--;
         var i = 0;
         for (i; i < selections.length; i++) {
 
-            console.log('changing the score validations');
-            console.log('[selections[i]] = ' + [selections[i]]);
+
             var ans = questions[i].choices;
             var userAns = selections[i];
             if (userAns === questionsAns[i].correctAnswer - 1) {
-                console.log('user ans is defined');
                 no_of_attempted_ans_ques += 1;
 
                 var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -485,7 +462,6 @@ window.time = t--;
                 positive_score += positive_marks_1;
                 no_of_correct_ans_ques += 1;
             } else if (userAns !== undefined) {
-                console.log('user ans is un defined');
 
                 no_of_attempted_ans_ques += 1;
                 var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -508,7 +484,6 @@ window.time = t--;
                 negative_score += negative_marks_1;
                 no_of_wrong_ans_ques += 1;
             } else {
-                console.log('user ans is not Attempted');
 
                 var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
                 section_un_attempted_questions += 1;
@@ -532,8 +507,7 @@ window.time = t--;
         var color_of_report_values = '<font color="green">';
 
         var finalScore = positive_score - negative_score;
-        console.log('Printing final Score as below : ');
-        console.log(finalScore);
+
         score.append(color_of_report_heading + '&nbsp &nbsp &nbsp Report : ' + color_of_report_details +
             ' <br> Total Questions : ' + color_of_report_values + questionsAns.length + color_of_report_details +
             ' <br> Questions Attempted : ' + color_of_report_values + no_of_attempted_ans_ques + color_of_report_details +
@@ -545,6 +519,7 @@ window.time = t--;
             ' <br> Answers Wrong : ' + color_of_report_values + no_of_wrong_ans_ques
         );
 
+        var time_taken_test = Math.round(window.time / 60);
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
         $('#next').hide();
@@ -562,7 +537,8 @@ window.time = t--;
             section_attempted_questions_map,
             section_un_attempted_questions_map,
             section_correct_attempted_questions_map,
-            section_wrong_attempted_questions_map
+            section_wrong_attempted_questions_map,
+            time_taken_test
 
         );
         return score;
@@ -583,7 +559,8 @@ window.time = t--;
         section_attempted_questions_map,
         section_un_attempted_questions_map,
         section_correct_attempted_questions_map,
-        section_wrong_attempted_questions_map
+        section_wrong_attempted_questions_map,
+        time_taken_test
     ) {
 
         var test_id = $('#test_id_div').text();
@@ -610,7 +587,8 @@ window.time = t--;
                 "map_attempted": JSON.stringify(Array.from(section_attempted_questions_map.entries())),
                 "map_un_attempted": JSON.stringify(Array.from(section_un_attempted_questions_map.entries())),
                 "map_correct_attempted": JSON.stringify(Array.from(section_correct_attempted_questions_map.entries())),
-                "map_wrong_attempted": JSON.stringify(Array.from(section_wrong_attempted_questions_map.entries()))
+                "map_wrong_attempted": JSON.stringify(Array.from(section_wrong_attempted_questions_map.entries())),
+                "time_taken_test": time_taken_test
             },
             success: function(data) {},
             error: function(data) {

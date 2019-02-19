@@ -176,6 +176,10 @@ def test_update_user_score():
 	map_un_attempted = request.form['map_un_attempted']
 	map_correct_attempted = request.form['map_correct_attempted']
 	map_wrong_attempted = request.form['map_wrong_attempted']
+	time_taken = request.form['time_taken_test']
+
+	print('Time taken for test is : ')
+	print(time_taken)
 
 	map_total_score_list = ast.literal_eval(map_total_score)
 	total_score_maths = map_total_score_list[0][1]
@@ -212,7 +216,7 @@ def test_update_user_score():
 	wrong_attempted_physics = map_wrong_attempted_list[1][1]
 	wrong_attempted_chemistry = map_wrong_attempted_list[2][1]
 
-	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques,total_score_maths = total_score_maths,total_score_physics = total_score_physics,total_score_chemistry = total_score_chemistry,positive_score_maths = positive_score_maths,positive_score_physics = positive_score_physics,positive_score_chemistry = positive_score_chemistry,negative_score_maths = negative_score_maths,negative_score_physics = negative_score_physics,negative_score_chemistry = negative_score_chemistry,attempted_maths = attempted_maths,attempted_physics = attempted_physics,attempted_chemistry = attempted_chemistry,un_attempted_maths = un_attempted_maths,un_attempted_physics = un_attempted_physics,un_attempted_chemistry = un_attempted_chemistry,correct_attempted_maths = correct_attempted_maths,correct_attempted_physics = correct_attempted_physics,correct_attempted_chemistry = correct_attempted_chemistry,wrong_attempted_maths = wrong_attempted_maths,wrong_attempted_physics = wrong_attempted_physics,wrong_attempted_chemistry = wrong_attempted_chemistry,)
+	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, time_taken=time_taken, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques,total_score_maths = total_score_maths,total_score_physics = total_score_physics,total_score_chemistry = total_score_chemistry,positive_score_maths = positive_score_maths,positive_score_physics = positive_score_physics,positive_score_chemistry = positive_score_chemistry,negative_score_maths = negative_score_maths,negative_score_physics = negative_score_physics,negative_score_chemistry = negative_score_chemistry,attempted_maths = attempted_maths,attempted_physics = attempted_physics,attempted_chemistry = attempted_chemistry,un_attempted_maths = un_attempted_maths,un_attempted_physics = un_attempted_physics,un_attempted_chemistry = un_attempted_chemistry,correct_attempted_maths = correct_attempted_maths,correct_attempted_physics = correct_attempted_physics,correct_attempted_chemistry = correct_attempted_chemistry,wrong_attempted_maths = wrong_attempted_maths,wrong_attempted_physics = wrong_attempted_physics,wrong_attempted_chemistry = wrong_attempted_chemistry,)
 	db.session.add(usertest)
 	db.session.commit()
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=user_id).order_by(UserTest.timestamp.desc()).first()
