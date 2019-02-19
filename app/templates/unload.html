@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<a href="your URL" id="navigate"> click here </a>
+<script>
+
+
+$(window).on('beforeunload', function(){
+      return 'Are you sure you want to leave?';
+});
+
+
+</script>
+</body>
+</html>

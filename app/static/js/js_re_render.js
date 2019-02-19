@@ -4,10 +4,9 @@
         console.log($('#timerCount').text());
         console.log('remain is : ' + $('#timerCount'));
 
-        console.log('t is  : ' + window.time);
+        console.log( selections);
+          localStorage.setItem("selections", JSON.stringify(selections));
         return 'Are you sure you want to leave?';
-
-
     });
 
 
@@ -253,6 +252,8 @@ window.time = t--;
 
     function getQuestions(test_id) {
 
+        console.log('questions is ' + questions);
+
         test_id = test_id.replace(/ /g, '');
 
         $.ajax({
@@ -314,13 +315,27 @@ window.time = t--;
     // Displays next requested element
     window.displayNext = function() {
 
+
+console.log(localStorage.getItem("selections"));
+var prev_selections = JSON.parse(localStorage.getItem("selections"));
+        console.log(prev_selections);
+
         quiz.fadeOut(function() {
             $('#question').remove();
             if (questionCounter < questions.length) {
                 $('#end_of_test_div').hide();
                 var nextQuestion = createQuestionElement(questionCounter);
                 quiz.append(nextQuestion).fadeIn();
-                if (!(isNaN(selections[questionCounter]))) {
+                if(prev_selections.length)
+                {
+                    if(prev_selections[questionCounter])
+                    {
+                        $('input[value=' + prev_selections[questionCounter] + ']').prop('checked', true);
+                        $('input[value=' + prev_selections[questionCounter] + ']').data('waschecked', true);
+                        
+                    }
+                }
+                else if (!(isNaN(selections[questionCounter]))) {
                     $('input[value=' + selections[questionCounter] + ']').prop('checked', true);
                     $('input[value=' + selections[questionCounter] + ']').data('waschecked', true);
                 }
@@ -357,10 +372,6 @@ window.time = t--;
 
         var test_id = $('#test_id_div').text();
         getAnswers(test_id);
-                
-        e.preventDefault();
-        $(window).off('beforeunload');
-        return false;
     });
 
     var questionsAns;
