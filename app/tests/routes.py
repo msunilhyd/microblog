@@ -122,6 +122,9 @@ def test_get_questions():
 		choices.append(emp.Question.b);
 		choices.append(emp.Question.c);
 		choices.append(emp.Question.d);
+
+		if emp.Question.e is not None:
+			choices.append(emp.Question.e);
 		
 		empDict = {
 		'question': emp.Question.question_content,
@@ -178,9 +181,6 @@ def test_update_user_score():
 	map_wrong_attempted = request.form['map_wrong_attempted']
 	time_taken = request.form['time_taken_test']
 
-	print('Time taken for test is : ')
-	print(time_taken)
-
 	map_total_score_list = ast.literal_eval(map_total_score)
 	total_score_maths = map_total_score_list[0][1]
 	total_score_physics = map_total_score_list[1][1]
@@ -220,11 +220,6 @@ def test_update_user_score():
 	db.session.add(usertest)
 	db.session.commit()
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=user_id).order_by(UserTest.timestamp.desc()).first()
-
-	print('printing usertest details as below : ')
-	print(usertest)
-	print(usertest.user)
-	print(usertest.test)
 
 	send_score_sheet_email(usertest.user, usertest.test, usertest)
 

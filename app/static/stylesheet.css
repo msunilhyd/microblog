@@ -12,6 +12,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
+.test-title{
+    text-align: center;
+    color: darkslateblue;
+}
+
+
 .logout-class{
   text-align: center
 }
@@ -178,6 +184,11 @@ p {
     text-indent: 10px;
     display:none;
 }
+
+#score {
+  text-align: center;
+}
+
 
 #time_in_mins_div {
     text-indent: 10px;

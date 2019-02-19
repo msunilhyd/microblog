@@ -502,7 +502,7 @@ window.time = t--;
             }
         }
 
-        var color_of_report_heading = '<font color="lightseagreen">';
+        var color_of_report_heading = '<font color="darkcyan">';
         var color_of_report_details = '<font color="#000099">';
         var color_of_report_values = '<font color="green">';
 

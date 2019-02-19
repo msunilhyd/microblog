@@ -13,11 +13,18 @@
           <a class="btn taken-test-btn btn-sm mt-1 mb-1 btn-primary" href="{{ url_for('tests.take_test', test_id=test.id) }}">Take Test</a>
 
       {% else %}  
-          <p class="taken-test-p"> <strong> Status = <font color="green"> Taken </strong> </p>
+          <p class="taken-test-p"> <strong> Status = <font color="darkslateblue"> Taken </strong> </p>
+          <p class="taken-test-p"> 
+            <strong> Date = <font color="darkslateblue"> 
+                                    {{ moment(usertest.timestamp).format('LLL')}}
+                                    {{ moment.include_jquery() }}
+                                    {{ moment.include_moment() }}
+              </strong> 
+          </p>
+                             
 
 
-
-          <h2 class="taken-test-p"><strong> Score Sheet </strong></h2>
+          <h2 class="taken-test-p"><strong> Score Sheet Total </strong></h2>
 
           <table id="score-sheet">
 
@@ -31,6 +38,7 @@
               <th>Un-Attempted</th>
               <th>Correct</th>
               <th>Wrong</th>
+              <th>Time Taken(mins)</th>
 
             <tr>
               
@@ -43,12 +51,16 @@
               <td>{{ usertest.no_answers }}</td>
               <td>{{ usertest.correct_answers }}</td>
               <td>{{ usertest.wrong_answers }}</td>
+              <td>{{ usertest.time_taken }}</td>
               
 
             </tr>
 
           </table>
 <br>
+          <h2 class="taken-test-p"><strong> Score Sheet Sections </strong></h2>
+
+
           <h3 class="taken-test-p"><strong> Maths </strong></h2>
 
           <table id="score-sheet">
