@@ -196,8 +196,8 @@ class Question(db.Model):
     d = db.Column(db.String(500), nullable=False)
     e = db.Column(db.String(500))
     ans = db.Column(db.Integer, nullable=False)
-    sub_section = db.Column(db.String(50), index=True)
     level = db.Column(db.Integer)
+    sub_section = db.Column(db.String(100), index=True)
     date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
 
     def __repr__(self):

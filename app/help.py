@@ -30,3 +30,8 @@
 
     flask db stamp heads
 
+
+
+mysql -u root -p < test_physics.sql --force
+
+
