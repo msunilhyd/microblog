@@ -35,3 +35,6 @@
 mysql -u root -p < test_physics.sql --force
 
 
+to run a script on remote mysql : 
+
+mysql -u equizuser -h 172.104.40.65 -p < test_physics.sql --force
