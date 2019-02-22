@@ -1,6 +1,7 @@
 (function() {
 
     $(window).on('beforeunload', function() {
+        $('#submitQuiz').click();
         return 'Are you sure you want to leave?';
     });
 

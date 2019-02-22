@@ -87,6 +87,9 @@ def show_questions(test_id):
 @login_required
 def take_test(test_id):
 	test = Test.query.get_or_404(test_id)
+	usertest = UserTest.query.filter_by(test_id=test_id, user_id=current_user.id).first()
+	if usertest is not None:
+		return render_template('tests/test.html', test=test, usertest=usertest)
 	question = TestQuestion.query.filter_by(test_id=test_id)
 	q = (db.session.query(TestQuestion, Question)
     .filter(TestQuestion.test_id == test_id)
