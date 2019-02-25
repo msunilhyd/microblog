@@ -10,7 +10,7 @@ from datetime import datetime
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, func
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
- 
+
 
 Base = declarative_base()
 
@@ -23,8 +23,8 @@ class Department(db.Model):
         'Employee',
         secondary='department_employee_link'
     )
- 
- 
+
+
 class Employee(db.Model):
     __tablename__ = 'employee'
     id = db.Column(db.Integer, primary_key=True)
@@ -34,8 +34,8 @@ class Employee(db.Model):
         Department,
         secondary='department_employee_link'
     )
- 
- 
+
+
 class DepartmentEmployeeLink(db.Model):
     __tablename__ = 'department_employee_link'
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'), primary_key=True)
@@ -50,7 +50,6 @@ followers = db.Table(
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
-
 
 
 class User(UserMixin, db.Model):
@@ -125,9 +124,9 @@ class User(UserMixin, db.Model):
 
     def get_confirm_email_token(self, expires_in=600):
         return jwt.encode(
-        {'confirm_email': self.id, 'exp': time() + expires_in},
-        current_app.config['SECRET_KEY'],
-        algorithm='HS256').decode('utf-8')
+            {'confirm_email': self.id, 'exp': time() + expires_in},
+            current_app.config['SECRET_KEY'],
+            algorithm='HS256').decode('utf-8')
 
     @staticmethod
     def verify_confirm_email_token(token):
@@ -161,7 +160,7 @@ class Post(db.Model):
 
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    test_name = db.Column(db.String(50), index=True,nullable=False)
+    test_name = db.Column(db.String(50), index=True, nullable=False)
     category = db.Column(db.String(50), index=True)
     instructions = db.Column(db.String(1000), nullable=False)
     total_no_of_questions = db.Column(db.Integer, nullable=False, default=0)
@@ -178,12 +177,13 @@ class Test(db.Model):
     author_maths = db.Column(db.String(120))
     author_physics = db.Column(db.String(120))
     author_chemistry = db.Column(db.String(120))
-    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)  
+    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     questions = db.relationship('TestQuestion', backref='NameOfTest', lazy=True)
 
     def __repr__(self):
-        return "Test('{}','{}''{}')".format(self.id,self.test_name, self.category, self.total_no_of_questions, self.user_id)
+        return "Test('{}','{}''{}')".format(self.id, self.test_name, self.category, self.total_no_of_questions, self.user_id)
+
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -196,6 +196,7 @@ class Question(db.Model):
     d = db.Column(db.String(500), nullable=False)
     e = db.Column(db.String(500))
     ans = db.Column(db.Integer, nullable=False)
+    solution = db.Column(db.String(1000))
     level = db.Column(db.Integer)
     sub_section = db.Column(db.String(100), index=True)
     date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
@@ -203,11 +204,12 @@ class Question(db.Model):
     def __repr__(self):
         return "Question('{}','{}''{}')".format(self.id, self.question_content, self.positive_marks)
 
+
 class TestQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    
+
     def __repr__(self):
         return "TestQuestion('{}','{}')".format(self.test_id, self.id)
 
@@ -253,5 +255,3 @@ class UserTest(db.Model):
 
     def __repr__(self):
         return "UserTest('{}','{}''{}')".format(self.id, self.test_id, self.user_id, self.user_score, self.test, self.user)
-
-
