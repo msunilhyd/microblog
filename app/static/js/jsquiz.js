@@ -21,6 +21,7 @@
     // Build Quiz
     // buildQuiz();
     $('#next').hide();
+    $('#prev').hide();
     $('#count').hide();
 
 
@@ -42,7 +43,40 @@
             }
         });
 
+ // Click handler for the 'next' button
+    $('#next').on('click', function(e) {
+        e.preventDefault();
 
+        // Suspend click listener during fade animation
+        if (quiz.is(':animated')) {
+            return false;
+        }
+        if (questionCounter < questions.length) {
+            choose();
+        }
+        questionCounter++;
+        displayNext();
+
+    });
+
+
+
+    // Click handler for the 'prev' button
+    $('#prev').on('click', function(e) {
+        e.preventDefault();
+        $('#next').show();
+        if (quiz.is(':animated')) {
+            return false;
+        }
+
+
+        if (questionCounter < questions.length) {
+            choose();
+        }
+
+        questionCounter--;
+        displayNext();
+    });
         $('#startQuiz').hide();
         $('#submitQuiz').show();
         $('#test_instr_div').hide();
@@ -76,7 +110,7 @@
         function timer(count, str) {
             count--;
             if (count != 0 && count < 600) {
-                str = str + "<div id='remain' style='display:block'>Last 10 minutes remaining</div>"
+                str = str + "<div class='remain' id='remain'>Last 10 minutes</div>"
             } else if (count === 0) {
                 clearInterval(interval);
                 var scoreElem = $('<p>', {
@@ -102,7 +136,7 @@ window.time = t--;
             timer(t, secondsToTime(window.time));
         }, 1000);
 
-        
+
         timer(t, secondsToTime(t));
         $('#submitQuiz').show();
 
@@ -172,15 +206,15 @@ window.time = t--;
         $(this).removeClass('active');
     });
 
-    // Creates and returns the div that contains the questions and 
+    // Creates and returns the div that contains the questions and
     // the answer selections
     function createQuestionElement(index) {
         var qElement = $('<div>', {
             id: 'question'
         });
 
-        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:green;"> &nbsp Section : ' + questions[index].section +
-            '<span style="float:right; color:#444444; font-size: 24px;"> Sub-section : <font color="green">' + questions[index].sub_section + '<br>  &nbsp <font color="#444444"> Level : <font color="green">' + questions[index].level + '</span></h2>');
+        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:lightseagreen;"> &nbsp Section : ' + questions[index].section +
+            '<span style="float:right; color:#444444; font-size: 24px;"> Sub-section : <font color="lightseagreen">' + questions[index].sub_section + '<br>  &nbsp <font color="#444444"> Level : <font color="lightseagreen">' + questions[index].level + '</span></h2>');
 
 
         qElement.append(header);
@@ -301,6 +335,11 @@ window.time = t--;
     // Displays next requested element
     window.displayNext = function() {
 
+       //console.log('questionCounter is :' + questionCounter);
+       //var random_button = document.getElementById('random0');
+       //console.log('random_button is : ' + random_button);
+       //random_button.background = 'yellow';
+
         quiz.fadeOut(function() {
             $('#question').remove();
             if (questionCounter < questions.length) {
@@ -344,7 +383,7 @@ window.time = t--;
 
         var test_id = $('#test_id_div').text();
         getAnswers(test_id);
-                
+
         e.preventDefault();
         $(window).off('beforeunload');
         return false;
@@ -405,7 +444,7 @@ window.time = t--;
         var section_correct_attempted_questions_map = new Map();
         var section_wrong_attempted_questions_map = new Map();
 
-        // adding some elements to the map  
+        // adding some elements to the map
         section_total_score_map.set("Maths", 0);
         section_total_score_map.set("Physics", 0);
         section_total_score_map.set("Chemistry", 0);

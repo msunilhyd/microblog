@@ -36,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-nav{
-  color: #ffffff;  
+  color: #ffffff;
 }
 
 .nav-item {
@@ -44,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-nav.li.a{
-  color: #ffffff;  
+  color: #ffffff;
 }
 
 .site-header .navbar-nav .nav-link:hover {
@@ -246,7 +246,19 @@ p {
     background-color: #F8F8FF;
     color: #525252;
 }
-
+.prev_next{
+    border:4px solid;
+    border-radius:5px;
+    width: 40px;
+    padding-left:5px;
+    padding-right: 5px;
+    position: relative;
+    float:left;
+    color: lightseagreen;
+    margin: 12px 2px 0 2px;
+  text-decoration:none;
+    cursor: pointer;
+}
 
 .submitQuiz{
     border:4px solid;
@@ -256,12 +268,17 @@ p {
     padding-right: 5px;
     position: relative;
     float:right;
-    background-color: #DCDCDC;
     color: lightseagreen;
     margin: 12px 2px 0 2px;
-  text-decoration:none;
+  text-decoration:blue;
     cursor: pointer;
 }
+
+.remain{
+    display: block;
+    columns: red;
+  }
+
 
 .randomClass{
     border:4px solid;
@@ -310,12 +327,10 @@ ul {
 }
 
 #prev {
-    display:none;
   width: auto;
 }
 
 #next {
-    display:none;
   width: auto;
 }
 
@@ -332,14 +347,14 @@ ul {
 
 input[type="radio"]{
     margin: 0 -4px 0 10px;
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
     width: 2%;
-    height: 2em;   
+    height: 2em;
 }
 
 
 .radioClass{
-  font-size: 1.5rem;    
+  font-size: 1.5rem;
 }
 
 
@@ -347,7 +362,7 @@ label {
     display: inline-block;
     margin-bottom: .5rem;
     font-size: 20px;
-    cursor: pointer;    
+    cursor: pointer;
     vertical-align: middle;
 }
 
