@@ -18,7 +18,7 @@ from app.tests.forms import TestForm, TestQuestionForm
 
 
 @bp.route("/tests")
-def tests():    
+def tests():
     tests = Test.query.order_by(Test.date_posted.desc())
     return render_template('tests/alltests.html', tests=tests)
 
@@ -61,7 +61,7 @@ def new_test_question(test_id):
 @bp.route("/test/<int:test_id>")
 def test(test_id):
 	user_id = request.args.get('user_id', None)
-	test = Test.query.get_or_404(test_id)	
+	test = Test.query.get_or_404(test_id)
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=user_id).first()
 
 	return render_template('tests/test.html', test=test, usertest=usertest)
@@ -90,16 +90,6 @@ def take_test(test_id):
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=current_user.id).first()
 	if usertest is not None:
 		return render_template('tests/test.html', test=test, usertest=usertest)
-	question = TestQuestion.query.filter_by(test_id=test_id)
-	q = (db.session.query(TestQuestion, Question)
-    .filter(TestQuestion.test_id == test_id)
-    .filter(TestQuestion.question_id == Question.id)
-    .all())
-	test.instructions = Markup(test.instructions)
-
-	if(len(question.all()) == 0):
-		return redirect(url_for('tests.new_test_question', test_id=test_id))
-
 	else:
 		print("Questions ready to take the test")
 		return render_template('tests/new_tests.html', title="Taking Test", legend='Take test', test = test)
@@ -112,7 +102,7 @@ def take_test(test_id):
 @bp.route("/test_get_questions/", methods=['GET','POST'])
 def test_get_questions():
 	test_id = request.form['test_id']
-	
+
 	q = (db.session.query(TestQuestion, Question)
     .filter(TestQuestion.test_id == test_id)
     .filter(TestQuestion.question_id == Question.id)
@@ -128,7 +118,7 @@ def test_get_questions():
 
 		if emp.Question.e is not None:
 			choices.append(emp.Question.e);
-		
+
 		empDict = {
 		'question': emp.Question.question_content,
 		'choices' : choices,
@@ -147,13 +137,13 @@ def test_get_questions():
 @bp.route("/test_get_answers/", methods=['GET','POST'])
 def test_get_answers():
 	test_id = request.form['test_id']
-	
+
 	q = (db.session.query(TestQuestion, Question)
     .filter(TestQuestion.test_id == test_id)
     .filter(TestQuestion.question_id == Question.id)
     .all())
 	empList = []
-	for emp in q:		
+	for emp in q:
 		empDict = {
 		'correctAnswer': emp.Question.ans,
 		'section' : emp.Question.section
@@ -193,7 +183,7 @@ def test_update_user_score():
 	positive_score_maths = map_positive_score_list[0][1]
 	positive_score_physics = map_positive_score_list[1][1]
 	positive_score_chemistry = map_positive_score_list[2][1]
-	
+
 	map_negative_score_list = ast.literal_eval(map_negative_score)
 	negative_score_maths = map_negative_score_list[0][1]
 	negative_score_physics = map_negative_score_list[1][1]
