@@ -8,6 +8,7 @@ from app.models import User, Post, UserTest, Test
 from app.main import bp
 import os
 import secrets
+from PIL import Image
 
 
 @bp.before_request
@@ -29,21 +30,20 @@ def index():
         flash('Your post is now live!', 'info')
         return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
-    
+
     # Currently hiding the user_test activity
     #posts = current_user.user_tests().paginate(page, current_app.config['POSTS_PER_PAGE'], False)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False) 
+        page, current_app.config['POSTS_PER_PAGE'], False)
 
     user_tests = UserTest.query.order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
-   
-    next_url = url_for('main.index', page=user_tests.next_num) \
-            if user_tests.has_next else None
-    prev_url = url_for('main.index', page=user_tests.prev_num) \
-            if user_tests.has_prev else None
-    return render_template('index.html', title='Home Page', form=form, posts=user_tests.items, next_url=next_url, prev_url=prev_url)
 
+    next_url = url_for('main.index', page=user_tests.next_num) \
+        if user_tests.has_next else None
+    prev_url = url_for('main.index', page=user_tests.prev_num) \
+        if user_tests.has_prev else None
+    return render_template('index.html', title='Home Page', form=form, posts=user_tests.items, next_url=next_url, prev_url=prev_url)
 
 
 @bp.route('/explore')
@@ -70,9 +70,9 @@ def user(username):
         page, current_app.config['POSTS_PER_PAGE'], False)
     user_tests = UserTest.query.filter_by(user_id=user.id).order_by(UserTest.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
-   
+
     if len(user.image_file) == 0:
-        user.image_file='default.jpg'
+        user.image_file = 'default.jpg'
 
     next_url = url_for('main.user', username=user.username,
                        page=user_tests.next_num) if user_tests.has_next else None
@@ -109,13 +109,17 @@ def edit_profile():
 
 
 def save_profile_picture(form_picture):
-	random_hex = secrets.token_hex(8)
-	_, f_ext = os.path.splitext(form_picture.filename)
-	picture_fn = random_hex + f_ext
-	picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
-	form_picture.save(picture_path)
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
 
-	return picture_fn
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
 
 
 @bp.route('/follow/<username>')
