@@ -27,7 +27,9 @@
 
     // Click handler for the 'startQuiz' button
     $('#startQuiz').on('click', function(e) {
-
+jQuery(document).bind("contextmenu cut copy",function(e){
+    e.preventDefault();
+});
         $("a.nav-item").off('click').on('click', function(e) {
 
             if ($('#timerCount').css('display') != 'none') {
