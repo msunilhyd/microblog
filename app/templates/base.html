@@ -17,7 +17,7 @@
                 </button>
 
                  <a class="navbar-brand navbar-left nav-item" href="/">
-                    <img style="max-width:166px; margin-top: -11px;" 
+                    <img style="max-width:166px; margin-top: -11px;"
                                 src="{{ url_for('static', filename='nav/logo.gif')}}"></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -48,7 +48,7 @@
              <div class="alert alert-{{ category }}">
                  {{ message }}
              </div>
-             {% endfor %}    
+             {% endfor %}
          {% endif %}
      {% endwith %}
 
@@ -61,5 +61,14 @@
     {{ moment.include_moment() }}
         <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='stylesheet.css')}} " >
             {{ super() }}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135639095-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135639095-1');
+</script>
 
 {% endblock %}
