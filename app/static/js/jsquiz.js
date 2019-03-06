@@ -215,8 +215,7 @@ window.time = t--;
             id: 'question'
         });
 
-        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:lightseagreen;"> &nbsp Section : ' + questions[index].section +
-            '<span style="float:right; color:#444444; font-size: 24px;"> Sub-section : <font color="lightseagreen">' + questions[index].sub_section + '<br>  &nbsp <font color="#444444"> Level : <font color="lightseagreen">' + questions[index].level + '</span></h2>');
+        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:lightseagreen;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
 
 
         qElement.append(header);
