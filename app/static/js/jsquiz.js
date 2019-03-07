@@ -152,9 +152,13 @@ window.time = t--;
         for (var i = 0; i < questions.length; i++) {
             var j = i + 1;
             input = '<input type="button" name="random" class="randomClass" id=random' + i +
-                ' value=Q' + j + ' onclick="randomQuesFun(' + i + ')"></div>';
+                ' value=' + j + ' onclick="randomQuesFun(' + i + ')"></div>';
 
             item += input;
+            if((j % 10) == 0)
+            {
+                item += '<br>';
+            }
         }
 
         item = "Navigation for Questions <br>" + item;
