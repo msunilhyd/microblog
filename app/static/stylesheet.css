@@ -241,6 +241,7 @@ p {
 .ques_nav_container
 {
   display: none;
+  text-align: center;
      width:auto;
     margin:auto;
     padding: 0 25px 55px 10px;
@@ -292,11 +293,11 @@ p {
 .randomClass{
     border-radius:5px;
     width: 40px;
+    border : 2px solid black;
     padding-left:5px;
     padding-right: 5px;
     position: relative;
     float:center;
-    width:105px;
     background-color: white;
     color: #34495E;
     margin: 12px 2px 0 2px;
