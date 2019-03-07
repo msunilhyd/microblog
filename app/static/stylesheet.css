@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .test-title{
     text-align: center;
-    color: darkslateblue;
+    color: #000099;
 }
 
 
@@ -310,7 +310,7 @@ p {
 
 #nav_for_questions{
   text-align: center;
-  color: lightseagreen;
+  color: darkcyan;
 }
 
 

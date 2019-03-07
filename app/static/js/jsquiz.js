@@ -410,8 +410,8 @@ window.time = t--;
                 questionsAns = parsedData;
                 var scoreElem = displayScore(questionsAns);
                 quiz.append(scoreElem).fadeIn();
-                document.getElementById('ques_buttons_div').insertAdjacentHTML('afterbegin', "You can use the below Navigations for " +
-                    "checking correct answers. <br>");
+                document.getElementById('nav_for_questions').insertAdjacentHTML('afterbegin', "<h3 id='nav_for_questions'>You can use the below Navigations for " +
+                    "checking correct answers </h3>");
             },
             error: function(data) {
                 console.log("Error getting questions from server");
@@ -507,8 +507,9 @@ window.time = t--;
 
                 positive_score += positive_marks_1;
                 no_of_correct_ans_ques += 1;
-            } else if (userAns !== undefined) {
+            } else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
 
+                console.log('userAns is not undefined and is : ' + userAns);
                 no_of_attempted_ans_ques += 1;
                 var section_score = section_total_score_map.get(questionsAns[i].section);
                 section_score -= negative_marks_1;
@@ -550,7 +551,7 @@ window.time = t--;
 
         var color_of_report_heading = '<font color="darkcyan">';
         var color_of_report_details = '<font color="#000099">';
-        var color_of_report_values = '<font color="green">';
+        var color_of_report_values = '<font color="darkcyan">';
 
         var finalScore = positive_score - negative_score;
 
