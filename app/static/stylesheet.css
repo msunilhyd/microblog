@@ -241,6 +241,15 @@ p {
 .ques_nav_container
 {
   display: none;
+     width:auto;
+    margin:auto;
+    padding: 0 25px 55px 10px;
+  background-color: #DCDCDC;
+    border:4px solid #B0E0E6;
+    border-radius:5px;
+  color: black;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px #888;
 }
 .button.active {
     background-color: #F8F8FF;
@@ -297,6 +306,11 @@ p {
 
 #ques_buttons_div{
     width:auto;
+}
+
+#nav_for_questions{
+  text-align: center;
+  color: lightseagreen;
 }
 
 

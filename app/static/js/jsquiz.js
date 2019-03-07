@@ -27,6 +27,8 @@
 
     // Click handler for the 'startQuiz' button
     $('#startQuiz').on('click', function(e) {
+            console.log('startQuiz clicked');
+                $('#ques_nav_container').show();
 jQuery(document).bind("contextmenu cut copy",function(e){
     e.preventDefault();
 });
@@ -161,7 +163,6 @@ window.time = t--;
             }
         }
 
-        item = "Navigation for Questions <br>" + item;
         document.getElementById('ques_buttons_div').innerHTML = item;
     }
 
