@@ -27,7 +27,6 @@
 
     // Click handler for the 'startQuiz' button
     $('#startQuiz').on('click', function(e) {
-            console.log('startQuiz clicked');
                 $('#ques_nav_container').show();
 jQuery(document).bind("contextmenu cut copy",function(e){
     e.preventDefault();
@@ -153,7 +152,7 @@ window.time = t--;
         var input = '';
         for (var i = 0; i < questions.length; i++) {
             var j = i + 1;
-            if(i == 0)
+            if(i == 0 && (j < questions.length))
             {
                 item +=  '<div id="section_at_test">' + questions[j].section + '</div> ';
             }
@@ -166,9 +165,9 @@ window.time = t--;
             {
                 item += '<br>';
             }
-            if((j % 30) == 0)
+            if((j % 30) == 0 && (j < questions.length))
             {
-                item +=  '<div id="section_at_test">' + questions[j].section + '</div>';
+                item +=  '<hr> <div id="section_at_test">' + questions[j].section + '</div>';
             }
         }
 
@@ -518,7 +517,6 @@ window.time = t--;
                 no_of_correct_ans_ques += 1;
             } else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
 
-                console.log('userAns is not undefined and is : ' + userAns);
                 no_of_attempted_ans_ques += 1;
                 var section_score = section_total_score_map.get(questionsAns[i].section);
                 section_score -= negative_marks_1;
