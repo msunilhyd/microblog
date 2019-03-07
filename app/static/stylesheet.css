@@ -290,12 +290,18 @@ p {
     columns: red;
   }
 
+br {
+  display:block;
+  margin-top:10px;
+  line-height:22px;
+}
+
 
 .randomClass{
     border-radius:5px;
     border : 2px solid black;
     border : 2px solid black;
-    width: 90px;
+    width: 50px;
     padding-left:5px;
     padding-right: 5px;
     position: relative;
@@ -314,6 +320,12 @@ p {
 #nav_for_questions{
   text-align: center;
   color: darkcyan;
+}
+
+#section_at_test{
+  text-align: center;
+  color: darkcyan;
+  font-size: 35px;
 }
 
 

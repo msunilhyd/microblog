@@ -153,13 +153,22 @@ window.time = t--;
         var input = '';
         for (var i = 0; i < questions.length; i++) {
             var j = i + 1;
+            if(i == 0)
+            {
+                item +=  '<div id="section_at_test">' + questions[j].section + '</div> ';
+            }
             input = '<input type="button" name="random" class="randomClass" id=random' + i +
                 ' value=' + j + ' onclick="randomQuesFun(' + i + ')"></div>';
 
             item += input;
+
             if((j % 10) == 0)
             {
                 item += '<br>';
+            }
+            if((j % 30) == 0)
+            {
+                item +=  '<div id="section_at_test">' + questions[j].section + '</div>';
             }
         }
 
@@ -220,7 +229,7 @@ window.time = t--;
             id: 'question'
         });
 
-        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:lightseagreen;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
+        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:darkcyan;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
 
 
         qElement.append(header);
