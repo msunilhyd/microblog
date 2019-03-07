@@ -243,6 +243,7 @@ p {
   display: none;
   text-align: center;
      width:auto;
+     text-align: center;
     margin:auto;
     padding: 0 25px 55px 10px;
   background-color: #DCDCDC;
@@ -292,8 +293,9 @@ p {
 
 .randomClass{
     border-radius:5px;
-    width: 40px;
     border : 2px solid black;
+    border : 2px solid black;
+    width: 90px;
     padding-left:5px;
     padding-right: 5px;
     position: relative;
