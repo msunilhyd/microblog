@@ -106,6 +106,7 @@ def test_get_questions():
 	q = (db.session.query(TestQuestion, Question)
     .filter(TestQuestion.test_id == test_id)
     .filter(TestQuestion.question_id == Question.id)
+    .order_by(Question.section.desc())
     .all())
 
 	empList = []

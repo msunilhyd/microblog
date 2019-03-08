@@ -150,24 +150,30 @@ window.time = t--;
     function createRandomButtons() {
         var item = '';
         var input = '';
+
+        var local_section = questions[0].section;
         for (var i = 0; i < questions.length; i++) {
-            var j = i + 1;
-            if(i == 0 && (j < questions.length))
+            if (i == 0)
             {
-                item +=  '<div id="section_at_test">' + questions[j].section + '</div> ';
+                item +=  '<div id="section_at_test">' + questions[i].section + '</div> ';
             }
+            if(questions[i].section !== local_section)
+            {
+                item +=  '<div id="section_at_test">' + questions[i].section + '</div> ';
+                local_section = questions[i].section;
+            }
+
+            var j = i + 1;
+
             input = '<input type="button" name="random" class="randomClass" id=random' + i +
                 ' value=' + j + ' onclick="randomQuesFun(' + i + ')"></div>';
 
             item += input;
 
+
             if((j % 10) == 0)
             {
                 item += '<br>';
-            }
-            if((j % 30) == 0 && (j < questions.length))
-            {
-                item +=  '<hr> <div id="section_at_test">' + questions[j].section + '</div>';
             }
         }
 
@@ -312,6 +318,9 @@ window.time = t--;
     }
 
     window.randomQuesFun = function(i) {
+
+            document.getElementById('random' + questionCounter).style.background = 'white';
+            document.getElementById('random' + i).style.background = 'yellow';
 
         $('#prev').show();
 

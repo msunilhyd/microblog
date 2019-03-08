@@ -1,9 +1,8 @@
 {% extends 'bootstrap/base.html' %}
 
-{% block title %}
-    {% if title %}{{ title }} - EQuizzy{% else %}Welcome to EQuizzy{% endif %}
-{% endblock %}
-
+    {% block title %}
+        {% if title %}{{ title }} - EQuizzy{% else %}Welcome to EQuizzy{% endif %}
+    {% endblock %}
 
 {% block navbar %}
     <nav class="navbar navbar-default navbar-custom" style="background-color: #2E4053; color: #ffffff">
@@ -70,5 +69,6 @@
 
   gtag('config', 'UA-135639095-1');
 </script>
+
 
 {% endblock %}
