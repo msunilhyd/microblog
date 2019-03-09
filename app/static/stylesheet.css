@@ -11,7 +11,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
   font-family: 'Source Sans Pro Bold', sans-serif;
 }
 
@@ -19,13 +18,19 @@ p {
   color: black;
   font-family: 'Source Sans Pro Bold', sans-serif;
 }
+.nav-item{
+    font-family: 'Source Sans Pro Bold', sans-serif;
+}
 
 .test-title{
     text-align: center;
-    color: #000099;
-
 }
 
+
+
+.form-group{
+    font-family: 'Source Sans Pro Bold', sans-serif;
+}
 
 .logout-class{
   text-align: center
