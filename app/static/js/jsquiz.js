@@ -316,10 +316,18 @@ window.time = t--;
             }
         });
     }
-
+var prev_color;
     window.randomQuesFun = function(i) {
 
-            document.getElementById('random' + questionCounter).style.background = 'white';
+            prev_color = document.getElementById('random' + questionCounter).style.background;
+            if(prev_color === 'yellow')
+            {
+                document.getElementById('random' + questionCounter).style.background = 'none';
+            }
+            else
+            {
+                document.getElementById('random' + questionCounter).style.background = prev_color;
+            }
             document.getElementById('random' + i).style.background = 'yellow';
 
         $('#prev').show();
