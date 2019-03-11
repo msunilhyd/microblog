@@ -214,6 +214,11 @@ class TestQuestion(db.Model):
         return "TestQuestion('{}','{}')".format(self.test_id, self.id)
 
 
+class TestTypes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(100), index=True)
+
+
 class UserTest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)

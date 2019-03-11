@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+{% if current_user.is_authenticated %}
+
+
+
+<h1 class="mb-3 user-posts-heading"> </h1>
+
+  <div class="wrapper">
+      {% for type in test_types %}
+         <a href="{{ url_for('tests.tests_test_type', type=type.type) }}">
+        <div class="box">{{ type.type }}</div>
+      {% endfor %}
+  </div>
+
+
+{% else %}
+
+    <div>
+      <div class="logout-class"> Please Login !</div>
+        <div class="article-metadata"></div>
+    </div>
+
+
+{% endif  %}
+
+
+{% endblock app_content %}

@@ -1,5 +1,5 @@
 
-from flask import render_template, redirect, url_for, flash, request, json, request, abort,jsonify,Markup
+from flask import render_template, redirect, url_for, flash, request, json, request, abort, jsonify, Markup
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -8,7 +8,7 @@ from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Test, TestQuestion, Question, UserTest
+from app.models import User, Test, TestQuestion, Question, UserTest, TestTypes
 from app.auth.email import send_score_sheet_email
 from app.tests import bp
 import ast
@@ -16,12 +16,20 @@ import ast
 from app.tests.forms import TestForm, TestQuestionForm
 
 
+@bp.route("/tests_test_type/<string:type>", methods=['GET', 'POST'])
+def tests_test_type(type):
+	print('type passed is as below :')
+	print(type)
+	tests = Test.query.filter_by(category=type).order_by(Test.date_posted.desc())
+	return render_template('tests/alltests.html', tests=tests)
 
-@bp.route("/tests")
+
+@bp.route("/tests", methods=['GET', 'POST'])
 def tests():
-    tests = Test.query.order_by(Test.date_posted.desc())
-    return render_template('tests/alltests.html', tests=tests)
-
+    test_types = TestTypes.query.order_by(TestTypes.id.desc())
+    print('from all_test_types : ')
+    print(test_types)
+    return render_template('tests/all_test_types.html', test_types=test_types)
 
 @bp.route("/test/new", methods=['GET', 'POST'])
 @login_required

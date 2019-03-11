@@ -3,25 +3,25 @@
 
   <article class="media content-section">
     <div class="media-body">
-     
+
         <h2 class="article-title"> Test Name : {{ test.test_name }}</h2>
 
       <p class="article-content"> Category : {{ test.category }}</p>
 
       {% if usertest == None %}
-          
-          <a class="btn taken-test-btn btn-sm mt-1 mb-1 btn-primary" href="{{ url_for('tests.take_test', test_id=test.id) }}">Take Test</a>
 
-      {% else %}  
+                  <div class='taken-test-btn' id='taken-test-btn'><a href="{{ url_for('tests.take_test', test_id=test.id) }}">Take Test</a></div>
+
+      {% else %}
           <p class="taken-test-p"> <strong> Status = <font color="darkslateblue"> Taken </strong> </p>
-          <p class="taken-test-p"> 
-            <strong> Date = <font color="darkslateblue"> 
+          <p class="taken-test-p">
+            <strong> Date = <font color="darkslateblue">
                                     {{ moment(usertest.timestamp).format('LLL')}}
                                     {{ moment.include_jquery() }}
                                     {{ moment.include_moment() }}
-              </strong> 
+              </strong>
           </p>
-                             
+
 
 
           <h2 class="taken-test-p"><strong> Score Sheet Total </strong></h2>
@@ -33,7 +33,7 @@
               <th>Total Qs </th>
               <th>Your Score</th>
               <th>Postive </th>
-              <th>Negative </th> 
+              <th>Negative </th>
               <th>Attempted</th>
               <th>Un-Attempted</th>
               <th>Correct</th>
@@ -41,7 +41,7 @@
               <th>Time Taken(mins)</th>
 
             <tr>
-              
+
               <td>{{ test.total_marks }}</td>
               <td>{{ test.total_no_of_questions }}</td>
               <td>{{ usertest.user_score }}</td>
@@ -52,7 +52,7 @@
               <td>{{ usertest.correct_answers }}</td>
               <td>{{ usertest.wrong_answers }}</td>
               <td>{{ usertest.time_taken }}</td>
-              
+
 
             </tr>
 
@@ -70,11 +70,11 @@
               <th>Total Qs </th>
               <th>Your Score</th>
               <th>Postive </th>
-              <th>Negative </th> 
+              <th>Negative </th>
               <th>Attempted</th>
               <th>Un-Attempted</th>
               <th>Correct</th>
-              <th>Wrong</th>            
+              <th>Wrong</th>
 
             <tr>
 
@@ -87,7 +87,7 @@
               <td>{{ usertest.un_attempted_maths }}</td>
               <td>{{ usertest.correct_attempted_maths }}</td>
               <td>{{ usertest.wrong_attempted_maths }}</td>
-            
+
             </tr>
 
           </table>
@@ -103,11 +103,11 @@
               <th>Total Qs </th>
               <th>Your Score</th>
               <th>Postive </th>
-              <th>Negative </th> 
+              <th>Negative </th>
               <th>Attempted</th>
               <th>Un-Attempted</th>
               <th>Correct</th>
-              <th>Wrong</th>            
+              <th>Wrong</th>
 
             <tr>
 
@@ -120,7 +120,7 @@
               <td>{{ usertest.un_attempted_physics }}</td>
               <td>{{ usertest.correct_attempted_physics }}</td>
               <td>{{ usertest.wrong_attempted_physics }}</td>
-            
+
             </tr>
 
           </table>
@@ -136,11 +136,11 @@
               <th>Total Qs </th>
               <th>Your Score</th>
               <th>Postive </th>
-              <th>Negative </th> 
+              <th>Negative </th>
               <th>Attempted</th>
               <th>Un-Attempted</th>
               <th>Correct</th>
-              <th>Wrong</th>            
+              <th>Wrong</th>
 
             <tr>
 
@@ -153,7 +153,7 @@
               <td>{{ usertest.un_attempted_chemistry }}</td>
               <td>{{ usertest.correct_attempted_chemistry }}</td>
               <td>{{ usertest.wrong_attempted_chemistry }}</td>
-            
+
             </tr>
 
           </table>
