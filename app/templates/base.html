@@ -1,5 +1,24 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block scripts %}
+        <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='stylesheet.css')}} " >
+            {{ super() }}
+    {{ moment.include_moment() }}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135639095-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135639095-1');
+</script>
+
+
+{% endblock %}
+
+
     {% block title %}
         {% if title %}{{ title }} - EQuizzy{% else %}Welcome to EQuizzy{% endif %}
     {% endblock %}
@@ -17,7 +36,7 @@
 
                  <a class="navbar-brand navbar-left nav-item" href="/">
                     <img class="logo"
-                                src="{{ url_for('static', filename='nav/websitelogo.svg')}}"></a>
+                                src="{{ url_for('static', filename='nav/website4.svg')}}"></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -54,21 +73,4 @@
         {# application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
     </div>
-{% endblock %}
-
-{% block scripts %}
-    {{ moment.include_moment() }}
-        <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='stylesheet.css')}} " >
-            {{ super() }}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135639095-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-135639095-1');
-</script>
-
-
 {% endblock %}
