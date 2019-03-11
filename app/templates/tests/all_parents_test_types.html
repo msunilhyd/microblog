@@ -10,9 +10,9 @@
 <h1 class="mb-3 user-posts-heading"> </h1>
 
   <div class="wrapper">
-      {% for type in test_types %}
-        <a href="{{ url_for('tests.tests_final', parent=parent_test_type, child=type.type) }}">
-        <div class="box">{{ type.type }}</div>
+      {% for type in parent_test_types %}
+         <a href="{{ url_for('tests.tests_test_type_parent', parent_test_type=type.parent_test_type) }}">
+        <div class="box">{{ type.parent_test_type }}</div>
       {% endfor %}
   </div>
 

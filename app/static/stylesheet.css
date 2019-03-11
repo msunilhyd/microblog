@@ -19,12 +19,13 @@ body {
 }
 
 .box {
-  background-color: darkcyan;
+  background-color: lightslategray;
   color: #fff;
   border-radius: 5px;
-  padding: 20px;
-  font-size: 150%;
+  padding: 4px;
+  font-size: 110%;
   width: auto;
+    height: auto;
     margin-top:auto;
     margin-bottom:auto;
     text-align:center;
@@ -164,6 +165,10 @@ p {
     font-weight: bold;
   }
 
+.logo{
+    max-width: 201px;
+    margin-top: -10px;
+}
   .submitQuiz{
     border:4px solid;
     border-radius:5px;

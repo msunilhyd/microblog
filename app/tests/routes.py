@@ -8,7 +8,7 @@ from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Test, TestQuestion, Question, UserTest, TestTypes
+from app.models import User, Test, TestQuestion, Question, UserTest, TestTypes,ParentTestTypes
 from app.auth.email import send_score_sheet_email
 from app.tests import bp
 import ast
@@ -16,21 +16,32 @@ import ast
 from app.tests.forms import TestForm, TestQuestionForm
 
 
-@bp.route("/tests_test_type/<string:type>", methods=['GET', 'POST'])
-def tests_test_type(type):
-	print('type passed is as below :')
-	print(type)
-	tests = Test.query.filter_by(category=type).order_by(Test.date_posted.desc())
-	return render_template('tests/alltests.html', tests=tests)
 
 
 @bp.route("/tests", methods=['GET', 'POST'])
 def tests():
+    parent_test_types = ParentTestTypes.query.order_by(ParentTestTypes.id.desc())
+    return render_template('tests/all_parents_test_types.html', parent_test_types=parent_test_types)
+
+
+@bp.route("/tests_test_type_parent/<string:parent_test_type>", methods=['GET', 'POST'])
+def tests_test_type_parent(parent_test_type):
+	test_types = TestTypes.query.order_by(TestTypes.id.desc())
+	return render_template('tests/all_test_types.html', test_types=test_types, parent_test_type=parent_test_type)
+
+@bp.route("/tests/<string:parent>/<string:child>", methods=['GET', 'POST'])
+def tests_final(parent, child):
+	tests = Test.query.filter_by(parent_category=parent, category=child).order_by(Test.date_posted.desc())
+	print('tests parent_category and child_category ')
+	print(tests)
+	return render_template('tests/alltests.html', tests=tests)
+'''
+@bp.route("/tests", methods=['GET', 'POST'])
+def tests():
     test_types = TestTypes.query.order_by(TestTypes.id.desc())
-    print('from all_test_types : ')
-    print(test_types)
     return render_template('tests/all_test_types.html', test_types=test_types)
 
+'''
 @bp.route("/test/new", methods=['GET', 'POST'])
 @login_required
 def new_test():
