@@ -11,7 +11,7 @@
 
   <div class="wrapper">
       {% for type in test_types %}
-        <a href="{{ url_for('tests.tests_final', parent=parent_test_type, child=type.type) }}">
+        <a href="{{ url_for('tests.tests_final', parent_test_type_id=parent_test_type_id, child_test_type_id=type.id) }}">
         <div class="box">{{ type.type }}</div>
       {% endfor %}
   </div>

@@ -161,8 +161,8 @@ class Post(db.Model):
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_name = db.Column(db.String(50), index=True, nullable=False)
-    category = db.Column(db.String(50), index=True)
-    parent_category = db.Column(db.String(50), index=True)
+    category = db.Column(db.Integer, index=True)
+    parent_category = db.Column(db.Integer, index=True)
     instructions = db.Column(db.String(1000), nullable=False)
     total_no_of_questions = db.Column(db.Integer, nullable=False, default=0)
     no_of_questions_maths = db.Column(db.Integer, nullable=False, default=0)
