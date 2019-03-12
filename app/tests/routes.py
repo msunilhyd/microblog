@@ -8,7 +8,7 @@ from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Test, TestQuestion, Question, UserTest, ChildTestTypes, ParentTestTypes, ParentChildTests
+from app.models import User, Test, TestQuestion, Question, UserTest, ChildrenTestTypes, ParentTestTypes, ParentChildTests
 from app.auth.email import send_score_sheet_email
 from app.tests import bp
 import ast
@@ -24,7 +24,7 @@ def tests():
 
 @bp.route("/tests_test_type_parent/<int:parent_test_type_id>", methods=['GET', 'POST'])
 def tests_test_type_parent(parent_test_type_id):
-		q = db.session.query(ParentTestTypes, ParentChildTests, ChildTestTypes).filter(ParentTestTypes.id == parent_test_type_id).filter(ParentTestTypes.id == ParentChildTests.parent_test_id).filter(ParentChildTests.child_test_id ==ChildTestTypes.id).all()
+		q = db.session.query(ParentTestTypes, ParentChildTests, ChildrenTestTypes).filter(ParentTestTypes.id == parent_test_type_id).filter(ParentTestTypes.id == ParentChildTests.parent_test_id).filter(ParentChildTests.child_test_id ==ChildrenTestTypes.id).all()
 		child_test_types = []
 		for emp in q:
 			child_test_types.append(emp[2])

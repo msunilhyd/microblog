@@ -214,9 +214,9 @@ class TestQuestion(db.Model):
         return "TestQuestion('{}','{}')".format(self.test_id, self.id)
 
 
-class ChildTestTypes(db.Model):
+class ChildrenTestTypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(100), index=True)
+    child_test_type = db.Column(db.String(100), index=True)
 
 
 class ParentChildTests(db.Model):
