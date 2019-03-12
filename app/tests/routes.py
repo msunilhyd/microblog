@@ -8,7 +8,7 @@ from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Test, TestQuestion, Question, UserTest, TestTypes,ParentTestTypes
+from app.models import User, Test, TestQuestion, Question, UserTest, ChildTestTypes, ParentTestTypes, ParentChildTests
 from app.auth.email import send_score_sheet_email
 from app.tests import bp
 import ast
@@ -24,12 +24,15 @@ def tests():
 
 @bp.route("/tests_test_type_parent/<int:parent_test_type_id>", methods=['GET', 'POST'])
 def tests_test_type_parent(parent_test_type_id):
-	test_types = TestTypes.query.order_by(TestTypes.id.desc())
-	return render_template('tests/all_test_types.html', test_types=test_types, parent_test_type_id=parent_test_type_id)
+		q = db.session.query(ParentTestTypes, ParentChildTests, ChildTestTypes).filter(ParentTestTypes.id == parent_test_type_id).filter(ParentTestTypes.id == ParentChildTests.parent_test_id).filter(ParentChildTests.child_test_id ==ChildTestTypes.id).all()
+		child_test_types = []
+		for emp in q:
+			child_test_types.append(emp[2])
+		return render_template('tests/all_test_types.html', test_types=child_test_types, parent_test_type_id=parent_test_type_id)
 
-@bp.route("/tests/<int:parent_test_type_id>/<int:child_test_type_id>", methods=['GET', 'POST'])
-def tests_final(parent_test_type_id, child_test_type_id):
-	tests = Test.query.filter_by(parent_category=parent_test_type_id, category=child_test_type_id).order_by(Test.date_posted.desc())
+@bp.route("/tests/<int:child_test_type_id>", methods=['GET', 'POST'])
+def tests_final(child_test_type_id):
+	tests = Test.query.filter_by(category=child_test_type_id).order_by(Test.date_posted.desc())
 	return render_template('tests/alltests.html', tests=tests)
 '''
 @bp.route("/tests", methods=['GET', 'POST'])

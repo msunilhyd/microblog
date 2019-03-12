@@ -162,7 +162,6 @@ class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_name = db.Column(db.String(50), index=True, nullable=False)
     category = db.Column(db.Integer, index=True)
-    parent_category = db.Column(db.Integer, index=True)
     instructions = db.Column(db.String(1000), nullable=False)
     total_no_of_questions = db.Column(db.Integer, nullable=False, default=0)
     no_of_questions_maths = db.Column(db.Integer, nullable=False, default=0)
@@ -215,9 +214,15 @@ class TestQuestion(db.Model):
         return "TestQuestion('{}','{}')".format(self.test_id, self.id)
 
 
-class TestTypes(db.Model):
+class ChildTestTypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(100), index=True)
+
+
+class ParentChildTests(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    parent_test_id = db.Column(db.Integer, index=True)
+    child_test_id = db.Column(db.Integer, index=True)
 
 
 class ParentTestTypes(db.Model):
