@@ -32,8 +32,6 @@ def tests_test_type_parent(parent_test_type):
 @bp.route("/tests/<string:parent>/<string:child>", methods=['GET', 'POST'])
 def tests_final(parent, child):
 	tests = Test.query.filter_by(parent_category=parent, category=child).order_by(Test.date_posted.desc())
-	print('tests parent_category and child_category ')
-	print(tests)
 	return render_template('tests/alltests.html', tests=tests)
 '''
 @bp.route("/tests", methods=['GET', 'POST'])
