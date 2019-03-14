@@ -5,9 +5,6 @@
         return 'Are you sure you want to leave?';
     });
 
-
-
-
     var questions = [];
 
     var questionCounter = 0; //Tracks question number
@@ -318,7 +315,7 @@ window.time = t--;
     }
 var prev_color;
     window.randomQuesFun = function(i) {
-
+/*
             prev_color = document.getElementById('random' + questionCounter).style.background;
             if(prev_color === 'yellow')
             {
@@ -329,7 +326,7 @@ var prev_color;
                 document.getElementById('random' + questionCounter).style.background = prev_color;
             }
             document.getElementById('random' + i).style.background = 'yellow';
-
+*/
         $('#prev').show();
 
         if (i < questions.length) {
