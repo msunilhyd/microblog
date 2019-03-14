@@ -78,12 +78,16 @@ def new_test_question(test_id):
 
 @bp.route("/test/<int:test_id>")
 def test(test_id):
-	user_id = request.args.get('user_id', None)
 	test = Test.query.get_or_404(test_id)
-	usertest = UserTest.query.filter_by(test_id=test_id, user_id=user_id).first()
+	usertest = UserTest.query.filter_by(test_id=test_id, user_id=current_user.id).first()
+	if usertest is not None:
+		return render_template('tests/test.html', test=test, usertest=usertest)
+	else:
+		print("Questions ready to take the test")
+		return render_template('tests/new_tests.html', title="Taking Test", legend='Take test', test = test)
 
-	return render_template('tests/test.html', test=test, usertest=usertest)
-
+	flash('Your test is not empty! You can add more questions', 'success')
+	return redirect(url_for('new_test_question', test_id=test_id))
 
 @bp.route("/show_questions/<int:test_id>",  methods=['GET', 'POST'])
 @login_required
