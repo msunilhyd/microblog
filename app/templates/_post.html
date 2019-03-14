@@ -2,17 +2,37 @@
         <tr>
             <td width="70px">
                 <a href="{{ url_for('main.user', username=post.user_id) }}">
-                    <!-- 
+                    <!--
                        {# <img src="{{ post.user_id.avatar(70) }}" /> #}
                     -->
                     <img class="rounded-circle article-img" src="{{url_for('static', filename='profile_pics/' + post.user.image_file)}}">
                 </a>
             </td>
+            {% if user == current_user %}
+                <td>
+                    <a href="{{ url_for('main.user', username=post.user.username) }}">
+                        You
+                    </a>
+                    have completed the test -
+                    <a href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
+                        {{ post.test.test_name }}
+                    </a>
+
+                    {{ moment(post.timestamp).fromNow() }}:
+
+                    {{ moment.include_jquery() }}
+                    {{ moment.include_moment() }}
+
+                    <br>
+                    {{ post.body }}
+                </td>
+                {% else %}
+
             <td>
                 <a href="{{ url_for('main.user', username=post.user.username) }}">
                     {{ post.user.username }}
                 </a>
-                has completed the test - 
+                has completed the test -
                 <a href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
                     {{ post.test.test_name }}
                 </a>
@@ -21,9 +41,11 @@
 
                 {{ moment.include_jquery() }}
                 {{ moment.include_moment() }}
-                
+
                 <br>
                 {{ post.body }}
             </td>
+                        {% endif %}
+
         </tr>
     </table>

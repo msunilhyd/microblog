@@ -4,7 +4,7 @@
 
 {% block app_content %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    
+
 
     {% for post in posts %}
     	{% include '_post.html' %}
@@ -15,7 +15,7 @@
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> Newer 
+                    <span aria-hidden="true">&larr;</span> Newer
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
