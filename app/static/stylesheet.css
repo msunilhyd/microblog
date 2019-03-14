@@ -4,6 +4,10 @@ body {
     font-family: Source Sans Pro Bold;
 }
 
+.custompager{
+  font-family: Source Sans Pro Bold;
+}
+
 body {
   background: #fafafa;
   color: #333333;
@@ -15,7 +19,9 @@ body {
   grid-row-gap: 10px;
   grid-template-columns: auto ;
   color: #444;
-  margin-top: 100px;
+  margin-top: 60px;
+  margin-bottom: 100px;
+
 }
 
 .box {
