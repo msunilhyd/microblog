@@ -315,8 +315,8 @@ window.time = t--;
     }
 var prev_color;
     window.randomQuesFun = function(i) {
-/*
-            prev_color = document.getElementById('random' + questionCounter).style.background;
+
+           /* prev_color = document.getElementById('random' + questionCounter).style.background;
             if(prev_color === 'yellow')
             {
                 document.getElementById('random' + questionCounter).style.background = 'none';
@@ -325,8 +325,16 @@ var prev_color;
             {
                 document.getElementById('random' + questionCounter).style.background = prev_color;
             }
-            document.getElementById('random' + i).style.background = 'yellow';
-*/
+            debugger;*/
+
+            var yyy = document.getElementById('random' + i).getAttribute("class");
+
+            $('#random' + questionCounter).removeClass("yellow");
+
+            document.getElementById('random' + i).setAttribute("class",yyy + " yellow");
+
+
+            var tt  = document.getElementById('random' + i).getAttribute("class");
         $('#prev').show();
 
         if (i < questions.length) {
@@ -344,11 +352,13 @@ var prev_color;
 
             $radio.prop('checked', false);
             $radio.data('waschecked', false);
-            document.getElementById('random' + questionCounter).style.background = 'none';
+            document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class") + " none");
+
 
         } else {
             $radio.data('waschecked', true); // remove was checked from other radio
-            document.getElementById('random' + questionCounter).style.background = 'lightseagreen';
+
+            document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
         }
         // $radio.siblings('input[name="rad"]').data('waschecked', false);
         $radio.closest("ul").find('input').each(function(index, elem) {

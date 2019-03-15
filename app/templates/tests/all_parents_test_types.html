@@ -9,11 +9,16 @@
 
 <h1 class="mb-3 user-posts-heading"> </h1>
 
-  <div class="wrapper">
+<div class="container-fluid gutter">
+  <div class="row">
       {% for type in parent_test_types %}
-         <a href="{{ url_for('tests.tests_test_type_parent', parent_test_type_id=type.id) }}">
-        <div class="box">{{ type.parent_test_type }}</div>
+
+         <a class="col-sm-4 boClass" href="{{ url_for('tests.tests_test_type_parent', parent_test_type_id=type.id) }}">
+       <span> {{ type.parent_test_type }} </span>
+      </a>
+
       {% endfor %}
+  </div>
   </div>
 
 

@@ -17,13 +17,38 @@ body {
 .wrapper {
   display: grid;
   grid-row-gap: 10px;
-  grid-template-columns: auto ;
+  grid-template-columns: auto auto ;
   color: #444;
   margin-top: 60px;
   margin-bottom: 100px;
 
 }
 
+@media (min-width: 992px) {
+ .gutter .col-sm-4 {
+   border-right: 12px white solid;
+ }
+}
+
+.boClass{
+min-height:80px;
+  background-color: lightslategray;
+    color: #fff;
+      font-size: 110%;
+  border-radius: 5px;
+  padding: 4px;
+    margin-bottom:15px;
+        text-align:center;
+            outline-offset: -10px;
+}
+
+.boClass:hover {
+    color: #darkgrey;
+}
+
+.boClass a{
+  color: #fff;
+}
 .box {
   background-color: lightslategray;
   color: #fff;
@@ -62,6 +87,13 @@ p {
     text-align: center;
 }
 
+.randomClass.lightseagreen{
+  background-color: lightseagreen;
+}
+
+.randomClass.yellow{
+  background-color: yellow;
+}
 
 
 .form-group{
