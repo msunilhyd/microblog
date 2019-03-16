@@ -4,7 +4,7 @@
 
 
 {% if current_user.is_authenticated %}
-       
+
         {% if current_user.is_admin %}
 
         <a class="btn add-ques-btn btn-sm mt-1 mb-1 floatLeft btn-primary" href="{{ url_for('tests.new_test') }}">Add New Test</a>
@@ -17,7 +17,7 @@
     <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
-          <h3> <a class=" mr-2 article-title" href="{{ url_for('tests.test', test_id=test.id, user_id=current_user.id) }}">
+          <h3> <a class=" mr-2 article-title testAClass" href="{{ url_for('tests.test', test_id=test.id, user_id=current_user.id) }}">
             Test : {{ test.test_name }}
            </a>
           </h3>
@@ -32,7 +32,7 @@
   {% endfor %}
 
 {% else %}
-      
+
     <div>
       <div class="logout-class"> Please Login !</div>
         <div class="article-metadata"></div>

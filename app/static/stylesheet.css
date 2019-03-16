@@ -243,6 +243,11 @@ a.article-title {
   text-decoration: none;
 }
 
+.testAClass:visited{
+  color: navy;
+
+}
+
 .article-svg {
   width: 25px;
   height: 25px;

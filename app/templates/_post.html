@@ -14,7 +14,7 @@
                         You
                     </a>
                     have completed the test -
-                    <a href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
+                    <a class="testAClass" href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
                         {{ post.test.test_name }}
                     </a>
 
@@ -33,7 +33,7 @@
                     {{ post.user.username }}
                 </a>
                 has completed the test -
-                <a href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
+                <a class="testAClass" href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
                     {{ post.test.test_name }}
                 </a>
 
