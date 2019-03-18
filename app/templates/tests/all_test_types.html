@@ -10,10 +10,10 @@
 <h1 class="mb-3 user-posts-heading"> </h1>
 
 <div class="container-fluid gutter">
-  <div class="row">
+  <div class=".row-fluid">
       {% for type in test_types %}
 
-         <a class="col-sm-4 boClass" href="{{ url_for('tests.tests_final', child_test_type_id=type.id) }}">
+         <a class="col-sm-4 boClass col-xs-12" href="{{ url_for('tests.tests_final', child_test_type_id=type.id) }}">
         {{ type.child_test_type }}
       </a>
 
