@@ -25,7 +25,7 @@ body {
 }
 
 @media (min-width: 992px) {
- .gutter .col-sm-4 {
+ .gutter .col-md-4 {
    border-right: 12px white solid;
  }
 }
