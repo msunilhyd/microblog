@@ -18,13 +18,13 @@ from app.tests.forms import TestForm, TestQuestionForm
 
 @bp.route("/tests", methods=['GET', 'POST'])
 def tests():
-    parent_test_types = ParentTestTypes.query.order_by(ParentTestTypes.id.desc())
+    parent_test_types = ParentTestTypes.query.order_by(ParentTestTypes.id)
     return render_template('tests/all_parents_test_types.html', parent_test_types=parent_test_types)
 
 
 @bp.route("/tests_test_type_parent/<int:parent_test_type_id>", methods=['GET', 'POST'])
 def tests_test_type_parent(parent_test_type_id):
-		q = db.session.query(ParentTestTypes, ParentChildTests, ChildrenTestTypes).filter(ParentTestTypes.id == parent_test_type_id).filter(ParentTestTypes.id == ParentChildTests.parent_test_id).filter(ParentChildTests.child_test_id ==ChildrenTestTypes.id).all()
+		q = db.session.query(ParentTestTypes, ParentChildTests, ChildrenTestTypes).filter(ParentTestTypes.id == parent_test_type_id).filter(ParentTestTypes.id == ParentChildTests.parent_test_id).filter(ParentChildTests.child_test_id ==ChildrenTestTypes.id).order_by(ChildrenTestTypes.id).all()
 		child_test_types = []
 		for emp in q:
 			child_test_types.append(emp[2])
@@ -32,7 +32,7 @@ def tests_test_type_parent(parent_test_type_id):
 
 @bp.route("/tests/<int:child_test_type_id>", methods=['GET', 'POST'])
 def tests_final(child_test_type_id):
-	tests = Test.query.filter_by(category=child_test_type_id).order_by(Test.date_posted.desc())
+	tests = Test.query.filter_by(category=child_test_type_id).order_by(Test.id)
 	return render_template('tests/alltests.html', tests=tests)
 '''
 @bp.route("/tests", methods=['GET', 'POST'])
