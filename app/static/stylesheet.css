@@ -11,7 +11,7 @@ body {
 body {
   background: #fafafa;
   color: #333333;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .wrapper {
@@ -206,7 +206,7 @@ p {
 
 .logo{
     max-width: 220px;
-    margin-top: -14px;
+    margin-top: -10px;
 }
   .submitQuiz{
     border:4px solid;
