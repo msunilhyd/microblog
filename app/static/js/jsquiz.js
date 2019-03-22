@@ -24,10 +24,13 @@
 
     // Click handler for the 'startQuiz' button
     $('#startQuiz').on('click', function(e) {
-                $('#ques_nav_container').show();
-jQuery(document).bind("contextmenu cut copy",function(e){
-    e.preventDefault();
-});
+        
+        $('#ques_nav_container').show();
+        
+        jQuery(document).bind("contextmenu cut copy",function(e){
+            e.preventDefault();
+        });
+        
         $("a.nav-item").off('click').on('click', function(e) {
 
             if ($('#timerCount').css('display') != 'none') {
@@ -43,47 +46,45 @@ jQuery(document).bind("contextmenu cut copy",function(e){
             }
         });
 
- // Click handler for the 'next' button
-    $('#next').on('click', function(e) {
-        e.preventDefault();
+        // Click handler for the 'next' button
+        $('#next').on('click', function(e) {
+            e.preventDefault();
 
-        // Suspend click listener during fade animation
-        if (quiz.is(':animated')) {
-            return false;
-        }
-        if (questionCounter < questions.length) {
-            choose();
-        }
-        questionCounter++;
-        displayNext();
+            // Suspend click listener during fade animation
+            if (quiz.is(':animated')) {
+                return false;
+            }
+            if (questionCounter < questions.length) {
+                choose();
+            }
+            questionCounter++;
+            displayNext();
 
-    });
+        });
 
-
-
-    // Click handler for the 'prev' button
-    $('#prev').on('click', function(e) {
-        e.preventDefault();
-        $('#next').show();
-        if (quiz.is(':animated')) {
-            return false;
-        }
+        // Click handler for the 'prev' button
+        $('#prev').on('click', function(e) {
+            e.preventDefault();
+            $('#next').show();
+            if (quiz.is(':animated')) {
+                return false;
+            }
 
 
-        if (questionCounter < questions.length) {
-            choose();
-        }
+            if (questionCounter < questions.length) {
+                choose();
+            }
 
-        questionCounter--;
-        displayNext();
-    });
+            questionCounter--;
+            displayNext();
+        });
+        
         $('#startQuiz').hide();
         $('#submitQuiz').show();
         $('#test_instr_div').hide();
 
         var t = $('#time_in_mins_div').text();
         t = t * 60;
-
         var test_id = $('#test_id_div').text();
 
 
@@ -104,7 +105,6 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                 "s": seconds
             };
             return hours + " hours " + minutes + " minutes " + seconds + " seconds";
-
         }
 
         function timer(count, str) {
@@ -132,7 +132,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                 document.getElementById('timerCount').innerHTML = '';
                 return;
             }
-window.time = t--;
+            window.time = t--;
             timer(t, secondsToTime(window.time));
         }, 1000);
 
@@ -313,28 +313,28 @@ window.time = t--;
             }
         });
     }
-var prev_color;
+    var prev_color;
     window.randomQuesFun = function(i) {
 
-           /* prev_color = document.getElementById('random' + questionCounter).style.background;
-            if(prev_color === 'yellow')
-            {
-                document.getElementById('random' + questionCounter).style.background = 'none';
-            }
-            else
-            {
-                document.getElementById('random' + questionCounter).style.background = prev_color;
-            }
-            debugger;*/
+       /* prev_color = document.getElementById('random' + questionCounter).style.background;
+        if(prev_color === 'yellow')
+        {
+            document.getElementById('random' + questionCounter).style.background = 'none';
+        }
+        else
+        {
+            document.getElementById('random' + questionCounter).style.background = prev_color;
+        }
+        debugger;*/
 
-            var yyy = document.getElementById('random' + i).getAttribute("class");
+        var yyy = document.getElementById('random' + i).getAttribute("class");
 
-            $('#random' + questionCounter).removeClass("yellow");
+        $('#random' + questionCounter).removeClass("yellow");
 
-            document.getElementById('random' + i).setAttribute("class",yyy + " yellow");
+        document.getElementById('random' + i).setAttribute("class",yyy + " yellow");
 
 
-            var tt  = document.getElementById('random' + i).getAttribute("class");
+        var tt  = document.getElementById('random' + i).getAttribute("class");
         $('#prev').show();
 
         if (i < questions.length) {
