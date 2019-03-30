@@ -1,6 +1,6 @@
 Dear {{ user.username }},
 
- 
+
 To Confirm your Email click on the following link:
 
 {{ url_for('auth.confirm_email', token=token, _external=True) }}
@@ -8,4 +8,4 @@ To Confirm your Email click on the following link:
 
 Sincerely,
 
-The EQuizzy Team
+The GradeMatrix Team
