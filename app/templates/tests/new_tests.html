@@ -1,14 +1,8 @@
 
 {% extends "base.html" %}
 
+
 {% block app_content %}
-
-<h1></h1>
-
-<head>
-    <title> Quiz Project</title>
-    <link rel="text/css" type="text/css" href=" {{ url_for('static', filename='stylesheet.css')}} " >
-</head>
 
 <div id='container' class='container'>
   
@@ -16,9 +10,6 @@
     <h1 class='test-title'>{{ test.test_name }}</h1>
   </div>
   
-  <span id="timerCount" class="timerCount"></span>
-  <br/>
-
   <div id='test_instr_div'> {{ test.instructions }} </div>
 
   <div id='total_marks_div'> {{ test.total_marks }} </div>
@@ -33,32 +24,20 @@
   
   <div id='negative_marks_div'> {{ test.negative_marks }} </div>
 
-  <div id='end_of_test_div' class='end_of_test_div' >Reached End of Test.</div>
+  
   
   <!-- quiz comes here reactjs starts here-->  
   <div id='quiz' ></div>
-  
-  <div class='button' id='startQuiz'><a href='#'>Start Test</a></div>
-  
-  <div class='prev_next' id='prev'><a href='#'>Prev</a></div>
-        
-  <div class='prev_next' id='next'><a href='#'>Next</a></div>
-
-  <div class='submitQuiz' id='submitQuiz'><a href='#'>Submit</a></div>
 
 </div>
 
-<div id='ques_nav_container' name='ques_nav_container' class="ques_nav_container">
-  <div id='nav_for_questions' >
-        <h2 id='nav_for_questions'> <strong>Navigation for Questions </strong></h2>
-    </div>
-  <div id='ques_buttons_div'></div>
-</div>
+
       
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
-<script type='text/javascript' src='{{ url_for('static', filename='js/jquery.min.js')}}'></script>
-<script type='text/javascript' src='{{ url_for('static', filename='js/jsquiz.js')}}'></script>
 
+{% include 'tests/front_test.html' %}
 {% endblock app_content %}
+
+

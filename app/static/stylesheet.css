@@ -275,7 +275,6 @@ p {
 
 #quiz {
     text-indent: 10px;
-    display:none;
 }
 
 
@@ -340,7 +339,7 @@ p {
 
 .ques_nav_container
 {
-  display: none;
+  
   text-align: center;
      width:auto;
      text-align: center;
@@ -352,6 +351,9 @@ p {
   color: black;
     font-weight: bold;
     box-shadow: 5px 5px 5px #888;
+    margin-top: 20px;
+display: inline-block;
+width: 100%;
 }
 .button.active {
     background-color: #F8F8FF;
@@ -452,12 +454,11 @@ ul {
 
 
 #start {
-    display:none;
     width: auto;
 }
 
 #submitQuiz{
-  display:none;
+  
   width: auto;
 }
 
@@ -592,3 +593,19 @@ span.ListParagraphChar
   padding:24.0pt 24.0pt 24.0pt 24.0pt;}
 div.WordSection1
   {page:WordSection1;}
+
+
+  .darkcyan{
+    color:darkcyan;
+  }
+
+  .grey{
+    color:#000099;
+  }
+
+  #ques_buttons_div  li{
+    display:inline-block;
+  }
+  .section_at_test{
+    diplay:inline-block;
+  }

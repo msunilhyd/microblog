@@ -24,8 +24,12 @@
 
     // Click handler for the 'startQuiz' button
     $('#startQuiz').on('click', function(e) {
+
+
         
-        $('#ques_nav_container').show();
+        
+        
+        //$('#ques_nav_container').show();
         
         jQuery(document).bind("contextmenu cut copy",function(e){
             e.preventDefault();
@@ -88,7 +92,7 @@
         var test_id = $('#test_id_div').text();
 
 
-        getQuestions(test_id);
+        //getQuestions(test_id);
 
         function secondsToTime(secs) {
             var hours = Math.floor(secs / (60 * 60));
