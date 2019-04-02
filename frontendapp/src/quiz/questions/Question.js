@@ -13,11 +13,10 @@ class Question extends React.Component {
  
 
   componentDidMount() {
-   
-     /*let math = MathJax.Hub.getAllJax("question"+this.props.questionCounter);
-     MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);*/
-    
-
+   /*if(this.props.question){
+     let math = MathJax.Hub.getAllJax("question"+this.props.questionCounter);
+     MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+    }*/
   }
 
   render() {
