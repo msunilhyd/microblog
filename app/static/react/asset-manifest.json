@@ -1,12 +1,12 @@
 {
-  "main.js": "/static/react/js/main.c0ef0410.chunk.js",
-  "main.js.map": "/static/react/js/main.c0ef0410.chunk.js.map",
+  "main.js": "/static/react/js/main.66f6642e.chunk.js",
+  "main.js.map": "/static/react/js/main.66f6642e.chunk.js.map",
   "runtime~main.js": "/static/react/js/runtime~main.5d7886d3.js",
   "runtime~main.js.map": "/static/react/js/runtime~main.5d7886d3.js.map",
   "js/2.da3fae6e.chunk.js": "/static/react/js/2.da3fae6e.chunk.js",
   "js/2.da3fae6e.chunk.js.map": "/static/react/js/2.da3fae6e.chunk.js.map",
   "../../templates/tests/front_test.html": "/static/react/../../templates/tests/front_test.html",
-  "precache-manifest.aa1610bffa93419e79756a4b5aa31718.js": "/static/react/precache-manifest.aa1610bffa93419e79756a4b5aa31718.js",
+  "precache-manifest.0a7fa7f987bfe744e8479e70e0adf75b.js": "/static/react/precache-manifest.0a7fa7f987bfe744e8479e70e0adf75b.js",
   "service-worker.js": "/static/react/service-worker.js",
   "templates/index.html": "/static/react/templates/index.html"
 }
