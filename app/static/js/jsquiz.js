@@ -56,6 +56,11 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
         questionCounter++;
         displayNext();
+        var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
+
+            $('.randomClass').removeClass("yellow");
+
+            document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
 
     });
 
@@ -75,6 +80,11 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
         questionCounter--;
         displayNext();
+        var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
+
+            $('.randomClass').removeClass("yellow");
+
+            document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
     });
         $('#startQuiz').hide();
         $('#submitQuiz').show();
@@ -190,7 +200,11 @@ window.time = t--;
         }
         questionCounter++;
         displayNext();
+        var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
 
+            $('.randomClass').removeClass("yellow");
+
+            document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
     });
 
 
@@ -210,6 +224,11 @@ window.time = t--;
 
         questionCounter--;
         displayNext();
+        var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
+
+            $('.randomClass').removeClass("yellow");
+
+            document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
     });
 
 
@@ -306,6 +325,11 @@ window.time = t--;
                 questions = parsedData;
                 displayNext();
                 createRandomButtons();
+                var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
+
+            $('.randomClass').removeClass("yellow");
+
+            document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
             },
             error: function(data) {
                 alert("Error getting questions from server");
@@ -328,7 +352,7 @@ var prev_color;
 
             var yyy = document.getElementById('random' + i).getAttribute("class");
 
-            $('#random' + questionCounter).removeClass("yellow");
+            $('.randomClass').removeClass("yellow");
 
             document.getElementById('random' + i).setAttribute("class",yyy + " yellow");
 

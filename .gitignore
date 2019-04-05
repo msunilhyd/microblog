@@ -1,3 +1,6 @@
 *.log
 *.env
 .flaskenv
+*.pyc
+.DS_Store
+frontendapp/
