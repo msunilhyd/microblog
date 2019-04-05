@@ -129,6 +129,7 @@ def test_get_questions():
     .filter(TestQuestion.test_id == test_id)
     .filter(TestQuestion.question_id == Question.id)
     .order_by(Question.section.desc())
+    .order_by(Question.id)
     .all())
 
 	empList = []

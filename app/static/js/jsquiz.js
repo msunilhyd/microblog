@@ -46,7 +46,6 @@ jQuery(document).bind("contextmenu cut copy",function(e){
  // Click handler for the 'next' button
     $('#next').on('click', function(e) {
         e.preventDefault();
-
         // Suspend click listener during fade animation
         if (quiz.is(':animated')) {
             return false;
@@ -54,6 +53,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         if (questionCounter < questions.length) {
             choose();
         }
+
         questionCounter++;
         displayNext();
 
@@ -68,7 +68,6 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         if (quiz.is(':animated')) {
             return false;
         }
-
 
         if (questionCounter < questions.length) {
             choose();
@@ -333,8 +332,7 @@ var prev_color;
 
             document.getElementById('random' + i).setAttribute("class",yyy + " yellow");
 
-
-            var tt  = document.getElementById('random' + i).getAttribute("class");
+            //var tt  = document.getElementById('random' + i).getAttribute("class");
         $('#prev').show();
 
         if (i < questions.length) {

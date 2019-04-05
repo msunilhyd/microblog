@@ -202,7 +202,7 @@ class Question(db.Model):
     date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
-        return "Question('{}','{}''{}')".format(self.id, self.question_content, self.positive_marks)
+        return "Question('{}','{}')".format(self.id, self.question_content)
 
 
 class TestQuestion(db.Model):
