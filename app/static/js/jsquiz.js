@@ -258,6 +258,7 @@ window.time = t--;
         qElement.append(question);
 
         var radioButtons = createRadios(index);
+        //console.log('radioButtons is : ' + radioButtons);
         qElement.append(radioButtons);
 
         if (typeof questions[index].question_image == "string") {
@@ -273,31 +274,61 @@ window.time = t--;
         var radioList = $('<ul>');
         var item;
         var input = '';
-        for (var i = 0; i < questions[index].choices.length; i++) {
-            item = $('<li> style="height: 1.8em;"');
-            input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+        var type_of_question = questions[index].type;
+        item = $('<li> style="height: 1.8em;"');
 
-            var str = questions[index].choices[i];
-            var n = str.endsWith(".png");
+        if(type_of_question != 3)
+        {
+                for (var i = 0; i < questions[index].choices.length; i++) {
 
-            if (n === true) {
-                var img_file = '<br><img src="/static/questions/' + questions[index].choices[i] + '"width="auto" height="auto">';
-                input += '<label for=' + i + '>' + img_file + '</label>';
-            } else {
-                input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';
+                    if(type_of_question == 1)
+                    {
+                        input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                    }
+                    else if(type_of_question == 2)
+                    {
+                        input = '<input type="radio" name="answer' + i + '" + class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                    }
+
+                    var str = questions[index].choices[i];
+                    var n = str.endsWith(".png");
+
+                    if (n === true) {
+                        var img_file = '<br><img src="/static/questions/' + questions[index].choices[i] + '"width="auto" height="auto">';
+                        input += '<label for=' + i + '>' + img_file + '</label>';
+                    } else {
+                        input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';
+                    }
+
+
+                    if (isSubmit === 1) {
+                        if (i == questionsAns[index].correctAnswer - 1) {
+                            input += '<span id="tick" style="color:green;"> &#10003; </span>';
+                        } else if ((i != questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter])) {
+                            input += '<span id="cross" style="color:red;"> &#10005; </span>';
+                        }
+                    }
+
+                    item.append(input);
+                    radioList.append(item);
             }
+        }
+        else
+        {
+            console.log('type is 3');
+            console.log('creating a text box');
 
+            input = document.createElement('input');
+            input.setAttribute("type","text");
+            input.setAttribute("name", "answer");
+            input.setAttribute("id", "int_ans" + index);
+            input.setAttribute("class", "radioClass");
 
-            if (isSubmit === 1) {
-                if (i == questionsAns[index].correctAnswer - 1) {
-                    input += '<span id="tick" style="color:green;"> &#10003; </span>';
-                } else if ((i != questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter])) {
-                    input += '<span id="cross" style="color:red;"> &#10005; </span>';
-                }
-
-            }
+            // name="integer_answer" class="radioClass" id=123';
+            console.log('input is as : ' + input);
 
             item.append(input);
+            console.log('item is : ' + JSON.stringify(item));
             radioList.append(item);
         }
         return radioList;
@@ -306,6 +337,28 @@ window.time = t--;
     // Reads the user selection and pushes the value to an array
     function choose() {
         selections[questionCounter] = +$('input[name="answer"]:checked').val();
+        //console.log('printing answer as below');
+        //console.log(+$('input[name="answer"]').val());
+
+        var ques_type = questions[questionCounter].type;
+        //console.log('ques_type is: ');
+        //console.log(ques_type);
+        if(ques_type == 2){
+            var list_of_ans = [];
+            list_of_ans.push(+$('input[name="answer0"]:checked').val());
+            list_of_ans.push(+$('input[name="answer1"]:checked').val());
+            list_of_ans.push(+$('input[name="answer2"]:checked').val());
+            list_of_ans.push(+$('input[name="answer3"]:checked').val());
+            console.log(list_of_ans);
+            selections[questionCounter] = list_of_ans;
+
+            //selections[questionCounter].push(+$('input[name="answer0"]:checked').val());
+            // console.log('selections is as below : ');
+            // console.log(selections);
+        }
+        if(ques_type == 3){
+            selections[questionCounter] = $('input[name="answer"]').val();
+        }
     }
 
 
@@ -367,7 +420,7 @@ var prev_color;
     }
 
     window.selectradio = function(event) {
-
+        //debugger;
         var $radio = $(event.target) // if this was previously checked
 
         if ($radio.data('waschecked') == true) {
@@ -384,9 +437,15 @@ var prev_color;
         }
         // $radio.siblings('input[name="rad"]').data('waschecked', false);
         $radio.closest("ul").find('input').each(function(index, elem) {
-            if (elem != event.target) {
+            if($(elem).data('waschecked') == true){
+                $(elem).data('waschecked', true);
+            }
+            else if (elem != event.target) {
                 $(elem).data('waschecked', false);
             }
+            // if($(elem).data('waschecked') == false){
+            //     $(elem).data('waschecked', true);
+            // }
         });
 
 
@@ -406,9 +465,49 @@ var prev_color;
                 $('#end_of_test_div').hide();
                 var nextQuestion = createQuestionElement(questionCounter);
                 quiz.append(nextQuestion).fadeIn();
+
+                console.log('in displayNext, selections[questionCounter] is : ' + selections[questionCounter]);
+
+                var q_type = questions[questionCounter].type;
+                console.log('q_type at displayNext is : ' + q_type);
+
                 if (!(isNaN(selections[questionCounter]))) {
-                    $('input[value=' + selections[questionCounter] + ']').prop('checked', true);
-                    $('input[value=' + selections[questionCounter] + ']').data('waschecked', true);
+                    if(q_type == 1)
+                    {
+                        $('input[value=' + selections[questionCounter] + ']').prop('checked', true);
+                        $('input[value=' + selections[questionCounter] + ']').data('waschecked', true);
+                    }
+                    else if(q_type == 3)
+                    {
+                        console.log('q_type is 3');
+                        console.log(selections[questionCounter]);
+                        $('input[id=int_ans' + questionCounter + ']').val(selections[questionCounter]);
+
+                    }
+                    console.log('not NaN');
+                }
+                else
+                {
+                    if(q_type == 2)
+                    {
+                        console.log('q_type is 2');
+                        console.log(selections[questionCounter]);
+                        var ans_arr = selections[questionCounter];
+                        if(undefined !== ans_arr)
+                        {
+                            for(var i=0;i<ans_arr.length;i++)
+                            {
+                                if (!(isNaN(ans_arr[i]))) {
+                                    $('input[value=' + selections[questionCounter][i] + ']').prop('checked', true);
+                                    $('input[value=' + selections[questionCounter][i] + ']').data('waschecked', true);
+
+                                }
+                             }
+
+                        }
+                    }
+                    console.log(typeof selections[questionCounter]);
+                    console.log('is NaN');
                 }
 
                 // Controls display of 'prev' button
@@ -534,63 +633,191 @@ var prev_color;
         section_wrong_attempted_questions_map.set("Chemistry", 0);
 
         var i = 0;
+        console.log('printing selections as below:');
+        console.log(selections);
         for (i; i < selections.length; i++) {
-
 
             var ans = questions[i].choices;
             var userAns = selections[i];
-            if (userAns === questionsAns[i].correctAnswer - 1) {
-                no_of_attempted_ans_ques += 1;
 
-                var section_score = section_total_score_map.get(questionsAns[i].section);
-                section_score += positive_marks_1;
-                section_total_score_map.set(questionsAns[i].section, section_score);
+            var ques_type = questions[i].type;
+            if(ques_type == 1)
+            {
+                if (userAns === questionsAns[i].correctAnswer - 1)
+                {
+                    no_of_attempted_ans_ques += 1;
 
-                var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
-                section_score_positive += positive_marks_1;
-                section_positive_score_map.set(questionsAns[i].section, section_score_positive);
+                    var section_score = section_total_score_map.get(questionsAns[i].section);
+                    section_score += positive_marks_1;
+                    section_total_score_map.set(questionsAns[i].section, section_score);
 
-                var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
-                section_attempted_questions += 1;
-                section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+                    var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
+                    section_score_positive += positive_marks_1;
+                    section_positive_score_map.set(questionsAns[i].section, section_score_positive);
 
-                var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].section);
-                section_correct_attempted_questions += 1;
-                section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
+                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                    section_attempted_questions += 1;
+                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
 
-
-                positive_score += positive_marks_1;
-                no_of_correct_ans_ques += 1;
-            } else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
-
-                no_of_attempted_ans_ques += 1;
-                var section_score = section_total_score_map.get(questionsAns[i].section);
-                section_score -= negative_marks_1;
-                section_total_score_map.set(questionsAns[i].section, section_score);
+                    var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].section);
+                    section_correct_attempted_questions += 1;
+                    section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
 
 
-                var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
-                section_score_negative += negative_marks_1;
-                section_negative_score_map.set(questionsAns[i].section, section_score_negative);
+                    positive_score += positive_marks_1;
+                    no_of_correct_ans_ques += 1;
+                }
+                    else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
 
-                var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
-                section_attempted_questions += 1;
-                section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+                    no_of_attempted_ans_ques += 1;
+                    var section_score = section_total_score_map.get(questionsAns[i].section);
+                    section_score -= negative_marks_1;
+                    section_total_score_map.set(questionsAns[i].section, section_score);
 
-                var section_wrong_attempted_questions = section_wrong_attempted_questions_map.get(questionsAns[i].section);
-                section_wrong_attempted_questions += 1;
-                section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
 
-                negative_score += negative_marks_1;
-                no_of_wrong_ans_ques += 1;
-            } else {
+                    var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
+                    section_score_negative += negative_marks_1;
+                    section_negative_score_map.set(questionsAns[i].section, section_score_negative);
 
-                var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
-                section_un_attempted_questions += 1;
-                section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
-                no_of_not_ans_ques += 1;
+                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                    section_attempted_questions += 1;
+                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                    var section_wrong_attempted_questions = section_wrong_attempted_questions_map.get(questionsAns[i].section);
+                    section_wrong_attempted_questions += 1;
+                    section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
+
+                    negative_score += negative_marks_1;
+                    no_of_wrong_ans_ques += 1;
+                }
+                else
+                {
+                    var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
+                    section_un_attempted_questions += 1;
+                    section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
+                    no_of_not_ans_ques += 1;
+                }
             }
+            else if(ques_type == 3)
+            {
+                if (userAns === questionsAns[i].correctAnswer)
+                {
+                    no_of_attempted_ans_ques += 1;
+
+                    var section_score = section_total_score_map.get(questionsAns[i].section);
+                    section_score += positive_marks_1;
+                    section_total_score_map.set(questionsAns[i].section, section_score);
+
+                    var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
+                    section_score_positive += positive_marks_1;
+                    section_positive_score_map.set(questionsAns[i].section, section_score_positive);
+
+                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                    section_attempted_questions += 1;
+                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                    var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].section);
+                    section_correct_attempted_questions += 1;
+                    section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
+
+
+                    positive_score += positive_marks_1;
+                    no_of_correct_ans_ques += 1;
+                }
+                else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
+
+                    no_of_attempted_ans_ques += 1;
+                    var section_score = section_total_score_map.get(questionsAns[i].section);
+                    section_score -= negative_marks_1;
+                    section_total_score_map.set(questionsAns[i].section, section_score);
+
+
+                    var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
+                    section_score_negative += negative_marks_1;
+                    section_negative_score_map.set(questionsAns[i].section, section_score_negative);
+
+                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                    section_attempted_questions += 1;
+                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                    var section_wrong_attempted_questions = section_wrong_attempted_questions_map.get(questionsAns[i].section);
+                    section_wrong_attempted_questions += 1;
+                    section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
+
+                    negative_score += negative_marks_1;
+                    no_of_wrong_ans_ques += 1;
+                }
+                else
+                {
+                    var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
+                    section_un_attempted_questions += 1;
+                    section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
+                    no_of_not_ans_ques += 1;
+                }
         }
+            if(ques_type == 2)
+            {
+                ans_list = questionsAns[i].correctAnswer;
+                ans_list = ans_list.split(',');
+
+                console.log('ans_list is :' + ans_list);
+                console.log('user ans list is : ' + userAns);
+
+                if (userAns === questionsAns[i].correctAnswer - 1)
+                {
+                    no_of_attempted_ans_ques += 1;
+
+                    var section_score = section_total_score_map.get(questionsAns[i].section);
+                    section_score += positive_marks_1;
+                    section_total_score_map.set(questionsAns[i].section, section_score);
+
+                    var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
+                    section_score_positive += positive_marks_1;
+                    section_positive_score_map.set(questionsAns[i].section, section_score_positive);
+
+                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                    section_attempted_questions += 1;
+                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                    var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].section);
+                    section_correct_attempted_questions += 1;
+                    section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
+
+                    positive_score += positive_marks_1;
+                    no_of_correct_ans_ques += 1;
+                }
+                    else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
+
+                    no_of_attempted_ans_ques += 1;
+                    var section_score = section_total_score_map.get(questionsAns[i].section);
+                    section_score -= negative_marks_1;
+                    section_total_score_map.set(questionsAns[i].section, section_score);
+
+
+                    var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
+                    section_score_negative += negative_marks_1;
+                    section_negative_score_map.set(questionsAns[i].section, section_score_negative);
+
+                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                    section_attempted_questions += 1;
+                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                    var section_wrong_attempted_questions = section_wrong_attempted_questions_map.get(questionsAns[i].section);
+                    section_wrong_attempted_questions += 1;
+                    section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
+
+                    negative_score += negative_marks_1;
+                    no_of_wrong_ans_ques += 1;
+                }
+                else
+                {
+                    var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
+                    section_un_attempted_questions += 1;
+                    section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
+                    no_of_not_ans_ques += 1;
+                }
+            }
+    }
 
         if (i <= questionsAns.length - 1) {
             no_of_not_ans_ques += questionsAns.length - i;

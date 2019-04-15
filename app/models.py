@@ -196,6 +196,7 @@ class Question(db.Model):
     d = db.Column(db.String(500), nullable=False)
     e = db.Column(db.String(500))
     ans = db.Column(db.Integer, nullable=False)
+    type = db.Column(db.Integer)
     solution = db.Column(db.String(1000))
     level = db.Column(db.Integer)
     sub_section = db.Column(db.String(100), index=True)

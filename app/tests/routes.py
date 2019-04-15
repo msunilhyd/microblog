@@ -149,7 +149,8 @@ def test_get_questions():
 		'section' : emp.Question.section,
 		'sub_section' : emp.Question.sub_section,
 		'level' : emp.Question.level,
-		'question_image' : emp.Question.question_image
+		'question_image' : emp.Question.question_image,
+		'type' : emp.Question.type
 		}
 		choices = []
 		empList.append(empDict)
@@ -165,9 +166,14 @@ def test_get_answers():
 	q = (db.session.query(TestQuestion, Question)
     .filter(TestQuestion.test_id == test_id)
     .filter(TestQuestion.question_id == Question.id)
+    .order_by(Question.section.desc())
+    .order_by(Question.id)
     .all())
+
 	empList = []
 	for emp in q:
+		print('correctAnswer is as below : ')
+		print(emp.Question.ans)
 		empDict = {
 		'correctAnswer': emp.Question.ans,
 		'section' : emp.Question.section
