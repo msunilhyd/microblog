@@ -760,11 +760,39 @@ var prev_color;
                 ans_list = questionsAns[i].correctAnswer;
                 ans_list = ans_list.split(',');
 
+                function removeDuplicates(list)
+                {
+                    var temp = {};
+                    for (var i = 0; i < list.length; i++)
+                      temp[list[i]] = true;
+                    var r = [];
+                    for (var k in temp)
+                      r.push(k);
+                    return r;
+                }
+
+                var list = [NaN, NaN, 2, 3];
+                var ans_list = [1,2,3,4];
+
+                console.log(removeDuplicates(list));
+
+                const newArray = list.filter(function (value) {
+                    return !Number.isNaN(value);
+                });
+                console.log(newArray);
+
+                console.log(newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }));
+
+
                 console.log('ans_list is :' + ans_list);
                 console.log('user ans list is : ' + userAns);
+                var user_ans_set = new Set(userAns);
+                console.log('userAns set is : ' + JSON.stringify(user_ans_set));
 
                 if (userAns === questionsAns[i].correctAnswer - 1)
                 {
+                    console.log('in if case for test type 2');
+
                     no_of_attempted_ans_ques += 1;
 
                     var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -787,6 +815,8 @@ var prev_color;
                     no_of_correct_ans_ques += 1;
                 }
                     else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
+
+                    console.log('in else case for test type 2');
 
                     no_of_attempted_ans_ques += 1;
                     var section_score = section_total_score_map.get(questionsAns[i].section);
