@@ -249,7 +249,26 @@ window.time = t--;
             id: 'question'
         });
 
-        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:darkcyan;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
+        var ques_type_for_test = "";
+        var ques_type = questions[index].type;
+        console.log('ques_type is : ' + ques_type);
+        if(ques_type === 1)
+        {
+            ques_type_for_test = "Single Correct Answer ";
+        }
+        else if(ques_type === 2)
+        {
+            ques_type_for_test = "Multiple Correct Answers ";
+        }
+        else if(ques_type === 3)
+        {
+            ques_type_for_test = "Integer Answers ";
+        }
+
+
+        console.log('ques_type is : ' +  ques_type);
+        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:darkcyan;"> &nbsp Type : ' + ques_type_for_test + '</span>  '+
+            '<span style="float:center; color:darkcyan;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
 
 
         qElement.append(header);
@@ -315,8 +334,6 @@ window.time = t--;
         }
         else
         {
-            console.log('type is 3');
-            console.log('creating a text box');
 
             input = document.createElement('input');
             input.setAttribute("type","text");
@@ -325,10 +342,8 @@ window.time = t--;
             input.setAttribute("class", "radioClass");
 
             // name="integer_answer" class="radioClass" id=123';
-            console.log('input is as : ' + input);
 
             item.append(input);
-            console.log('item is : ' + JSON.stringify(item));
             radioList.append(item);
         }
         return radioList;
@@ -701,13 +716,8 @@ var prev_color;
             }
             else if(ques_type == 3)
             {
-                console.log('ques_type == 3');
-                console.log('userAns is  : ' + userAns);
-                console.log('questionsAns[i].correctAnswer is : ' + questionsAns[i].correctAnswer);
-
                 if (userAns == questionsAns[i].correctAnswer)
                 {
-                    console.log('ques_type == 3 is correct');
                     no_of_attempted_ans_ques += 1;
 
                     var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -730,9 +740,7 @@ var prev_color;
                     positive_score += positive_marks_1;
                     no_of_correct_ans_ques += 1;
                 }
-                else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
-
-                    console.log('ques_type == 3 is not correct');
+                else if ((userAns !== undefined) && !(isNaN(userAns)) && userAns !=='' ) {
 
                     no_of_attempted_ans_ques += 1;
                     var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -757,9 +765,6 @@ var prev_color;
                 }
                 else
                 {
-
-                    console.log('ques_type == 3 is not answered');
-
                     var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
                     section_un_attempted_questions += 1;
                     section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
@@ -773,35 +778,12 @@ var prev_color;
                     return parseInt(item, 10);
                 });
 
-                console.log(typeof ans_list);
 
                 const newArray = userAns.filter(function (value) {
                     return !Number.isNaN(value);
                 });
 
-                console.log(userAns);
-                console.log('Hello');
-                console.log(newArray);
-
-                console.log('typeof newArray is  :  ' + typeof newArray);
-
-                console.log(newArray.every(function(val)
-                    {   console.log('val is : ' + val);
-                        return ans_list.indexOf(parseInt(val)) >= 0;
-                    }));
-                for(var i=0;i<newArray.length;i++)
-                {
-                    console.log('newArray[i] is : ' +  newArray[i]);
-                    console.log('index of' + ans_list[i] +' is : ' + ans_list.indexOf(newArray[i]));
-                }
-
-                console.log('ans_list is :' + ans_list);
-                console.log('newArray is : ' + newArray);
-                console.log('correct answer list is : ' + questionsAns[i].correctAnswer);
-
                 var correct_ans_list_size = ans_list.length;
-                console.log('correct_ans_list_size is : '  + correct_ans_list_size);
-
 
                 if (newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
                 {
@@ -848,11 +830,9 @@ var prev_color;
                             positive_score += 2;                       {
                         }
 
-                    console.log('in if case for test type 2');
                 }
                 else if (! newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
                 {
-                    console.log('in else case for test type 2');
 
                     no_of_attempted_ans_ques += 1;
                     var section_score = section_total_score_map.get(questionsAns[i].section);
