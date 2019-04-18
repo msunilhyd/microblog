@@ -357,6 +357,7 @@ window.time = t--;
             // console.log(selections);
         }
         if(ques_type == 3){
+            console.log('ques_type == 3 and userAns is : ' + $('input[name="answer"]').val())
             selections[questionCounter] = $('input[name="answer"]').val();
         }
     }
@@ -667,7 +668,7 @@ var prev_color;
                     positive_score += positive_marks_1;
                     no_of_correct_ans_ques += 1;
                 }
-                    else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
+                else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
 
                     no_of_attempted_ans_ques += 1;
                     var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -700,8 +701,13 @@ var prev_color;
             }
             else if(ques_type == 3)
             {
-                if (userAns === questionsAns[i].correctAnswer)
+                console.log('ques_type == 3');
+                console.log('userAns is  : ' + userAns);
+                console.log('questionsAns[i].correctAnswer is : ' + questionsAns[i].correctAnswer);
+
+                if (userAns == questionsAns[i].correctAnswer)
                 {
+                    console.log('ques_type == 3 is correct');
                     no_of_attempted_ans_ques += 1;
 
                     var section_score = section_total_score_map.get(questionsAns[i].section);
@@ -726,6 +732,8 @@ var prev_color;
                 }
                 else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
 
+                    console.log('ques_type == 3 is not correct');
+
                     no_of_attempted_ans_ques += 1;
                     var section_score = section_total_score_map.get(questionsAns[i].section);
                     section_score -= negative_marks_1;
@@ -749,73 +757,101 @@ var prev_color;
                 }
                 else
                 {
+
+                    console.log('ques_type == 3 is not answered');
+
                     var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
                     section_un_attempted_questions += 1;
                     section_un_attempted_questions_map.set(questionsAns[i].section, section_un_attempted_questions);
                     no_of_not_ans_ques += 1;
                 }
-        }
+            }
             if(ques_type == 2)
             {
                 ans_list = questionsAns[i].correctAnswer;
-                ans_list = ans_list.split(',');
+                var ans_list = ans_list.split(',').map(function(item) {
+                    return parseInt(item, 10);
+                });
 
-                function removeDuplicates(list)
-                {
-                    var temp = {};
-                    for (var i = 0; i < list.length; i++)
-                      temp[list[i]] = true;
-                    var r = [];
-                    for (var k in temp)
-                      r.push(k);
-                    return r;
-                }
+                console.log(typeof ans_list);
 
-                var list = [NaN, NaN, 2, 3];
-                var ans_list = [1,2,3,4];
-
-                console.log(removeDuplicates(list));
-
-                const newArray = list.filter(function (value) {
+                const newArray = userAns.filter(function (value) {
                     return !Number.isNaN(value);
                 });
+
+                console.log(userAns);
+                console.log('Hello');
                 console.log(newArray);
 
-                console.log(newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }));
+                console.log('typeof newArray is  :  ' + typeof newArray);
 
+                console.log(newArray.every(function(val)
+                    {   console.log('val is : ' + val);
+                        return ans_list.indexOf(parseInt(val)) >= 0;
+                    }));
+                for(var i=0;i<newArray.length;i++)
+                {
+                    console.log('newArray[i] is : ' +  newArray[i]);
+                    console.log('index of' + ans_list[i] +' is : ' + ans_list.indexOf(newArray[i]));
+                }
 
                 console.log('ans_list is :' + ans_list);
-                console.log('user ans list is : ' + userAns);
-                var user_ans_set = new Set(userAns);
-                console.log('userAns set is : ' + JSON.stringify(user_ans_set));
+                console.log('newArray is : ' + newArray);
+                console.log('correct answer list is : ' + questionsAns[i].correctAnswer);
 
-                if (userAns === questionsAns[i].correctAnswer - 1)
+                var correct_ans_list_size = ans_list.length;
+                console.log('correct_ans_list_size is : '  + correct_ans_list_size);
+
+
+                if (newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
                 {
+                        no_of_attempted_ans_ques += 1;
+                        no_of_correct_ans_ques += 1;
+
+                        if(newArray.length == ans_list.length)
+                        {
+                            var section_score = section_total_score_map.get(questionsAns[i].section);
+                            section_score += positive_marks_1;
+                            section_total_score_map.set(questionsAns[i].section, section_score);
+
+                            var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
+                            section_score_positive += positive_marks_1;
+                            section_positive_score_map.set(questionsAns[i].section, section_score_positive);
+
+                            var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                            section_attempted_questions += 1;
+                            section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                            var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].      section);
+                            section_correct_attempted_questions += 1;
+                            section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions    );
+
+                            positive_score += positive_marks_1;
+                        }
+                        else
+                            var section_score = section_total_score_map.get(questionsAns[i].section);
+                            section_score += 2;
+                            section_total_score_map.set(questionsAns[i].section, section_score);
+
+                            var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
+                            section_score_positive += 2;
+                            section_positive_score_map.set(questionsAns[i].section, section_score_positive);
+
+                            var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
+                            section_attempted_questions += 1;
+                            section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
+
+                            var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].      section);
+                            section_correct_attempted_questions += 1;
+                            section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions    );
+
+                            positive_score += 2;                       {
+                        }
+
                     console.log('in if case for test type 2');
-
-                    no_of_attempted_ans_ques += 1;
-
-                    var section_score = section_total_score_map.get(questionsAns[i].section);
-                    section_score += positive_marks_1;
-                    section_total_score_map.set(questionsAns[i].section, section_score);
-
-                    var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
-                    section_score_positive += positive_marks_1;
-                    section_positive_score_map.set(questionsAns[i].section, section_score_positive);
-
-                    var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
-                    section_attempted_questions += 1;
-                    section_attempted_questions_map.set(questionsAns[i].section, section_attempted_questions);
-
-                    var section_correct_attempted_questions = section_correct_attempted_questions_map.get(questionsAns[i].section);
-                    section_correct_attempted_questions += 1;
-                    section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions);
-
-                    positive_score += positive_marks_1;
-                    no_of_correct_ans_ques += 1;
                 }
-                    else if ((userAns !== undefined) && !(isNaN(userAns)) ) {
-
+                else if (! newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
+                {
                     console.log('in else case for test type 2');
 
                     no_of_attempted_ans_ques += 1;
@@ -839,7 +875,7 @@ var prev_color;
                     negative_score += negative_marks_1;
                     no_of_wrong_ans_ques += 1;
                 }
-                else
+                else if(newArray.length == 0)
                 {
                     var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
                     section_un_attempted_questions += 1;
