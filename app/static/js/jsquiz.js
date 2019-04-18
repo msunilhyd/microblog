@@ -262,7 +262,7 @@ window.time = t--;
         }
         else if(ques_type === 3)
         {
-            ques_type_for_test = "Integer Answers ";
+            ques_type_for_test = "Integer Answer ";
         }
 
 
