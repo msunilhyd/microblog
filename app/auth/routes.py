@@ -10,6 +10,7 @@ from app.auth.forms import LoginForm, RegistrationForm, \
 from app.models import User
 from app.auth.email import send_password_reset_email, send_confirm_email
 
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -26,7 +27,7 @@ def login():
             flash('A Confirmation mail has been sent to your email, Please check to complete Registration.', 'info')
             return redirect(url_for('auth.login'))
         else:
-            session.permanent = True  
+            session.permanent = True
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
@@ -46,7 +47,12 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = RegistrationForm()
+    print(form.username.data)
+    print(form.password.data)
+    print(form.email.data)
+
     if form.validate_on_submit():
+        print('Yes, form is validated')
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -54,6 +60,8 @@ def register():
         send_confirm_email(user)
         flash('A Confirmation mail has been sent to your email, Please check it to complete Registration.', 'info')
         return redirect(url_for('auth.login'))
+    else:
+        print('Form is not Validated')
     return render_template('auth/register.html', title=_('Register'),
                            form=form)
 
@@ -88,6 +96,7 @@ def reset_password(token):
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
 
+
 @bp.route('/confirm_email/<token>', methods=['GET', 'POST'])
 def confirm_email(token):
     if current_user.is_authenticated:
@@ -95,12 +104,12 @@ def confirm_email(token):
     user = User.verify_confirm_email_token(token)
     if not user:
         return redirect(url_for('main.index'))
-    user.is_confirmed = 1;
+    user.is_confirmed = 1
     db.session.commit()
 
     login_user(user)
     next_page = request.args.get('next')
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('main.index')
-    flash('Welcome to EQuizzy, Your account has been verified.','info')
+    flash('Welcome to EQuizzy, Your account has been verified.', 'info')
     return redirect(next_page)
