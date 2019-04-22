@@ -19,6 +19,10 @@ def before_request():
 
 
 @bp.route('/', methods=['GET', 'POST'])
+def route_register():
+    return redirect(url_for('auth.register'))
+
+
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
