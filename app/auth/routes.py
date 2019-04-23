@@ -106,5 +106,5 @@ def confirm_email(token):
     next_page = request.args.get('next')
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('main.index')
-    flash('Welcome to EQuizzy, Your account has been verified.', 'info')
+    flash('Welcome to GradeMatrix, Your account has been verified.', 'info')
     return redirect(next_page)
