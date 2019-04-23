@@ -24,7 +24,7 @@
         <div class="form-v4-content">
             <div class="form-left">
                 <h2>INFORMATION BLOCK</h2>
-
+<h2>
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -34,6 +34,7 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+</h2>
 <p class="text-1">Sample Data about the site or product</p>
                 <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
                 <div class="form-left-last">
