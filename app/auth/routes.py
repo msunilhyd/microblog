@@ -47,12 +47,7 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = RegistrationForm()
-    print(form.username.data)
-    print(form.password.data)
-    print(form.email.data)
-
     if form.validate_on_submit():
-        print('Yes, form is validated')
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
