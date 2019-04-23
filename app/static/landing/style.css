@@ -182,7 +182,7 @@ body {
 	margin-bottom: 27px;
 }
 .form-v4-content .form-detail input {
-	width: auto;
+	width: 100%;
     padding: 11.5px 15px;
     border: 1px solid #e5e5e5;
     border-top-left-radius: 5px;
