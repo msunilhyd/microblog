@@ -42,6 +42,11 @@
                         <input type="submit" name="account" class="account" value="Forgot Password !">
                     </a>
                 </div>
+                <div class="form-left-last">
+                    <a href="{{ url_for('auth.register') }}">
+                        <input type="submit" name="account" class="account" value="Register">
+                    </a>
+                </div>
             </div>
 
             <form class="form-detail" action="{{ url_for('auth.login') }}" method="post"  novalidate="novalidate">
