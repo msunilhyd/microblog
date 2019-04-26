@@ -267,8 +267,8 @@ window.time = t--;
 
 
         console.log('ques_type is : ' +  ques_type);
-        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:darkcyan;"> &nbsp Type : ' + ques_type_for_test + '</span>  '+
-            '<span style="float:center; color:darkcyan;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
+        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:#3786bd;"> &nbsp Type : ' + ques_type_for_test + '</span>  '+
+            '<span style="float:center; color:#3786bd;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
 
 
         qElement.append(header);
