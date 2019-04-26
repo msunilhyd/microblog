@@ -12,6 +12,7 @@ from app.models import User, Test, TestQuestion, Question, UserTest, ChildrenTes
 from app.auth.email import send_score_sheet_email
 from app.tests import bp
 import ast
+import json
 
 from app.tests.forms import TestForm, TestQuestionForm
 
@@ -172,8 +173,8 @@ def test_get_answers():
 
 	empList = []
 	for emp in q:
-		print('correctAnswer is as below : ')
-		print(emp.Question.ans)
+		# print('correctAnswer is as below : ')
+		# print(emp.Question.ans)
 		empDict = {
 		'correctAnswer': emp.Question.ans,
 		'section' : emp.Question.section
@@ -195,46 +196,46 @@ def test_update_user_score():
 	no_answers = request.form['no_answers']
 	attempted_ques = request.form['no_of_attempted_ans_ques']
 
-	map_total_score = request.form['map_total_score']
-	map_positive_score = request.form['map_positive_score']
-	map_negative_score = request.form['map_negative_score']
-	map_attempted = request.form['map_attempted']
-	map_un_attempted = request.form['map_un_attempted']
-	map_correct_attempted = request.form['map_correct_attempted']
-	map_wrong_attempted = request.form['map_wrong_attempted']
+	map_total_score = json.loads(request.form['map_total_score'])
+	map_positive_score = json.loads(request.form['map_positive_score'])
+	map_negative_score = json.loads(request.form['map_negative_score'])
+	map_attempted = json.loads(request.form['map_attempted'])
+	map_un_attempted = json.loads(request.form['map_un_attempted'])
+	map_correct_attempted = json.loads(request.form['map_correct_attempted'])
+	map_wrong_attempted = json.loads(request.form['map_wrong_attempted'])
 	time_taken = request.form['time_taken_test']
 
-	map_total_score_list = ast.literal_eval(map_total_score)
+	map_total_score_list = map_total_score
 	total_score_maths = map_total_score_list[0][1]
 	total_score_physics = map_total_score_list[1][1]
 	total_score_chemistry = map_total_score_list[2][1]
 
-	map_positive_score_list = ast.literal_eval(map_positive_score)
+	map_positive_score_list = map_positive_score
 	positive_score_maths = map_positive_score_list[0][1]
 	positive_score_physics = map_positive_score_list[1][1]
 	positive_score_chemistry = map_positive_score_list[2][1]
 
-	map_negative_score_list = ast.literal_eval(map_negative_score)
+	map_negative_score_list = map_negative_score
 	negative_score_maths = map_negative_score_list[0][1]
 	negative_score_physics = map_negative_score_list[1][1]
 	negative_score_chemistry = map_negative_score_list[2][1]
 
-	map_attempted_list = ast.literal_eval(map_attempted)
+	map_attempted_list = map_attempted
 	attempted_maths = map_attempted_list[0][1]
 	attempted_physics = map_attempted_list[1][1]
 	attempted_chemistry = map_attempted_list[2][1]
 
-	map_un_attempted_list = ast.literal_eval(map_un_attempted)
+	map_un_attempted_list = map_un_attempted
 	un_attempted_maths = map_un_attempted_list[0][1]
 	un_attempted_physics = map_un_attempted_list[1][1]
 	un_attempted_chemistry = map_un_attempted_list[2][1]
 
-	map_correct_attempted_list = ast.literal_eval(map_correct_attempted)
+	map_correct_attempted_list = map_correct_attempted
 	correct_attempted_maths = map_correct_attempted_list[0][1]
 	correct_attempted_physics = map_correct_attempted_list[1][1]
 	correct_attempted_chemistry = map_correct_attempted_list[2][1]
 
-	map_wrong_attempted_list = ast.literal_eval(map_wrong_attempted)
+	map_wrong_attempted_list = map_wrong_attempted
 	wrong_attempted_maths = map_wrong_attempted_list[0][1]
 	wrong_attempted_physics = map_wrong_attempted_list[1][1]
 	wrong_attempted_chemistry = map_wrong_attempted_list[2][1]
