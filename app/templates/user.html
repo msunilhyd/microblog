@@ -8,31 +8,31 @@
 				<h1> Username : {{ user.username }} </h1>
                         {% if user.first_name %}
                             {% if user.last_name %}
-                                <p><font color="lightseagreen"> Name : <font color="#333333"> {{ user.first_name }} {{ user.last_name }} </p>
+                                <p><font color="#3786bd"> Name : <font color="#333333"> {{ user.first_name }} {{ user.last_name }} </p>
                             {% else %}
-                                <p><font color="lightseagreen"> Name : <font color="#333333"> {{ user.first_name }}</p>
+                                <p><font color="#3786bd"> Name : <font color="#333333"> {{ user.first_name }}</p>
                             {% endif %}
                         {% endif %}
-        
+
                         {% if user.coach %}
-                            <p><font color="lightseagreen"> Coach : <font color="#333333"> {{ user.coach }}</p>
+                            <p><font color="#3786bd"> Coach : <font color="#333333"> {{ user.coach }}</p>
                         {% endif %}
-        
+
                 		{% if user.about_me %}
-                            <p><font color="lightseagreen"> About me : <font color="#333333"> {{ user.about_me }}</p>
+                            <p><font color="#3786bd"> About me : <font color="#333333"> {{ user.about_me }}</p>
                         {% endif %}
-                		
+
                         {% if user.last_seen %}
-                            <p><font color="lightseagreen"> Last seen on : <font color="#333333"> {{ moment(user.last_seen).format('LLL')}}</p>
+                            <p><font color="#3786bd"> Last seen on : <font color="#333333"> {{ moment(user.last_seen).format('LLL')}}</p>
                                     {{ moment.include_jquery() }}
                                     {{ moment.include_moment() }}
                             </p>
                         {% endif %}
 
                 		{% if user == current_user %}
-                    		<p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
+                    		<p><a href="{{ url_for('main.edit_profile') }}" >Edit your profile</a></p>
                 		{% endif %}
-		
+
         	</td>
 		</tr>
 	</table>
@@ -40,13 +40,13 @@
 	{% for post in posts %}
 		{% include '_post.html' %}
 	{% endfor %}
-	
+
 
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> Newer 
+                    <span aria-hidden="true">&larr;</span> Newer
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
