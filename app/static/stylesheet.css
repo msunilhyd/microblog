@@ -141,7 +141,7 @@ body {
 
 .boClass{
 min-height:80px;
-  background-color: lightslategray;
+  background-color: #3786bd;
     color: #fff;
       font-size: 110%;
   border-radius: 5px;
@@ -223,7 +223,7 @@ p {
 
 
 .taken-test-p{
-  color: lightseagreen;
+  color: #3786bd;
 }
 
 .navbar-nav{
@@ -619,7 +619,7 @@ label {
 }
 
 .score-sheet.tr:nth-child(even) {
-  background-color: lightseagreen;
+  background-color: #3786bd;
 }
 
 
