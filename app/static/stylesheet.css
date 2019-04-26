@@ -634,7 +634,7 @@ label {
   text-align: center;
 }
 
-#score-sheet tr:nth-child(odd){background-color: lightseagreen; color: white}
+#score-sheet tr:nth-child(odd){background-color: #3786bd; color: white}
 #score-sheet tr:nth-child(even){background-color: #ddd; color: black}
 
 #score-sheet th {

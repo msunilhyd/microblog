@@ -37,11 +37,7 @@
 </h2>
 <p class="text-1">Sample Data about the site or product</p>
                 <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
-                <div class="form-left-last">
-                    <a href="{{ url_for('auth.reset_password_request') }}">
-                        <input type="submit" name="account" class="account" value="Forgot Password !">
-                    </a>
-                </div>
+
                 <div class="form-left-last">
                     <a href="{{ url_for('auth.register') }}">
                         <input type="submit" name="account" class="account" value="Register">
@@ -78,7 +74,13 @@
                      <div class="form-row-last">
                         {{ form.submit(class="register") }}
                     </div>
+                      <div class="form-left-last">
+                    <a href="{{ url_for('auth.reset_password_request') }}">
+                        <input type="button" name="forgot_pass" class="register" value="Forgot Password !">
+                    </a>
+                </div>
             </form>
+
 
         </div>
 
