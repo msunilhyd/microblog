@@ -321,10 +321,15 @@ window.time = t--;
 
 
                     if (isSubmit === 1) {
-                        if (i == questionsAns[index].correctAnswer - 1) {
+                        if (i == questionsAns[index].correctAnswer - 1){
                             input += '<span id="tick" style="color:green;"> &#10003; </span>';
-                        } else if ((i != questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter])) {
+                        } else if ((i != questionsAns[index].correctAnswer - 1) &&
+                            (i == selections[questionCounter])) {
                             input += '<span id="cross" style="color:red;"> &#10005; </span>';
+                        }
+                        if((i == questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter]))
+                        {
+                            input += '<span id="tick" style="color:red;"> &#10003; </span>';
                         }
                     }
 
