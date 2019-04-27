@@ -251,7 +251,7 @@ window.time = t--;
 
         var ques_type_for_test = "";
         var ques_type = questions[index].type;
-        console.log('ques_type is : ' + ques_type);
+        // console.log('ques_type is : ' + ques_type);
         if(ques_type === 1)
         {
             ques_type_for_test = "Single Correct Answer ";
@@ -266,7 +266,7 @@ window.time = t--;
         }
 
 
-        console.log('ques_type is : ' +  ques_type);
+        // console.log('ques_type is : ' +  ques_type);
         var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:#3786bd;"> &nbsp Type : ' + ques_type_for_test + '</span>  '+
             '<span style="float:center; color:#3786bd;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
 
@@ -338,8 +338,8 @@ window.time = t--;
                         {
                             var ans_list = questionsAns[index].correctAnswer;
 
-                            console.log('ans_list is : ' + ans_list);
-                            console.log('selections[questionCounter] is : ' + selections[questionCounter]);
+                            // console.log('ans_list is : ' + ans_list);
+                            // console.log('selections[questionCounter] is : ' + selections[questionCounter]);
 
                             if(ans_list.indexOf(i) > -1)
                             {
@@ -394,7 +394,7 @@ window.time = t--;
             list_of_ans.push(+$('input[name="answer1"]:checked').val());
             list_of_ans.push(+$('input[name="answer2"]:checked').val());
             list_of_ans.push(+$('input[name="answer3"]:checked').val());
-            console.log(list_of_ans);
+            // console.log(list_of_ans);
             selections[questionCounter] = list_of_ans;
 
             //selections[questionCounter].push(+$('input[name="answer0"]:checked').val());
@@ -402,7 +402,7 @@ window.time = t--;
             // console.log(selections);
         }
         if(ques_type == 3){
-            console.log('ques_type == 3 and userAns is : ' + $('input[name="answer"]').val())
+            // console.log('ques_type == 3 and userAns is : ' + $('input[name="answer"]').val())
             selections[questionCounter] = $('input[name="answer"]').val();
         }
     }
@@ -512,10 +512,10 @@ var prev_color;
                 var nextQuestion = createQuestionElement(questionCounter);
                 quiz.append(nextQuestion).fadeIn();
 
-                console.log('in displayNext, selections[questionCounter] is : ' + selections[questionCounter]);
+                // console.log('in displayNext, selections[questionCounter] is : ' + selections[questionCounter]);
 
                 var q_type = questions[questionCounter].type;
-                console.log('q_type at displayNext is : ' + q_type);
+                // console.log('q_type at displayNext is : ' + q_type);
 
                 if (!(isNaN(selections[questionCounter]))) {
                     if(q_type == 1)
@@ -525,19 +525,19 @@ var prev_color;
                     }
                     else if(q_type == 3)
                     {
-                        console.log('q_type is 3');
-                        console.log(selections[questionCounter]);
+                        // console.log('q_type is 3');
+                        // console.log(selections[questionCounter]);
                         $('input[id=int_ans' + questionCounter + ']').val(selections[questionCounter]);
 
                     }
-                    console.log('not NaN');
+                    // console.log('not NaN');
                 }
                 else
                 {
                     if(q_type == 2)
                     {
-                        console.log('q_type is 2');
-                        console.log(selections[questionCounter]);
+                        // console.log('q_type is 2');
+                        // console.log(selections[questionCounter]);
                         var ans_arr = selections[questionCounter];
                         if(undefined !== ans_arr)
                         {
@@ -552,8 +552,8 @@ var prev_color;
 
                         }
                     }
-                    console.log(typeof selections[questionCounter]);
-                    console.log('is NaN');
+                    // console.log(typeof selections[questionCounter]);
+                    // console.log('is NaN');
                 }
 
                 // Controls display of 'prev' button
@@ -679,8 +679,8 @@ var prev_color;
         section_wrong_attempted_questions_map.set("Chemistry", 0);
 
         var i = 0;
-        console.log('printing selections as below:');
-        console.log(selections);
+        // console.log('printing selections as below:');
+        // console.log(selections);
         for (i; i < selections.length; i++) {
 
             var ans = questions[i].choices;
@@ -815,7 +815,8 @@ var prev_color;
 
                 var correct_ans_list_size = ans_list.length;
 
-                if (newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
+                if ((newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }) &&
+                    newArray.length > 0))
                 {
                         no_of_attempted_ans_ques += 1;
                         no_of_correct_ans_ques += 1;
