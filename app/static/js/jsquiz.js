@@ -321,15 +321,40 @@ window.time = t--;
 
 
                     if (isSubmit === 1) {
-                        if (i == questionsAns[index].correctAnswer - 1){
-                            input += '<span id="tick" style="color:green;"> &#10003; </span>';
-                        } else if ((i != questionsAns[index].correctAnswer - 1) &&
-                            (i == selections[questionCounter])) {
-                            input += '<span id="cross" style="color:red;"> &#10005; </span>';
-                        }
-                        if((i == questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter]))
+                        if(type_of_question == 1)
                         {
-                            input += '<span id="tick" style="color:red;"> &#10003; </span>';
+                            if (i == questionsAns[index].correctAnswer - 1){
+                                input += '<span id="tick" style="color:green;"> &#10003; </span>';
+                            } else if ((i != questionsAns[index].correctAnswer - 1) &&
+                                (i == selections[questionCounter])) {
+                                input += '<span id="cross" style="color:red;"> &#10005; </span>';
+                            }
+                            if((i == questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter]))
+                            {
+                                input += '<span id="tick" style="color:red;"> &#10003; </span>';
+                            }
+                        }
+                        else if(type_of_question == 2)
+                        {
+                            var ans_list = questionsAns[index].correctAnswer;
+
+                            console.log('ans_list is : ' + ans_list);
+                            console.log('selections[questionCounter] is : ' + selections[questionCounter]);
+
+                            if(ans_list.indexOf(i) > -1)
+                            {
+                                input += '<span id="tick" style="color:green;"> &#10003; </span>';
+                            }
+                            if((selections[questionCounter].indexOf(i) > -1)
+                                && ans_list.indexOf(i) > -1)
+                            {
+                                input += '<span id="tick" style="color:red;"> &#10003; </span>';
+                            }
+                             if((selections[questionCounter].indexOf(i) > -1)
+                                && ans_list.indexOf(i) == -1)
+                            {
+                                input += '<span id="cross" style="color:red;"> &#10005; </span>';
+                            }
                         }
                     }
 

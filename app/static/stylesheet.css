@@ -606,6 +606,13 @@ label {
     font-size: 23px;
 }
 
+#cross {
+    color: red;
+    vertical-align: middle;
+    font-size: 23px;
+}
+
+
 
 .score-sheet.table {
   border-collapse: collapse;
