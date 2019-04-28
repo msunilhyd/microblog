@@ -18,12 +18,14 @@ from app.tests.forms import TestForm, TestQuestionForm
 
 
 @bp.route("/tests", methods=['GET', 'POST'])
+@login_required
 def tests():
     parent_test_types = ParentTestTypes.query.order_by(ParentTestTypes.id)
     return render_template('tests/all_parents_test_types.html', parent_test_types=parent_test_types)
 
 
 @bp.route("/tests_test_type_parent/<int:parent_test_type_id>", methods=['GET', 'POST'])
+@login_required
 def tests_test_type_parent(parent_test_type_id):
 		q = db.session.query(ParentTestTypes, ParentChildTests, ChildrenTestTypes).filter(ParentTestTypes.id == parent_test_type_id).filter(ParentTestTypes.id == ParentChildTests.parent_test_id).filter(ParentChildTests.child_test_id ==ChildrenTestTypes.id).order_by(ChildrenTestTypes.id).all()
 		child_test_types = []
@@ -32,6 +34,7 @@ def tests_test_type_parent(parent_test_type_id):
 		return render_template('tests/all_test_types.html', test_types=child_test_types, parent_test_type_id=parent_test_type_id)
 
 @bp.route("/tests/<int:child_test_type_id>", methods=['GET', 'POST'])
+@login_required
 def tests_final(child_test_type_id):
 	tests = Test.query.filter_by(category=child_test_type_id).order_by(Test.date_posted.desc())
 	return render_template('tests/alltests.html', tests=tests)
@@ -78,6 +81,7 @@ def new_test_question(test_id):
 
 
 @bp.route("/test/<int:test_id>")
+@login_required
 def test(test_id):
 	test = Test.query.get_or_404(test_id)
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=current_user.id).first()
@@ -123,6 +127,7 @@ def take_test(test_id):
 
 
 @bp.route("/test_get_questions/", methods=['GET','POST'])
+@login_required
 def test_get_questions():
 	test_id = request.form['test_id']
 
@@ -161,6 +166,7 @@ def test_get_questions():
 
 
 @bp.route("/test_get_answers/", methods=['GET','POST'])
+@login_required
 def test_get_answers():
 	test_id = request.form['test_id']
 
@@ -184,6 +190,7 @@ def test_get_answers():
 
 
 @bp.route("/test_update_user_score/", methods=['GET','POST'])
+@login_required
 def test_update_user_score():
 
 	test_id = request.form['test_id']
