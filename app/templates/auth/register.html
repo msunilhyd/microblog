@@ -22,9 +22,22 @@
 
         <div class="form-v4-content">
             <div class="form-left">
-                <h2>INFORMATION BLOCK</h2>
-                <p class="text-1">Sample Data about the site or product</p>
-                <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
+                <h2>GRADEMATRIX.COM</h2>
+<h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+</h2>
+<h3 class="text-1">Register with your email</h3>
+                <p class="text-3"><span></span> For any enquiries contact us
+at gradematrixsocial@gmail.com</p>
+
                 <div class="form-left-last">
                     <a href="{{ url_for('auth.login') }}">
                         <input type="submit" name="account" class="account" value="Have An Account">

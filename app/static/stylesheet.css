@@ -51,12 +51,6 @@ a {
   font-size: .99em;
 }
 
-.main-nav a:hover {
-  color: #718daa;
-}
-
-
-
 .header {
   padding-top: .5em;
   padding-bottom: .5em;
@@ -152,7 +146,8 @@ min-height:80px;
 }
 
 .boClass:hover {
-    color: #darkgrey;
+    color: lightseagreen;
+    text-decoration: none;
 }
 
 .boClass a{

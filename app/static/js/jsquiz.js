@@ -356,6 +356,15 @@ window.time = t--;
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
                         }
+                        else if(type_of_question == 3)
+                        {
+                            input = document.createElement('input');
+                            input.setAttribute("type","text");
+                            input.setAttribute("name", "answer");
+                            input.setAttribute("id", "int_ans" + index);
+                            input.setAttribute("class", "radioClass");
+                            input.setAttribute("value", questionsAns[index].correctAnswer);
+                        }
                     }
 
                     item.append(input);
