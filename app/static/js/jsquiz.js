@@ -302,11 +302,11 @@ window.time = t--;
 
                     if(type_of_question == 1)
                     {
-                        input = '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                        input = '<br><input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
                     }
                     else if(type_of_question == 2)
                     {
-                        input = '<input type="radio" name="answer' + i + '" + class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                        input = '<br><input type="radio" name="answer' + i + '" + class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
                     }
 
                     var str = questions[index].choices[i];
@@ -323,6 +323,8 @@ window.time = t--;
                     if (isSubmit === 1) {
                         if(type_of_question == 1)
                         {
+                            console.log('Hello1');
+
                             if (i == questionsAns[index].correctAnswer - 1){
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             } else if ((i != questionsAns[index].correctAnswer - 1) &&
@@ -336,34 +338,31 @@ window.time = t--;
                         }
                         else if(type_of_question == 2)
                         {
+                            console.log('Hello2');
+
                             var ans_list = questionsAns[index].correctAnswer;
 
                             // console.log('ans_list is : ' + ans_list);
                             // console.log('selections[questionCounter] is : ' + selections[questionCounter]);
 
-                            if(ans_list.indexOf(i) > -1)
+                            if(ans_list != null && ans_list.indexOf(i) > -1)
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             }
-                            if((selections[questionCounter].indexOf(i) > -1)
-                                && ans_list.indexOf(i) > -1)
+                            if( selections[questionCounter] != null && (selections[questionCounter].indexOf(i) > -1)
+                                && ans_list != null && ans_list.indexOf(i) > -1)
                             {
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
-                             if((selections[questionCounter].indexOf(i) > -1)
-                                && ans_list.indexOf(i) == -1)
+                             if(selections[questionCounter] != null &&  (selections[questionCounter].indexOf(i) > -1)
+                                && ans_list != null && ans_list.indexOf(i) == -1)
                             {
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
                         }
                         else if(type_of_question == 3)
                         {
-                            input = document.createElement('input');
-                            input.setAttribute("type","text");
-                            input.setAttribute("name", "answer");
-                            input.setAttribute("id", "int_ans" + index);
-                            input.setAttribute("class", "radioClass");
-                            input.setAttribute("value", questionsAns[index].correctAnswer);
+                            console.log('Hello3');
                         }
                     }
 

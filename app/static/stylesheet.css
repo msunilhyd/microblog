@@ -534,7 +534,7 @@ button {
     border-radius:5px;
   color: black;
   background-color: #FFFFFF;
-    font-weight: bold;
+    /*font-weight: bold;*/
     box-shadow: 5px 5px 5px #888;
 }
 
