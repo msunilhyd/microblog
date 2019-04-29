@@ -43,6 +43,9 @@ at gradematrixsocial@gmail.com</p>
                     <a href="{{ url_for('auth.register') }}">
                         <input type="submit" name="account" class="account" value="Register">
                     </a>
+                    <a href="{{ url_for('auth.reset_password_request') }}">
+                        <input type="submit" name="forgot_pass" class="forgot_pass" value="Forgot Password !">
+                    </a>
                 </div>
             </div>
 
@@ -74,8 +77,6 @@ at gradematrixsocial@gmail.com</p>
                 </div>
                      <div class="form-row-last">
                         {{ form.submit(class="register") }}
-                        <a href="{{ url_for('auth.reset_password_request') }}">
-                        <input type="button" name="forgot_pass" class="register" value="Forgot Password !">
                     </a>
                     </div>
 

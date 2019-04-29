@@ -63,6 +63,30 @@ body {
 .form-v4-content .form-left .text-2 {
 	margin: 20px 0 25px;
 }
+.forgot_pass{
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    /*width: 180px;*/
+    border: none;
+    margin: 15px 0px 50px 5px;
+    cursor: pointer;
+    color: #333;
+    font-weight: 700;
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+    appearance: unset;
+    -moz-appearance: unset;
+    -webkit-appearance: unset;
+    -o-appearance: unset;
+    -ms-appearance: unset;
+    outline: none;
+    -moz-outline: none;
+    -webkit-outline: none;
+    -o-outline: none;
+    -ms-outline: none;
+    }
+
 .form-v4-content .form-left .account {
 	background: #fff;
 	border-top-left-radius: 5px;
