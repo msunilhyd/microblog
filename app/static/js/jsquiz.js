@@ -811,11 +811,18 @@ var prev_color;
             }
             if(ques_type == 2)
             {
-                ans_list = questionsAns[i].correctAnswer;
-                var ans_list = ans_list.split(',').map(function(item) {
+                var ans_list = [];
+                var crct_ans_list = questionsAns[i].correctAnswer;
+
+                for(var j=0;j<crct_ans_list.length;j++)
+                {
+                    ans_list.push(crct_ans_list.charAt(j))
+                }
+                ans_list = ans_list.map(function(item) {
                     return parseInt(item, 10);
                 });
 
+                console.log('ans_list is : ' + ans_list);
 
                 var newArray ;
                 if(newArray !== undefined && userAns !== undefined){
