@@ -273,7 +273,7 @@ window.time = t--;
 
         qElement.append(header);
 
-        var question = $('<br><p>').append(questions[index].question);
+        var question = $('<br><p class="question_element">').append(questions[index].question);
         qElement.append(question);
 
         var radioButtons = createRadios(index);
@@ -818,7 +818,7 @@ var prev_color;
 
 
                 var newArray ;
-                if(newArray !== undefined){
+                if(newArray !== undefined && userAns !== undefined){
                     newArray = userAns.filter(function (value) {
                     return !Number.isNaN(value);
                     })
