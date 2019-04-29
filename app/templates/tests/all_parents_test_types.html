@@ -9,17 +9,21 @@
 
 <h1 class="mb-3 user-posts-heading"> </h1>
 
-<div class="container-fluid gutter custompager" style="margin-top: 16rem;">
-  <div class=".row-fluid">
       {% for type in parent_test_types %}
-         <a class="col-md-4 boClass col-sm-6 col-xs-12 no-hover" href="{{ url_for('tests.tests_test_type_parent', parent_test_type_id=type.id) }}">
-       <span style="font-family: sans-serif"> {{ type.parent_test_type }} </span>
-      </a>
 
-      {% endfor %}
-  </div>
-  </div>
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <h3> <a class=" mr-2 article-title testAClass" href="{{ url_for('tests.tests_test_type_parent', parent_test_type_id=type.id) }}">
+            {{ type.parent_test_type }}
+           </a>
+          </h3>
+        </div>
+      </div>
 
+    </article>
+
+  {% endfor %}
 
 {% else %}
 

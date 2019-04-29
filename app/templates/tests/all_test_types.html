@@ -9,19 +9,22 @@
 
 <h1 class="mb-3 user-posts-heading"> </h1>
 
-<div class="container-fluid gutter " style="margin-top: 16rem;">
-  <div class=".row-fluid">
-      {% for type in test_types %}
 
-         <a class="col-md-4 boClass col-sm-6 col-xs-12 fontfamily" style="font-family: sans-serif" href="{{ url_for('tests.tests_final', child_test_type_id=type.id) }}">
-        {{ type.child_test_type }}
-      </a>
+     {% for type in test_types %}
 
-      {% endfor %}
-  </div>
-  </div>
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <h3> <a class=" mr-2 article-title testAClass" href="{{ url_for('tests.tests_final', child_test_type_id=type.id)}}">
+            {{ type.child_test_type }}
+           </a>
+          </h3>
+        </div>
+      </div>
 
+    </article>
 
+  {% endfor %}
 
 {% else %}
 
