@@ -817,13 +817,16 @@ var prev_color;
                 });
 
 
-                const newArray = userAns.filter(function (value) {
+                var newArray ;
+                if(newArray !== undefined){
+                    newArray = userAns.filter(function (value) {
                     return !Number.isNaN(value);
-                });
+                    })
+                }
 
                 var correct_ans_list_size = ans_list.length;
 
-                if ((newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }) &&
+                if ((newArray !== undefined) && (newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }) &&
                     newArray.length > 0))
                 {
                         no_of_attempted_ans_ques += 1;
@@ -870,7 +873,7 @@ var prev_color;
                         }
 
                 }
-                else if (! newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
+                else if ((newArray !== undefined) && ! newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
                 {
 
                     no_of_attempted_ans_ques += 1;
@@ -894,7 +897,7 @@ var prev_color;
                     negative_score += negative_marks_1;
                     no_of_wrong_ans_ques += 1;
                 }
-                else if(newArray.length == 0)
+                else if((newArray !== undefined) && newArray.length == 0)
                 {
                     var section_un_attempted_questions = section_un_attempted_questions_map.get(questionsAns[i].section);
                     section_un_attempted_questions += 1;
