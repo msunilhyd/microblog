@@ -323,7 +323,6 @@ window.time = t--;
                     if (isSubmit === 1) {
                         if(type_of_question == 1)
                         {
-                            console.log('Hello1');
 
                             if (i == questionsAns[index].correctAnswer - 1){
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
@@ -338,14 +337,13 @@ window.time = t--;
                         }
                         else if(type_of_question == 2)
                         {
-                            console.log('Hello2');
 
                             var ans_list = questionsAns[index].correctAnswer;
 
                             // console.log('ans_list is : ' + ans_list);
                             // console.log('selections[questionCounter] is : ' + selections[questionCounter]);
 
-                            if(ans_list != null && ans_list.indexOf(i) > -1)
+                            if(ans_list != null && ans_list.indexOf(i+1) > -1)
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             }
@@ -360,10 +358,6 @@ window.time = t--;
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
                         }
-                        else if(type_of_question == 3)
-                        {
-                            console.log('Hello3');
-                        }
                     }
 
                     item.append(input);
@@ -372,17 +366,57 @@ window.time = t--;
         }
         else
         {
+            if(isSubmit === 1)
+            {
+                    var userAns = selections[index];
 
-            input = document.createElement('input');
-            input.setAttribute("type","text");
-            input.setAttribute("name", "answer");
-            input.setAttribute("id", "int_ans" + index);
-            input.setAttribute("class", "radioClass");
+                    input = document.createElement('input');
+                    input.setAttribute("type","text");
+                    input.setAttribute("name", "answer");
+                    input.setAttribute("id", "int_ans" + index);
+                    input.setAttribute("class", "radioClass");
 
-            // name="integer_answer" class="radioClass" id=123';
+                    input.setAttribute("value", questionsAns[index].correctAnswer);
+                    item.append(input);
+                    item.append('<span id="tick" style="color:green;"> &#10003; </span>');
 
-            item.append(input);
-            radioList.append(item);
+                    radioList.append(item);
+                if(userAns !== undefined && userAns !=="")
+                {
+                    var input2 = document.createElement('input');
+                    var item2 = $('<li> style="height: 1.8em;"');
+
+                    input2.setAttribute("type","text");
+                    input2.setAttribute("name", "int_answer");
+                    input2.setAttribute("id", "int_answer" + index);
+                    input2.setAttribute("class", "radioClass");
+                    input2.setAttribute("value", userAns);
+
+                    item2.append(input2);
+                    if(userAns === questionsAns[index].correctAnswer)
+                    {
+                        item2.append('<span id="tick" style="color:green;"> &#10003; </span>');
+                    }
+                    else
+                    {
+                        item2.append('<span id="cross" style="color:red;"> &#10005; </span>');
+                    }
+                    radioList.append(item2);
+                }
+                    return radioList;
+
+            }
+            else
+            {
+                    input = document.createElement('input');
+                    input.setAttribute("type","text");
+                    input.setAttribute("name", "answer");
+                    input.setAttribute("id", "int_ans" + index);
+                    input.setAttribute("class", "radioClass");
+
+                    item.append(input);
+                    radioList.append(item);
+            }
         }
         return radioList;
     }
@@ -695,7 +729,7 @@ var prev_color;
             var userAns = selections[i];
 
             var ques_type = questions[i].type;
-            if(ques_type == 1)
+            if(ques_type === 1)
             {
                 if (userAns === questionsAns[i].correctAnswer - 1)
                 {
@@ -752,7 +786,7 @@ var prev_color;
                     no_of_not_ans_ques += 1;
                 }
             }
-            else if(ques_type == 3)
+            else if(ques_type === 3)
             {
                 if (userAns == questionsAns[i].correctAnswer)
                 {
@@ -809,8 +843,9 @@ var prev_color;
                     no_of_not_ans_ques += 1;
                 }
             }
-            if(ques_type == 2)
+            if(ques_type === 2)
             {
+                // console.log('ques_type is 2');
                 var ans_list = [];
                 var crct_ans_list = questionsAns[i].correctAnswer;
 
@@ -822,31 +857,33 @@ var prev_color;
                     return parseInt(item, 10);
                 });
 
-                console.log('ans_list is : ' + ans_list);
+                // console.log('ans_list is : ' + ans_list);
 
-                var newArray ;
-                if(newArray !== undefined && userAns !== undefined){
+                var newArray =[];
+                if(userAns !== undefined){
                     newArray = userAns.filter(function (value) {
                     return !Number.isNaN(value);
                     })
                 }
-
+                // console.log('userAns is : ' + userAns);
                 var correct_ans_list_size = ans_list.length;
+                // console.log('newArray is : ' + newArray);
 
-                if ((newArray !== undefined) && (newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }) &&
-                    newArray.length > 0))
+                if ((newArray !== undefined) && newArray.length > 0 && (newArray.every(function(val) { return ans_list.indexOf(val+1) >= 0; })))
                 {
+                                        console.log('if');
                         no_of_attempted_ans_ques += 1;
                         no_of_correct_ans_ques += 1;
 
                         if(newArray.length == ans_list.length)
                         {
                             var section_score = section_total_score_map.get(questionsAns[i].section);
-                            section_score += positive_marks_1;
+                            console.log('positive_score is : ' + positive_score);
+                            section_score += 4;
                             section_total_score_map.set(questionsAns[i].section, section_score);
 
                             var section_score_positive = section_positive_score_map.get(questionsAns[i].section);
-                            section_score_positive += positive_marks_1;
+                            section_score_positive += 4;
                             section_positive_score_map.set(questionsAns[i].section, section_score_positive);
 
                             var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
@@ -857,9 +894,12 @@ var prev_color;
                             section_correct_attempted_questions += 1;
                             section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions    );
 
-                            positive_score += positive_marks_1;
+                            positive_score += 4;
+                                                        console.log('positive_score is : ' + positive_score);
+
                         }
                         else
+                        {
                             var section_score = section_total_score_map.get(questionsAns[i].section);
                             section_score += 2;
                             section_total_score_map.set(questionsAns[i].section, section_score);
@@ -876,21 +916,20 @@ var prev_color;
                             section_correct_attempted_questions += 1;
                             section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions    );
 
-                            positive_score += 2;                       {
+                            positive_score += 2;
                         }
 
                 }
-                else if ((newArray !== undefined) && ! newArray.every(function(val) { return ans_list.indexOf(val) >= 0; }))
+                else if ((newArray !== undefined) && ! newArray.every(function(val) { return ans_list.indexOf(val+1) >= 0; }))
                 {
-
                     no_of_attempted_ans_ques += 1;
                     var section_score = section_total_score_map.get(questionsAns[i].section);
-                    section_score -= negative_marks_1;
+                    section_score -= 2;
                     section_total_score_map.set(questionsAns[i].section, section_score);
 
 
                     var section_score_negative = section_negative_score_map.get(questionsAns[i].section);
-                    section_score_negative += negative_marks_1;
+                    section_score_negative += 2;
                     section_negative_score_map.set(questionsAns[i].section, section_score_negative);
 
                     var section_attempted_questions = section_attempted_questions_map.get(questionsAns[i].section);
@@ -901,7 +940,7 @@ var prev_color;
                     section_wrong_attempted_questions += 1;
                     section_wrong_attempted_questions_map.set(questionsAns[i].section, section_wrong_attempted_questions);
 
-                    negative_score += negative_marks_1;
+                    negative_score += 2;
                     no_of_wrong_ans_ques += 1;
                 }
                 else if((newArray !== undefined) && newArray.length == 0)
