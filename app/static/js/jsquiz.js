@@ -368,12 +368,12 @@ window.time = t--;
         else
         {
             // debugger;
-            console.log(typeof isSubmit);
+            // console.log(typeof isSubmit);
             if(isSubmit == 1 || isSubmit == "1")
             {
-                console.log('isSubmit = 1');
-                console.log('index is : ' + index);
-                console.log('selections is : ' + selections);
+                // console.log('isSubmit = 1');
+                // console.log('index is : ' + index);
+                // console.log('selections is : ' + selections);
 
                     var userAns = selections[index];
                     input = $('<input/>');
@@ -390,8 +390,6 @@ window.time = t--;
 
                     var userAns = selections[index];
 
-                    console.log(userAns);
-
                 if(userAns !== undefined && userAns !=="")
                 {
                     var input2 = $('<input/>');
@@ -403,10 +401,11 @@ window.time = t--;
                     input2.attr("class", "radioClass");
                     input2.val(userAns);
 
-                    item2.append(input2);
-                    if(userAns === questionsAns[index].correctAnswer)
+                    item2.append(input2);;
+
+                    if(Math.round(userAns) == questionsAns[index].correctAnswer)
                     {
-                        item2.append('<span id="tick" style="color:green;"> &#10003; </span>');
+                        item2.append('<span id="tick" style="color:red;"> &#10003; </span>');
                     }
                     else
                     {
@@ -418,7 +417,7 @@ window.time = t--;
             else
             {
 
-                console.log('isSubmit != 1');
+                // console.log('isSubmit != 1');
                     input = $('<input/>');
                     input.attr("type","text");
                     input.attr("name", "answer");
@@ -805,6 +804,7 @@ var prev_color;
             }
             else if(ques_type === 3)
             {
+                userAns = Math.round(userAns);
                 if (userAns == questionsAns[i].correctAnswer)
                 {
                     no_of_attempted_ans_ques += 1;
@@ -888,14 +888,14 @@ var prev_color;
 
                 if ((newArray !== undefined) && newArray.length > 0 && (newArray.every(function(val) { return ans_list.indexOf(val+1) >= 0; })))
                 {
-                                        console.log('if');
+                                        // console.log('if');
                         no_of_attempted_ans_ques += 1;
                         no_of_correct_ans_ques += 1;
 
                         if(newArray.length == ans_list.length)
                         {
                             var section_score = section_total_score_map.get(questionsAns[i].section);
-                            console.log('positive_score is : ' + positive_score);
+                            // console.log('positive_score is : ' + positive_score);
                             section_score += 4;
                             section_total_score_map.set(questionsAns[i].section, section_score);
 
@@ -912,7 +912,7 @@ var prev_color;
                             section_correct_attempted_questions_map.set(questionsAns[i].section, section_correct_attempted_questions    );
 
                             positive_score += 4;
-                                                        console.log('positive_score is : ' + positive_score);
+
 
                         }
                         else
