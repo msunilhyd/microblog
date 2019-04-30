@@ -278,6 +278,7 @@ window.time = t--;
 
         var radioButtons = createRadios(index);
         //console.log('radioButtons is : ' + radioButtons);
+        qElement
         qElement.append(radioButtons);
 
         if (typeof questions[index].question_image == "string") {
@@ -366,31 +367,41 @@ window.time = t--;
         }
         else
         {
-            if(isSubmit === 1)
+            // debugger;
+            console.log(typeof isSubmit);
+            if(isSubmit == 1 || isSubmit == "1")
             {
+                console.log('isSubmit = 1');
+                console.log('index is : ' + index);
+                console.log('selections is : ' + selections);
+
                     var userAns = selections[index];
+                    input = $('<input/>');
+                    input.attr("type","text");
+                    input.attr("name", "int_answer");
+                    input.attr("id", "int_ans_correct" + index);
+                    input.attr("class", "radioClass");
 
-                    input = document.createElement('input');
-                    input.setAttribute("type","text");
-                    input.setAttribute("name", "answer");
-                    input.setAttribute("id", "int_ans" + index);
-                    input.setAttribute("class", "radioClass");
-
-                    input.setAttribute("value", questionsAns[index].correctAnswer);
+                    input.val(questionsAns[index].correctAnswer);
                     item.append(input);
                     item.append('<span id="tick" style="color:green;"> &#10003; </span>');
 
                     radioList.append(item);
+
+                    var userAns = selections[index];
+
+                    console.log(userAns);
+
                 if(userAns !== undefined && userAns !=="")
                 {
-                    var input2 = document.createElement('input');
+                    var input2 = $('<input/>');
                     var item2 = $('<li> style="height: 1.8em;"');
 
-                    input2.setAttribute("type","text");
-                    input2.setAttribute("name", "int_answer");
-                    input2.setAttribute("id", "int_answer" + index);
-                    input2.setAttribute("class", "radioClass");
-                    input2.setAttribute("value", userAns);
+                    input2.attr("type","text");
+                    input2.attr("name", "answer");
+                    input2.attr("id", "int_answer" + index);
+                    input2.attr("class", "radioClass");
+                    input2.val(userAns);
 
                     item2.append(input2);
                     if(userAns === questionsAns[index].correctAnswer)
@@ -402,19 +413,19 @@ window.time = t--;
                         item2.append('<span id="cross" style="color:red;"> &#10005; </span>');
                     }
                     radioList.append(item2);
-                }
-                    return radioList;
-
             }
+        }
             else
             {
-                    input = document.createElement('input');
-                    input.setAttribute("type","text");
-                    input.setAttribute("name", "answer");
-                    input.setAttribute("id", "int_ans" + index);
-                    input.setAttribute("class", "radioClass");
 
-                    item.append(input);
+                console.log('isSubmit != 1');
+                    input = $('<input/>');
+                    input.attr("type","text");
+                    input.attr("name", "answer");
+                    input.attr("id", "int_ans_init" + index);
+                    input.attr("class", "radioClass");
+
+                    item.html(input);
                     radioList.append(item);
             }
         }
