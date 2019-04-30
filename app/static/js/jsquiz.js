@@ -424,6 +424,9 @@ window.time = t--;
     // Reads the user selection and pushes the value to an array
     function choose() {
         selections[questionCounter] = +$('input[name="answer"]:checked').val();
+
+
+
         //console.log('printing answer as below');
         //console.log(+$('input[name="answer"]').val());
 
@@ -446,6 +449,10 @@ window.time = t--;
         if(ques_type == 3){
             // console.log('ques_type == 3 and userAns is : ' + $('input[name="answer"]').val())
             selections[questionCounter] = $('input[name="answer"]').val();
+            if(selections[questionCounter])
+                        {
+                            document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
+                        }
         }
     }
 
@@ -570,7 +577,6 @@ var prev_color;
                         // console.log('q_type is 3');
                         // console.log(selections[questionCounter]);
                         $('input[id=int_ans' + questionCounter + ']').val(selections[questionCounter]);
-
                     }
                     // console.log('not NaN');
                 }
