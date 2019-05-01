@@ -26,7 +26,13 @@ a {
 a {
   text-decoration: none;
 }
+.user_class{
+  font-size: 24px;
+}
 
+.user_data_class{
+  font-size: 14px;
+}
 .question_element{
   font-size: 1.6rem;
 }
@@ -352,6 +358,10 @@ a.article-title {
 .testAClass:visited{
   color: navy;
 
+}
+
+.testAClass{
+  font-size: 20px;
 }
 
 .article-svg {
