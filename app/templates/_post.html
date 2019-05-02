@@ -1,7 +1,7 @@
     <table class="table table-hover">
         <tr>
             <td width="70px">
-                <a href="{{ url_for('main.user', username=post.user.username) }}">
+                <a href="{{ url_for('main.user', username=post.user.username) }}" class="user_data_class">
                     <!--
                        {# <img src="{{ post.user_id.avatar(70) }}" /> #}
                     -->
@@ -10,11 +10,11 @@
             </td>
             {% if user == current_user %}
                 <td>
-                    <a href="{{ url_for('main.user', username=post.user.username) }}">
+                    <a href="{{ url_for('main.user', username=post.user.username) }}" class="user_data_class">
                         You
                     </a>
                     have completed the test -
-                    <a class="testAClass" href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
+                    <a class="user_data_class" href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
                         {{ post.test.test_name }}
                     </a>
 
@@ -28,12 +28,12 @@
                 </td>
                 {% else %}
 
-            <td>
-                <a href="{{ url_for('main.user', username=post.user.username) }}">
+            <td><p class="user_data_class">
+                <a href="{{ url_for('main.user', username=post.user.username) }}" class="user_data_class">
                     {{ post.user.username }}
                 </a>
                 has completed the test -
-                <a class="testAClass" href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }}">
+                <a class="user_data_class" href="{{ url_for('tests.test', test_id=post.test.id, user_id=current_user.id) }} class="user_data_class"">
                     {{ post.test.test_name }}
                 </a>
 
@@ -44,6 +44,8 @@
 
                 <br>
                 {{ post.body }}
+
+                </p>
             </td>
                         {% endif %}
 
