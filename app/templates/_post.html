@@ -9,7 +9,7 @@
                 </a>
             </td>
             {% if user == current_user %}
-                <td>
+                <td><p class="user_data_class">
                     <a href="{{ url_for('main.user', username=post.user.username) }}" class="user_data_class">
                         You
                     </a>
@@ -25,6 +25,7 @@
 
                     <br>
                     {{ post.body }}
+                </p>
                 </td>
                 {% else %}
 
