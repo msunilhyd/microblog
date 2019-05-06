@@ -416,7 +416,7 @@ window.time = t--;
                     }
                     radioList.append(item2);
             }
-        }
+            }
             else
             {
 
@@ -426,6 +426,11 @@ window.time = t--;
                     input.attr("name", "answer");
                     input.attr("id", "int_ans_init" + index);
                     input.attr("class", "radioClass");
+
+                    if(selections[questionCounter])
+                    {
+                        input.attr("value", selections[questionCounter]);
+                    }
 
                     item.html(input);
                     radioList.append(item);
@@ -462,6 +467,7 @@ window.time = t--;
         if(ques_type == 3){
             // console.log('ques_type == 3 and userAns is : ' + $('input[name="answer"]').val())
             selections[questionCounter] = $('input[name="answer"]').val();
+            console.log(selections[questionCounter]);
             if(selections[questionCounter])
                         {
                             document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
