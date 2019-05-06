@@ -373,11 +373,10 @@ a.article-title {
   color: #333;
   text-decoration: none;
 }
-
+/*
 .testAClass:visited{
   color: navy;
-
-}
+}*/
 
 .testAClass{
   font-size: 20px;
