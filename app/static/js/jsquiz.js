@@ -270,8 +270,8 @@ window.time = t--;
 
 
         // console.log('ques_type is : ' +  ques_type);
-        var header = $('<div class="type_div"> &nbsp' + ques_type_for_test  + '</div>  '+
-            '<div class="section_type_div">' +  questions[index].section  + '</div><br><div style="float:left;">' + (index + 1) + '.</div> ');
+        var header = $('<div class="combined_div"><div class="type_div"> &nbsp' + ques_type_for_test  + '</div>  '+
+            '<div class="section_type_div">' +  questions[index].section  + '</div></div><br class="test"><div style="float:left;">' + (index + 1) + '.</div> ');
 
 
         qElement.append(header);

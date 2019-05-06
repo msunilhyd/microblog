@@ -201,10 +201,12 @@ p {
 
 .type_div
 {
-  text-align:center;
+  /*text-align:center;*/
   /*font-weight:bold;*/
-  margin-top: 16px;
+  /*margin-top: 16px;*/
     font-family: 'Source Sans Pro Bold', sans-serif;
+    float:left;
+      font-weight:bold;
 
 }
 
@@ -213,7 +215,7 @@ p {
 {
   text-align:center;
   font-weight:bold;
-  margin-top: 16px;
+  /*margin-top: 16px;*/
     font-family: 'Source Sans Pro Bold', sans-serif;
     color:#3786bd;
 
@@ -512,7 +514,7 @@ p {
     columns: red;
   }
 
-br {
+br.test {
   display:block;
   margin-top:10px;
   line-height:22px;
@@ -544,6 +546,12 @@ br {
   color: darkcyan;
 }
 
+#question{
+
+    margin-top: -22px;
+
+}
+
 #section_at_test{
   text-align: center;
   color: darkcyan;
@@ -570,9 +578,20 @@ button {
 
 .container .timerCount { float:right }
 
+.combined_div{
+  width : auto;
+      margin-top: 15px;
+
+}
+
+
 .timerCount
 {
-  margin-top: 16px;
+  /*margin-top: 4px;*/
+      font-weight: bold;
+          font-family: 'Source Sans Pro Bold', sans-serif;
+    margin-top: 15px;
+
 }
 
 ul {
