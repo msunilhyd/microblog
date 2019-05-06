@@ -25,6 +25,9 @@
     // Click handler for the 'startQuiz' button
     $('#startQuiz').on('click', function(e) {
                 $('#ques_nav_container').show();
+
+                $('#test-title').hide();
+
 jQuery(document).bind("contextmenu cut copy",function(e){
     e.preventDefault();
 });
@@ -267,13 +270,13 @@ window.time = t--;
 
 
         // console.log('ques_type is : ' +  ques_type);
-        var header = $('<h2 style="text-align:left;"> Question - ' + (index + 1) + '<span style="float:center; color:#3786bd;"> &nbsp Type : ' + ques_type_for_test + '</span>  '+
-            '<span style="float:center; color:#3786bd;"> &nbsp Section : ' + questions[index].section + '</span></h2>');
+        var header = $('<div class="type_div"> &nbsp' + ques_type_for_test  + '</div>  '+
+            '<div class="section_type_div">' +  questions[index].section  + '</div><br><div style="float:left;">' + (index + 1) + '.</div> ');
 
 
         qElement.append(header);
 
-        var question = $('<br><p class="question_element">').append(questions[index].question);
+        var question = $('<p class="question_element">').append(questions[index].question);
         qElement.append(question);
 
         var radioButtons = createRadios(index);
@@ -667,8 +670,8 @@ var prev_color;
                 questionsAns = parsedData;
                 var scoreElem = displayScore(questionsAns);
                 quiz.append(scoreElem).fadeIn();
-                document.getElementById('nav_for_questions').insertAdjacentHTML('afterbegin', "<h3 id='nav_for_questions'>You can use the below Navigations for " +
-                    "checking correct answers </h3>");
+                document.getElementById('nav_for_questions').insertAdjacentHTML('afterbegin', "<h4 id='nav_for_questions'>You can use the below for " +
+                    "correct answers </h4>");
             },
             error: function(data) {
                 console.log("Error getting questions from server");

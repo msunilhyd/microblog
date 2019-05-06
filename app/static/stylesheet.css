@@ -199,6 +199,25 @@ p {
     text-align: center;
 }
 
+.type_div
+{
+  text-align:center;
+  /*font-weight:bold;*/
+  margin-top: 16px;
+    font-family: 'Source Sans Pro Bold', sans-serif;
+
+}
+
+
+.section_type_div
+{
+  text-align:center;
+  font-weight:bold;
+  margin-top: 16px;
+    font-family: 'Source Sans Pro Bold', sans-serif;
+    color:#3786bd;
+
+}
 .randomClass.lightseagreen{
   background-color: darkturquoise;
 }
@@ -529,7 +548,7 @@ br {
 #section_at_test{
   text-align: center;
   color: darkcyan;
-  font-size: 35px;
+  font-size: 22px;
 }
 
 
@@ -551,6 +570,11 @@ button {
 }
 
 .container .timerCount { float:right }
+
+.timerCount
+{
+  margin-top: 16px;
+}
 
 ul {
     list-style-type: none;
