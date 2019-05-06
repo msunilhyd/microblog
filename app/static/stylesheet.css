@@ -97,6 +97,7 @@ a {
 
 }
 
+
 @media (min-width: 1025px) {
   .header {
     flex-direction: row;
@@ -118,6 +119,13 @@ body {
 .fontfamily{
     font-family: Source Sans Pro Bold;
 }
+
+.post-class
+{
+    /*font-family: Source Sans Pro Bold;*/
+    font-size: 20px;
+}
+
 
 body {
   background: #fafafa;

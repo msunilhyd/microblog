@@ -9,7 +9,7 @@
                 </a>
             </td>
             {% if user == current_user %}
-                <td><p class="">
+                <td><p class="post-class">
                     <a href="{{ url_for('main.user', username=post.user.username) }}" class="">
                         You
                     </a>
@@ -29,7 +29,7 @@
                 </td>
                 {% else %}
 
-            <td><p class="">
+            <td><p class="post-class">
                 <a href="{{ url_for('main.user', username=post.user.username) }}" class="">
                     {{ post.user.username }}
                 </a>
