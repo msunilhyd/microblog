@@ -353,6 +353,12 @@ p {
     margin: 12px 2px 0 2px;
   text-decoration:blue;
     cursor: pointer;
+        font-family: 'Source Sans Pro Bold', sans-serif;
+
+}
+
+.startQuiz{
+          font-family: 'Source Sans Pro Bold', sans-serif;
 }
 
 a.article-title {
@@ -472,6 +478,14 @@ p {
     margin: 12px 2px 0 2px;
     left: 1%;
     cursor: pointer;
+              font-family: 'Source Sans Pro Bold', sans-serif;
+
+}
+
+#test_instr_div
+{
+                font-family: 'Source Sans Pro Bold', sans-serif;
+
 }
 
 .ques_nav_container
@@ -505,6 +519,8 @@ p {
     margin: 12px 2px 0 2px;
   text-decoration:none;
     cursor: pointer;
+        font-family: 'Source Sans Pro Bold', sans-serif;
+
 }
 
 
@@ -535,6 +551,8 @@ br.test {
     margin: 12px 2px 0 2px;
   text-decoration:none;
     cursor: pointer;
+            font-family: 'Source Sans Pro Bold', sans-serif;
+
 }
 
 #ques_buttons_div{
@@ -554,8 +572,11 @@ br.test {
 
 #section_at_test{
   text-align: center;
+            font-family: 'Source Sans Pro Bold', sans-serif;
   color: darkcyan;
-  font-size: 22px;
+  font-size: 18px;
+      margin-top: 10px;
+
 }
 
 
@@ -624,6 +645,15 @@ input[type="radio"]{
     font-size: 0.9rem;
     width: 2%;
     height: 2em;
+}
+
+.question_element{
+  font-size: 1.8rem;
+}
+
+
+.MsoNormal{
+  font-size: 1.8rem;
 }
 
 
