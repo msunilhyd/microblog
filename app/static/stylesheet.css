@@ -257,6 +257,7 @@ p {
 
 .taken-test-p{
   color: #3786bd;
+  font-size: 20px;
 }
 
 .navbar-nav{
@@ -374,6 +375,11 @@ a.article-title {
   color: #007bfe;
 }
 
+.article-title {
+  /*color: #007bfe;*/
+  font-size: 20px;
+}
+
 .article-img {
   height: 65px;
   width: 65px;
@@ -424,7 +430,7 @@ a:hover{
 }
 
 p {
-    font-size: 2.25rem;
+    /*font-size: 2.25rem;*/
 }
 
 #title {
