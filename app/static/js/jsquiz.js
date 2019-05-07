@@ -817,10 +817,10 @@ var prev_color;
                 {
                     var decimal = userAns.toString();
                     decimal = decimal.split('.');
-                    console.log('decPart is : ' + decimal[1][0]);
+                    // console.log('decPart is : ' + decimal[1][0]);
                 }
-                if (userAns == questionsAns[i].correctAnswer ||
-                    (decimal[0] === questionsAns[i].correctAnswer && decimal[1][0] === 0))
+                if (userAns && (userAns == questionsAns[i].correctAnswer ||
+                    (decimal[0] === questionsAns[i].correctAnswer && decimal[1][0] === 0)))
                 {
                     no_of_attempted_ans_ques += 1;
 
