@@ -164,7 +164,7 @@ min-height:80px;
 
 .boClass:hover {
     color: lightseagreen;
-    text-decoration: none;
+    /*text-decoration: none;*/
 }
 
 .boClass a{
@@ -186,7 +186,7 @@ min-height:80px;
 
 .box:hover {
     color: #lightgrey;
-    background-color: darkgrey;
+    /*background-color: darkgrey;*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -388,8 +388,15 @@ a.article-title {
 
 .article-metadata a:hover {
   color: #333;
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
+
+a:hover{
+  text-decoration: none !important;
+  color : lightseagreen;
+}
+
+
 /*
 .testAClass:visited{
   color: navy;
