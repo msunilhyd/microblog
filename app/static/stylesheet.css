@@ -700,7 +700,7 @@ label {
     margin-bottom: .5rem;
     font-size: 20px;
     cursor: pointer;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
 }
 
 
