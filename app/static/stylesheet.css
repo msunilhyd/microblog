@@ -462,6 +462,12 @@ p {
 }
 
 
+.flash-message
+{
+    font-size: 20px;
+    color: aqua;
+}
+
 #end_of_test_div {
     text-indent: 10px;
     display:none;
