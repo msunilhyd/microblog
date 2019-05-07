@@ -673,8 +673,8 @@ input[type="radio"]{
     font-size: 0.9rem;
     width: 2%;
     height: 2em;
-    height:13px;
-    width:13px;
+    height:11px;
+    width:11px;
         -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
     transform: scale(1.5);
