@@ -265,13 +265,13 @@ window.time = t--;
         }
         else if(ques_type === 3)
         {
-            ques_type_for_test = "Integer Answer ";
+            ques_type_for_test = "Numerical Answer ";
         }
 
 
         // console.log('ques_type is : ' +  ques_type);
-        var header = $('<div class="combined_div"><div class="type_div"> &nbsp' + ques_type_for_test  + '</div>  '+
-            '<div class="section_type_div">' +  questions[index].section  + '</div></div><br class="test"><div style="float:left;">' + (index + 1) + '.</div> ');
+        var header = $('<div class="combined_div"><div class="type_div">' + ques_type_for_test  + '</div>  '+
+            '<div class="section_type_div"> <strong style="color:black;">' + (index + 1) +'.</strong> '+  questions[index].section  + '</div></div><br>');
 
 
         qElement.append(header);
