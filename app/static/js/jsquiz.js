@@ -525,6 +525,8 @@ var prev_color;
 
             //var tt  = document.getElementById('random' + i).getAttribute("class");
         $('#prev').show();
+        $('#next').show();
+
 
         if (i < questions.length) {
             choose();
@@ -1016,7 +1018,7 @@ var prev_color;
         var time_taken_test = Math.round(window.time / 60);
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
-        // $('#next').hide();
+        $('#next').hide();
         updateUserScore(
             finalScore,
             positive_score,
