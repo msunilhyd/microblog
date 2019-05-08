@@ -231,10 +231,12 @@ p {
 }
 .randomClass.lightseagreen{
   background-color: #3786bd;
+  color: white;
 }
 
 .randomClass.yellow{
   background-color: yellow;
+  color: black;
 }
 
 
@@ -292,7 +294,7 @@ p {
 .navbar-custom .navbar-nav > .active > a:focus,
 .navbar-custom .navbar-nav > .open >a {
     text-decoration: none;
-    color: lightseagreen;
+    color: yellow;
   }
 
 
@@ -399,7 +401,7 @@ a.article-title {
 
 a:hover{
   text-decoration: none !important;
-  color : lightseagreen;
+  color : brown;
 }
 
 
