@@ -467,7 +467,7 @@ window.time = t--;
         if(ques_type == 3){
             // console.log('ques_type == 3 and userAns is : ' + $('input[name="answer"]').val())
             selections[questionCounter] = $('input[name="answer"]').val();
-            console.log(selections[questionCounter]);
+            // console.log(selections[questionCounter]);
             if(selections[questionCounter])
                         {
                             document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
@@ -632,6 +632,7 @@ var prev_color;
                     $('#next').show();
                 }
             } else {
+                // console.log('questionCounter is less than questions length');
                 $('#next').hide();
                 $('#end_of_test_div').show();
 
@@ -1015,7 +1016,7 @@ var prev_color;
         var time_taken_test = Math.round(window.time / 60);
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
-        $('#next').hide();
+        // $('#next').hide();
         updateUserScore(
             finalScore,
             positive_score,
