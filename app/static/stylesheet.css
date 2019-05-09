@@ -696,20 +696,23 @@ input[type="radio"]{
 }
 
 
-.radioClass{
-  font-size: 1.5rem;
-}
-
-
 label {
     display: inline-block;
     margin-bottom: .5rem;
     font-size: 20px;
     cursor: pointer;
-        width: 98%;
+        /*width: 98%;*/
     vertical-align: top;
     /*vertical-align: middle;*/
 }
+
+
+.radioClass{
+  font-size: 1.5rem;
+}
+
+
+
 
 
 .form-control {

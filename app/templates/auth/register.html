@@ -83,8 +83,14 @@ at gradematrixsocial@gmail.com</p>
             {% endfor %}
                     </div>
                 </div>
-                     <div class="form-row-last">
+                     <div id="register_submit" class="form-row-last">
                         {{ form.submit(class="register") }}
+                        <!-- <script type="text/javascript">
+                            document.getElementById("submit").addEventListener("click",
+                                function(event){
+                                    event.preventDefault()
+                                });
+                        </script> -->
                     </div>
             </form>
         </div>
