@@ -680,6 +680,9 @@ input[type="radio"]{
         -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
     transform: scale(1.5);
+        display: inline-block;
+    width: 1%;
+
 }
 
 .question_element{
@@ -703,6 +706,8 @@ label {
     margin-bottom: .5rem;
     font-size: 20px;
     cursor: pointer;
+        width: 98%;
+    vertical-align: top;
     /*vertical-align: middle;*/
 }
 

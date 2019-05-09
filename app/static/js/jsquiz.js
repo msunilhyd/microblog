@@ -681,6 +681,8 @@ var prev_color;
 
     // Click handler for the 'submitQuiz' button
     $('#submitQuiz').on('click', function(e) {
+        if(isSubmit === 1)
+            return;
         $('#end_of_test_div').hide();
         isSubmit = 1;
         $('#timerCount').hide();
