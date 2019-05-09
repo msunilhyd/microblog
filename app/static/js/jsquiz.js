@@ -469,9 +469,13 @@ window.time = t--;
             selections[questionCounter] = $('input[name="answer"]').val();
             // console.log(selections[questionCounter]);
             if(selections[questionCounter])
-                        {
-                            document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
-                        }
+            {
+                document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
+            }
+            else
+            {
+                document.getElementById('random' + questionCounter).setAttribute("class", "randomClass none");
+            }
         }
     }
 
@@ -543,7 +547,36 @@ var prev_color;
 
             $radio.prop('checked', false);
             $radio.data('waschecked', false);
-            document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class") + " none");
+            console.log('coming here');
+            if(questions[questionCounter].type === 2)
+            {
+
+                // console.log($('[name="answer0"]').prop('checked'));
+                // console.log($('[name="answer1"]').prop('checked'));
+                // console.log($('[name="answer2"]').prop('checked'));
+                // console.log($('[name="answer3"]').prop('checked'));
+
+
+                if( $('[name="answer0"]').prop('checked') ||
+                    $('[name="answer1"]').prop('checked')||
+                    $('[name="answer2"]').prop('checked') ||
+                    $('[name="answer3"]').prop('checked'))
+                {
+                    console.log('questype is 2');
+                    document.getElementById('random' + questionCounter).setAttribute("class", "randomClass lightseagreen");
+                }
+                else
+                {
+                    console.log('questype is 2 else ');
+                    document.getElementById('random' + questionCounter).setAttribute("class", "randomClass none");
+                }
+            }
+            else
+            {
+                console.log('questype is  not 2');
+                document.getElementById('random' + questionCounter).setAttribute("class", "randomClass none");
+            }
+
 
 
         } else {
