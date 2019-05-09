@@ -294,7 +294,7 @@ p {
 .navbar-custom .navbar-nav > .active > a:focus,
 .navbar-custom .navbar-nav > .open >a {
     text-decoration: none;
-    color: yellow;
+    color: lightseagreen;
   }
 
 
@@ -401,7 +401,7 @@ a.article-title {
 
 a:hover{
   text-decoration: none !important;
-  color : brown;
+  color : lightseagreen;
 }
 
 
