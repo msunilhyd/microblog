@@ -673,15 +673,12 @@ ul {
 input[type="radio"]{
     margin: 0 -4px 0 10px;
     font-size: 0.9rem;
-    width: 2%;
-    height: 2em;
     height:11px;
     width:11px;
         -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
     transform: scale(1.5);
         display: inline-block;
-    width: 1%;
     position:relative;
     top:3px;
 }
