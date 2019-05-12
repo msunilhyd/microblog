@@ -1,10 +1,30 @@
 (function() {
+
+        user_selections = user_selections.replace(/[[\]]/g,'')
+        user_selections = user_selections.split(',');
+            // user_selections = JSON.stringify(user_selections);
+            // user_selections = JSON.parse(user_selections);
+            // console.log('ques_type is 2');
+            // console.log('user_selections is : ' + typeof(new Array(user_selections)));
+            // user_selections = new Array(user_selections);
+            // console.log(user_selections[0]);
+            // console.log(user_selections[1]);
+            // console.log('type of user_selections is : ' + user_selections);
+
+
+            // var sample_arr = [['None', 'None', 2, 3], 'None', ['None', 1, 2, 3], 'None', [0, 1, 'None', 'None'], 'None', 'None', 'None', 'None', ['None', 1, 'None', 'None']];
+
+            // console.log(sample_arr[0]);
+            // console.log(sample_arr[1]);
+            // console.log(sample_arr[2]);
+
+            // console.log('typeof sample_arr is : ' +  typeof(sample_arr));
+
+
+
     var isSubmit = 1;
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
-    user_selections = user_selections.replace(/[[\]]/g,'')
-
-    user_selections = user_selections.split(',');
 
     $(window).on('beforeunload', function() {
         $('#submitQuiz').click();
@@ -262,6 +282,8 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         return qElement;
     }
 
+
+
     // Creates a list of the answer choices as radio inputs
     function createRadios(index) {
         var radioList = $('<ul>');
@@ -269,6 +291,8 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         var input = '';
         var type_of_question = questions[index].type;
         item = $('<li> style="height: 1.8em;"');
+
+
 
         if(type_of_question != 3)
         {
@@ -297,6 +321,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                     if (isSubmit === 1) {
                         if(type_of_question == 1)
                         {
+
                             console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
 
                             if (i == questionsAns[index].correctAnswer - 1){
@@ -312,7 +337,8 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         }
                         else if(type_of_question == 2)
                         {
-
+// console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
+                            user_selections_ans[index];
                             var ans_list = questionsAns[index].correctAnswer;
 
                             // console.log('ans_list is : ' + ans_list);
@@ -322,12 +348,12 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             }
-                            if( selections[questionCounter] != null && (selections[questionCounter].indexOf(i) > -1)
+                            if( user_selections_ans[questionCounter] != null && (user_selections_ans[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i) > -1)
                             {
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
-                             if(selections[questionCounter] != null &&  (selections[questionCounter].indexOf(i) > -1)
+                             if(selections[questionCounter] != null &&  (user_selections_ans[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i) == -1)
                             {
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
