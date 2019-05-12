@@ -88,7 +88,7 @@ def test(test_id):
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=current_user.id).first()
 	if usertest is not None:
 		print('usertest is not none')
-		return render_template('tests/test.html', test=test, usertest=usertest)
+		return render_template('tests/test.html', test=test, usertest=usertest, user_selections=json.dumps(usertest.user_selections))
 	else:
 		print('usertest is empty')
 		print("Questions ready to take the test")
@@ -124,8 +124,8 @@ def take_test(test_id):
 		print("Questions ready to take the test")
 		return render_template('tests/new_tests.html', title="Taking Test", legend='Take test', test = test)
 
-	flash('Your test is not empty! You can add more questions', 'success')
-	return redirect(url_for('new_test_question', test_id=test_id))
+	# flash('Your test is not empty! You can add more questions', 'success')
+	# return redirect(url_for('new_test_question', test_id=test_id))
 
 
 
@@ -166,6 +166,43 @@ def test_get_questions():
 	return json.dumps(empList)
 
 
+@bp.route("/test_get_ques_ans/", methods=['GET','POST'])
+@login_required
+def test_get_ques_ans():
+	test_id = request.form['test_id']
+
+	q = (db.session.query(TestQuestion, Question)
+    .filter(TestQuestion.test_id == test_id)
+    .filter(TestQuestion.question_id == Question.id)
+    .order_by(Question.section.desc())
+    .order_by(Question.id)
+    .all())
+
+	empList = []
+	choices = []
+	for emp in q:
+		choices.append(emp.Question.a);
+		choices.append(emp.Question.b);
+		choices.append(emp.Question.c);
+		choices.append(emp.Question.d);
+
+		if emp.Question.e is not None:
+			choices.append(emp.Question.e);
+
+		empDict = {
+		'question': emp.Question.question_content,
+		'choices' : choices,
+		'section' : emp.Question.section,
+		'sub_section' : emp.Question.sub_section,
+		'level' : emp.Question.level,
+		'question_image' : emp.Question.question_image,
+		'type' : emp.Question.type,
+		'correctAnswer': emp.Question.ans,
+		}
+		choices = []
+		empList.append(empDict)
+	return json.dumps(empList)
+
 
 
 @bp.route("/test_get_answers/", methods=['GET','POST'])
@@ -205,7 +242,12 @@ def test_update_user_score():
 	wrong_answers = request.form['wrong_answers']
 	no_answers = request.form['no_answers']
 	attempted_ques = request.form['no_of_attempted_ans_ques']
+	print('Hello reached the test score update')
 
+	selections = json.loads(request.form['selections'])
+
+	print('selections is : ' + str(selections))
+	user_selections = str(selections)
 	map_total_score = json.loads(request.form['map_total_score'])
 	map_positive_score = json.loads(request.form['map_positive_score'])
 	map_negative_score = json.loads(request.form['map_negative_score'])
@@ -255,7 +297,7 @@ def test_update_user_score():
 		print('admin user : ')
 		print('Not Updating DB.')
 		return "Admin user, Not updating db";
-	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, time_taken=time_taken, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques,total_score_maths = total_score_maths,total_score_physics = total_score_physics,total_score_chemistry = total_score_chemistry,positive_score_maths = positive_score_maths,positive_score_physics = positive_score_physics,positive_score_chemistry = positive_score_chemistry,negative_score_maths = negative_score_maths,negative_score_physics = negative_score_physics,negative_score_chemistry = negative_score_chemistry,attempted_maths = attempted_maths,attempted_physics = attempted_physics,attempted_chemistry = attempted_chemistry,un_attempted_maths = un_attempted_maths,un_attempted_physics = un_attempted_physics,un_attempted_chemistry = un_attempted_chemistry,correct_attempted_maths = correct_attempted_maths,correct_attempted_physics = correct_attempted_physics,correct_attempted_chemistry = correct_attempted_chemistry,wrong_attempted_maths = wrong_attempted_maths,wrong_attempted_physics = wrong_attempted_physics,wrong_attempted_chemistry = wrong_attempted_chemistry,)
+	usertest = UserTest(test_id=test_id, user_id=user_id,user_score=user_score, time_taken=time_taken, positive_score=positive_score,negative_score=negative_score, correct_answers=correct_answers,wrong_answers=wrong_answers,no_answers=no_answers, attempted_ques=attempted_ques,total_score_maths = total_score_maths,total_score_physics = total_score_physics,total_score_chemistry = total_score_chemistry,positive_score_maths = positive_score_maths,positive_score_physics = positive_score_physics,positive_score_chemistry = positive_score_chemistry,negative_score_maths = negative_score_maths,negative_score_physics = negative_score_physics,negative_score_chemistry = negative_score_chemistry,attempted_maths = attempted_maths,attempted_physics = attempted_physics,attempted_chemistry = attempted_chemistry,un_attempted_maths = un_attempted_maths,un_attempted_physics = un_attempted_physics,un_attempted_chemistry = un_attempted_chemistry,correct_attempted_maths = correct_attempted_maths,correct_attempted_physics = correct_attempted_physics,correct_attempted_chemistry = correct_attempted_chemistry,wrong_attempted_maths = wrong_attempted_maths,wrong_attempted_physics = wrong_attempted_physics,wrong_attempted_chemistry = wrong_attempted_chemistry,user_selections = user_selections)
 	db.session.add(usertest)
 	db.session.commit()
 	usertest = UserTest.query.filter_by(test_id=test_id, user_id=user_id).order_by(UserTest.timestamp.desc()).first()

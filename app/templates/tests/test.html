@@ -158,6 +158,77 @@
 
           </table>
 
+
+<h1></h1>
+
+  <head>
+    <title> Quiz Project</title>
+    <link rel="text/css" type="text/css" href=" {{ url_for('static', filename='stylesheet.css')}} " >
+  </head>
+     <div id='container' class='container'>
+      <div id='title' class='test-title'>
+        <h4 id='test-title'>{{ test.test_name }}</h4>
+      </div>
+              <span id="timerCount" class="timerCount"></span>
+        <br/>
+
+
+        <div id='test_instr_div'> {{ test.instructions }} </div>
+
+        <div id='total_marks_div'> {{ test.total_marks }} </div>
+
+
+        <div id='test_id_div'> {{ test.id }} </div>
+        <div id='time_in_mins_div'> {{ test.time_in_mins }} </div>
+        <div id='user_id_div'> {{ current_user.id }} </div>
+        <div id='positive_marks_div'> {{ test.positive_marks }} </div>
+        <div id='negative_marks_div'> {{ test.negative_marks }} </div>
+
+
+        <div id='end_of_test_div' class='end_of_test_div' >Reached End of Test.
+          </div>
+        <div id='quiz' > </div>
+        <div class='button' id='startQuiz'><a href='#'>Check Answers</a></div>
+        <div class='prev_next' id='prev'><a href='#'>Prev</a></div>
+        <div class='prev_next' id='next'><a href='#'>Next</a></div>
+
+        <div class='submitQuiz' id='submitQuiz'><a href='#'>Submit</a></div>
+
+        <!-- <button class='' id='next'>Next</a></button>
+        <button class='' id='prev'>Prev</a></button>
+        <button class='' id='start'> Start Over</a></button> -->
+
+      </div>
+
+     <div id='ques_nav_container' name='ques_nav_container' class="ques_nav_container">
+
+          <div id='nav_for_questions' >
+              <h4 id='nav_for_questions'> <strong> </strong></h4>
+          </div>
+        <div id='ques_buttons_div' >
+        </div>
+
+        <div id='selections_div' >
+        </div>
+
+        <script type="text/javascript">
+
+        var user_selections = {{ user_selections|safe }};
+
+        </script>
+
+  </div>
+<script>
+
+
+</script>
+
+    <script type='text/javascript' src='{{ url_for('static', filename='js/jquery.min.js')}}'></script>
+    <script type='text/javascript' src='{{ url_for('static', filename='js/js_quiz_submitted.js')}}'></script>
+
+
+    </script>
+
       {% endif  %}
 
     </div>

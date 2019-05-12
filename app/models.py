@@ -265,6 +265,7 @@ class UserTest(db.Model):
     wrong_attempted_physics = db.Column(db.Integer, nullable=False, default=0)
     wrong_attempted_chemistry = db.Column(db.Integer, nullable=False, default=0)
     timestamp = db.Column(db.DateTime(timezone=True), index=True, nullable=False, default=datetime.utcnow)
+    user_selections = db.Column(db.String(1000))
     test = db.relationship(Test, backref=db.backref("test_assoc"))
     user = db.relationship(User, backref=db.backref("user_assoc"))
 

@@ -670,6 +670,10 @@ ul {
   width: auto;
 }
 
+#selections_div{
+  /*display:none;*/
+}
+
 input[type="radio"]{
     margin: 0 -4px 0 10px;
     font-size: 0.9rem;

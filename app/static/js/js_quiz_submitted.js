@@ -1,4 +1,10 @@
 (function() {
+    var isSubmit = 1;
+        var x = document.getElementById('submitQuiz');
+        x.style.display = "none";
+    user_selections = user_selections.replace(/[[\]]/g,'')
+
+    user_selections = user_selections.split(',');
 
     $(window).on('beforeunload', function() {
         $('#submitQuiz').click();
@@ -10,7 +16,6 @@
     var questionCounter = 0; //Tracks question number
     var selections = []; //Array containing user choices
     var quiz = $('#quiz'); //Quiz div object
-    var isSubmit = 0;
 
     // Display initial question
     //displayNext();
@@ -90,7 +95,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
             document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
     });
         $('#startQuiz').hide();
-        $('#submitQuiz').show();
+        // $('#submitQuiz').show();
         $('#test_instr_div').hide();
 
         var t = $('#time_in_mins_div').text();
@@ -116,42 +121,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                 "s": seconds
             };
             return hours + " hours " + minutes + " minutes " + seconds + " seconds";
-
         }
-
-        function timer(count, str) {
-            count--;
-            if (count != 0 && count < 600) {
-                str = str + "<div class='remain' id='remain'>Last 10 minutes</div>"
-            } else if (count === 0) {
-                clearInterval(interval);
-                var scoreElem = $('<p>', {
-                    id: 'timeUp'
-                });
-                scoreElem.append('Time up. Submitting the quiz.');
-                quiz.append(scoreElem);
-                $('#submitQuiz').click();
-                var x = document.getElementById('submitQuiz');
-                x.style.display = "none";
-            }
-            document.getElementById('timerCount').innerHTML = str;
-
-            // body...
-        }
-
-        var interval = setInterval(function() {
-            if (isSubmit === 1) {
-                document.getElementById('timerCount').innerHTML = '';
-                return;
-            }
-window.time = t--;
-            timer(t, secondsToTime(window.time));
-        }, 1000);
-
-
-        timer(t, secondsToTime(t));
-        $('#submitQuiz').show();
-
     });
 
 
@@ -248,6 +218,7 @@ window.time = t--;
     // Creates and returns the div that contains the questions and
     // the answer selections
     function createQuestionElement(index) {
+
         var qElement = $('<div>', {
             id: 'question'
         });
@@ -288,7 +259,6 @@ window.time = t--;
             var img_file = '<br><img src="/static/questions/' + questions[index].question_image + '"width="auto" height="auto">';
             qElement.append(img_file);
         }
-
         return qElement;
     }
 
@@ -327,14 +297,15 @@ window.time = t--;
                     if (isSubmit === 1) {
                         if(type_of_question == 1)
                         {
+                            console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
 
                             if (i == questionsAns[index].correctAnswer - 1){
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             } else if ((i != questionsAns[index].correctAnswer - 1) &&
-                                (i == selections[questionCounter])) {
+                                (i == user_selections[questionCounter])) {
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
-                            if((i == questionsAns[index].correctAnswer - 1) && (i == selections[questionCounter]))
+                            if((i == questionsAns[index].correctAnswer - 1) && (i == user_selections[questionCounter]))
                             {
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
@@ -486,7 +457,7 @@ window.time = t--;
         test_id = test_id.replace(/ /g, '');
 
         $.ajax({
-            url: "/test_get_questions/",
+            url: "/test_get_ques_ans/",
             type: "POST",
             data: {
                 "test_id": test_id
@@ -494,6 +465,7 @@ window.time = t--;
             success: function(data) {
                 let parsedData = JSON.parse(data);
                 questions = parsedData;
+                questionsAns = questions;
                 displayNext();
                 createRandomButtons();
                 var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
@@ -676,6 +648,25 @@ var prev_color;
             var math = MathJax.Hub.getAllJax("question");
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
 
+        user_selections[questionCounter] = user_selections[questionCounter].replace(/ /g,'');
+        if(user_selections[questionCounter])
+        {
+                        console.log(user_selections[questionCounter]);
+            if(user_selections[questionCounter] === 'None')
+            {
+                console.log('None, not answered');
+                document.getElementById('timerCount').innerHTML = 'Not Answered';
+            }
+            else
+            {
+                document.getElementById('timerCount').innerHTML = 'Answered';
+            }
+        }
+        else
+        {
+            document.getElementById('timerCount').innerHTML = 'Not Answered';
+        }
+
         });
     }
 
@@ -696,8 +687,6 @@ var prev_color;
 
         e.preventDefault();
         $(window).off('beforeunload');
-        window.location.href = test_id;
-
         return false;
     });
 
@@ -1040,6 +1029,17 @@ var prev_color;
         var color_of_report_values = '<font color="darkcyan">';
 
         var finalScore = positive_score - negative_score;
+
+        score.append(color_of_report_heading + '&nbsp &nbsp &nbsp Report : ' + color_of_report_details +
+            ' <br> Total Questions : ' + color_of_report_values + questionsAns.length + color_of_report_details +
+            ' <br> Questions Attempted : ' + color_of_report_values + no_of_attempted_ans_ques + color_of_report_details +
+            ' <br> Questions Not Attempted : ' + color_of_report_values + no_of_not_ans_ques + color_of_report_details +
+            ' <br> Your Score :   ' + color_of_report_values + finalScore + ' / ' + totalMarks + color_of_report_details +
+            ' <br> Positive Marks : ' + color_of_report_values + positive_score + color_of_report_details +
+            ' <br> Negative Marks : ' + color_of_report_values + negative_score + color_of_report_details +
+            ' <br> Answers Correct : ' + color_of_report_values + no_of_correct_ans_ques + color_of_report_details +
+            ' <br> Answers Wrong : ' + color_of_report_values + no_of_wrong_ans_ques
+        );
 
         var time_taken_test = Math.round(window.time / 60);
         var x = document.getElementById('submitQuiz');
