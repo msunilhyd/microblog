@@ -674,9 +674,10 @@ var prev_color;
             var math = MathJax.Hub.getAllJax("question");
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
 
-        user_selections[questionCounter] = user_selections[questionCounter].replace(/ /g,'');
         if(user_selections[questionCounter])
         {
+                    user_selections[questionCounter] = user_selections[questionCounter].replace(/ /g,'');
+
                         console.log(user_selections[questionCounter]);
             if(user_selections[questionCounter] === 'None')
             {
