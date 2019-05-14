@@ -1,10 +1,8 @@
 {% extends 'bootstrap/base.html' %}
 
-
 {% block styles %}
       {{super()}}
       <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='stylesheet.css')}} " >
-
 {% endblock %}
 
 
@@ -16,12 +14,15 @@
 </script>
 {% endblock %}
 
+            {% include "meta_tags.html" %}
+
 
     {% block title %}
         {% if title %}{{ title }} - Gradematrix{% else %}Welcome to Gradematrix{% endif %}
     {% endblock %}
 
 {% block navbar %}
+
     <nav class="navbar navbar-default navbar-custom" style="background-color: #3786bd; color: #ffffff">
         <div class="container">
             <div class="navbar-header">
@@ -55,6 +56,7 @@
 
 
 {% block content %}
+
     <div class="container">
 
      {% with messages = get_flashed_messages(with_categories=true) %}
@@ -70,4 +72,5 @@
         {# application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
     </div>
+
 {% endblock %}
