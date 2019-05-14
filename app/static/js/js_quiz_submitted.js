@@ -20,11 +20,6 @@
 
             // console.log('typeof sample_arr is : ' +  typeof(sample_arr));
 
-if(user_selections)
-{
-                        console.log("first  : " + user_selections);
-                            user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
-}
 
     var isSubmit = 1;
         var x = document.getElementById('submitQuiz');
@@ -324,8 +319,8 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                     if (isSubmit === 1) {
                         if(type_of_question == 1)
                         {
-                            console.log('user_selections is : ' + user_selections);
-                            console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
+                            // console.log('user_selections is : ' + user_selections);
+                            // console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
 
                             if (i == questionsAns[index].correctAnswer - 1){
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
@@ -499,7 +494,23 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                 createRandomButtons();
                 var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
 
+
+                if(user_selections)
+                {
+                    // console.log("first  : " + user_selections);
+                    user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
+                }
+
+                for(var i=0;i<user_selections.length;i++)
+                {
+                    if(user_selections[i] && user_selections[i] !== 'None'){
+                        document.getElementById('random' + i).setAttribute("class", document.getElementById('random' + i).getAttribute("class")+" lightseagreen");
+                    }
+                }
+
             $('.randomClass').removeClass("yellow");
+
+
 
             document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
             },
@@ -681,7 +692,7 @@ var prev_color;
         {
                     user_selections[questionCounter] = user_selections[questionCounter].replace(/ /g,'');
 
-                        console.log(user_selections[questionCounter]);
+                        // console.log(user_selections[questionCounter]);
             if(user_selections[questionCounter] === 'None')
             {
                 console.log('None, not answered');
