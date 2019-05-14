@@ -1092,6 +1092,8 @@ var prev_color;
         var user_id = $('#user_id_div').text();
         user_id = user_id.replace(/ /g, '');
 
+        selections = JSON.stringify(Array.from(selections)).replace(/null/g, "None");
+
         $.ajax({
             url: "/test_update_user_score/",
             type: "POST",
@@ -1113,7 +1115,7 @@ var prev_color;
                 "map_correct_attempted": JSON.stringify(Array.from(section_correct_attempted_questions_map.entries())),
                 "map_wrong_attempted": JSON.stringify(Array.from(section_wrong_attempted_questions_map.entries())),
                 "time_taken_test": time_taken_test,
-                "selections" : JSON.stringify(Array.from(selections))
+                "selections" : selections
             },
             success: function(data) {},
             error: function(data) {

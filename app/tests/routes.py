@@ -244,8 +244,10 @@ def test_update_user_score():
 	attempted_ques = request.form['no_of_attempted_ans_ques']
 	print('Hello reached the test score update')
 
-	selections = json.loads(request.form['selections'])
-
+	if request.form['selections']:
+		selections = request.form['selections']
+	else:
+		selections = '';
 	print('selections is : ' + str(selections))
 	user_selections = str(selections)
 	map_total_score = json.loads(request.form['map_total_score'])

@@ -20,7 +20,11 @@
 
             // console.log('typeof sample_arr is : ' +  typeof(sample_arr));
 
-
+if(user_selections)
+{
+                        console.log("first  : " + user_selections);
+                            user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
+}
 
     var isSubmit = 1;
         var x = document.getElementById('submitQuiz');
@@ -317,11 +321,10 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';
                     }
 
-
                     if (isSubmit === 1) {
                         if(type_of_question == 1)
                         {
-
+                            console.log('user_selections is : ' + user_selections);
                             console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
 
                             if (i == questionsAns[index].correctAnswer - 1){
