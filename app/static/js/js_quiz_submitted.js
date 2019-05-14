@@ -1,7 +1,7 @@
 (function() {
 
-        user_selections = user_selections.replace(/[[\]]/g,'')
-        user_selections = user_selections.split(',');
+        // user_selections = user_selections.replace(/[[\]]/g,'')
+        // user_selections = user_selections.split(',');
             // user_selections = JSON.stringify(user_selections);
             // user_selections = JSON.parse(user_selections);
             // console.log('ques_type is 2');
