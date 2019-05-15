@@ -1,5 +1,14 @@
 (function() {
 
+
+    if(user_selections)
+    {
+        console.log('user_selections is not null = ' + user_selections);
+    }
+    else
+    {
+        console.log('user_selections is null');
+    }
         // user_selections = user_selections.replace(/[[\]]/g,'')
         // user_selections = user_selections.split(',');
             // user_selections = JSON.stringify(user_selections);
@@ -46,8 +55,8 @@
     $('#count').hide();
 
 
-    // Click handler for the 'startQuiz' button
-    $('#startQuiz').on('click', function(e) {
+    // Click handler for the 'checkQuiz' button
+    $('#checkQuiz').on('click', function(e) {
                 $('#ques_nav_container').show();
 
                 $('#test-title').hide();
@@ -113,7 +122,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
             document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
     });
-        $('#startQuiz').hide();
+        $('#checkQuiz').hide();
         // $('#submitQuiz').show();
         $('#test_instr_div').hide();
 
@@ -291,8 +300,6 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         var type_of_question = questions[index].type;
         item = $('<li> style="height: 1.8em;"');
 
-
-
         if(type_of_question != 3)
         {
                 for (var i = 0; i < questions[index].choices.length; i++) {
@@ -335,8 +342,10 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         }
                         else if(type_of_question == 2)
                         {
-// console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
-                            user_selections_ans[index];
+console.log('user_selections is : ' + user_selections);
+console.log('user_selections[3] is : ' + user_selections[3]);
+
+                            // user_selections_ans[index];
                             var ans_list = questionsAns[index].correctAnswer;
 
                             // console.log('ans_list is : ' + ans_list);
@@ -346,12 +355,12 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             }
-                            if( user_selections_ans[questionCounter] != null && (user_selections_ans[questionCounter].indexOf(i) > -1)
+                            if( user_selections[questionCounter] != null && (user_selections[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i) > -1)
                             {
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
-                             if(selections[questionCounter] != null &&  (user_selections_ans[questionCounter].indexOf(i) > -1)
+                             if(selections[questionCounter] != null &&  (user_selections[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i) == -1)
                             {
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
@@ -465,6 +474,8 @@ jQuery(document).bind("contextmenu cut copy",function(e){
             // console.log(selections[questionCounter]);
             if(selections[questionCounter])
             {
+                console.log(questionCounter);
+                console.log(selections[questionCounter]);
                 document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
             }
             else
@@ -478,6 +489,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
     function getQuestions(test_id) {
 
+console.log('called');
         test_id = test_id.replace(/ /g, '');
 
         $.ajax({
@@ -490,27 +502,35 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                 let parsedData = JSON.parse(data);
                 questions = parsedData;
                 questionsAns = questions;
-                displayNext();
                 createRandomButtons();
                 var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
 
 
                 if(user_selections)
                 {
-                    // console.log("first  : " + user_selections);
-                    user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
+                    console.log("first  : " + user_selections);
+                    user_selections = user_selections.replace(/None/g, '"None"');
+                    user_selections = JSON.parse(user_selections);
+
+                    console.log(user_selections);
+
+                    // user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
                 }
 
                 for(var i=0;i<user_selections.length;i++)
                 {
-                    if(user_selections[i] && user_selections[i] !== 'None'){
+                    if(user_selections[i] && user_selections[i] !== "None"){
+                        console.log('user_selections[i] = ' + user_selections[i]);
                         document.getElementById('random' + i).setAttribute("class", document.getElementById('random' + i).getAttribute("class")+" lightseagreen");
                     }
                 }
+                displayNext();
 
             $('.randomClass').removeClass("yellow");
 
+            console.log('yyy is : ' + yyy);
 
+            var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
 
             document.getElementById('random' + questionCounter).setAttribute("class",yyy + " yellow");
             },
@@ -690,8 +710,6 @@ var prev_color;
 
         if(user_selections[questionCounter])
         {
-                    user_selections[questionCounter] = user_selections[questionCounter].replace(/ /g,'');
-
                         // console.log(user_selections[questionCounter]);
             if(user_selections[questionCounter] === 'None')
             {
