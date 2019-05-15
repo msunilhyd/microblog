@@ -586,7 +586,9 @@ br.test {
     border-radius:5px;
     border : 2px solid black;
     border : 2px solid black;
-    width: 50px;
+    width: 35px;
+    height: 33px;
+
     padding-left:5px;
     padding-right: 5px;
     position: relative;
