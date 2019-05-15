@@ -216,6 +216,7 @@ p {
     font-family: 'Source Sans Pro Bold', sans-serif;
     float:left;
       font-weight:bold;
+      color:#3786bd;
 
 }
 
@@ -656,6 +657,7 @@ button {
       font-weight: bold;
           font-family: 'Source Sans Pro Bold', sans-serif;
     margin-top: 15px;
+    color:#3786bd;
 
 }
 

@@ -356,29 +356,38 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         }
                         else if(type_of_question == 2)
                         {
-                                console.log('user_selections is : ' + user_selections);
-                                console.log('user_selections[3] is : ' + user_selections[3]);
+                                console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
 
                             // user_selections_ans[index];
                             var ans_list = questionsAns[index].correctAnswer;
 
-                            // console.log('ans_list is : ' + ans_list);
+                            console.log('ans_list is : ' + ans_list);
                             // console.log('selections[questionCounter] is : ' + selections[questionCounter]);
-
+                            input = "";
+                            if(i == 0)
+                            {
+                                input += "<br>";
+                            }
                             if(ans_list != null && ans_list.indexOf(i+1) > -1)
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             }
-                            if( user_selections[questionCounter] != null && (user_selections[questionCounter].indexOf(i) > -1)
-                                && ans_list != null && ans_list.indexOf(i) > -1)
+                            if( user_selections[questionCounter] != null && (user_selections[questionCounter].indexOf(i+1) > -1)
+                                && ans_list != null && ans_list.indexOf(i+1) > -1)
                             {
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
-                             if(selections[questionCounter] != null &&  (user_selections[questionCounter].indexOf(i) > -1)
-                                && ans_list != null && ans_list.indexOf(i) == -1)
+                            else if(user_selections[questionCounter] != null &&  (user_selections[questionCounter].indexOf(i) > -1)
+                                && ans_list != null && ans_list.indexOf(i+1) == -1)
                             {
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
+
+                                input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
+
+
+                            input += '<input type="radio" name="answer' + i + '" + class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                            input += '<label for=' + i + '>' + questions[index].choices[i] + '</label><br>';
                         }
                     }
 
@@ -526,7 +535,9 @@ console.log('called');
                     user_selections = user_selections.replace(/None/g, '"None"');
                     user_selections = JSON.parse(user_selections);
 
-                    console.log(user_selections);
+                    console.log('at user_selections[0]'+user_selections[0]);
+                    console.log('at user_selections[1]'+user_selections[1]);
+
 
                     // user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
                 }
