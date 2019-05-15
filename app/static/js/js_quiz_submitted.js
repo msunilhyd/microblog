@@ -328,22 +328,36 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         {
                             // console.log('user_selections is : ' + user_selections);
                             // console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
-
+                            input = "";
+                            if(i == 0)
+                            {
+                                input = "<br>";
+                            }
                             if (i == questionsAns[index].correctAnswer - 1){
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                             } else if ((i != questionsAns[index].correctAnswer - 1) &&
                                 (i == user_selections[questionCounter])) {
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
-                            if((i == questionsAns[index].correctAnswer - 1) && (i == user_selections[questionCounter]))
+                            else if((i == questionsAns[index].correctAnswer - 1) && (i == user_selections[questionCounter]))
                             {
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
+                            else{
+                                input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
+                            }
+
+
+                            input += '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                            var str = questions[index].choices[i];
+
+                            input += '<label for=' + i + '>' + questions[index].choices[i] + '</label><br>';
+
                         }
                         else if(type_of_question == 2)
                         {
-console.log('user_selections is : ' + user_selections);
-console.log('user_selections[3] is : ' + user_selections[3]);
+                                console.log('user_selections is : ' + user_selections);
+                                console.log('user_selections[3] is : ' + user_selections[3]);
 
                             // user_selections_ans[index];
                             var ans_list = questionsAns[index].correctAnswer;
