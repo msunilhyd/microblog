@@ -217,10 +217,12 @@ p {
     float:left;
       font-weight:bold;
       color:#3786bd;
-
 }
 
 
+.alert-info{
+background-color: #3786bd;
+}
 .section_type_div
 {
   text-align:center;
