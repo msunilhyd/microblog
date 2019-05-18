@@ -303,7 +303,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
         if(type_of_question != 3)
         {
-            
+
                 for (var i = 0; i < questions[index].choices.length; i++) {
 
                     if(type_of_question == 1)
@@ -330,7 +330,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         {
                             // console.log('user_selections is : ' + user_selections);
                             // console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
-                           
+
                             input = "";
                             if(i == 0)
                             {
@@ -377,7 +377,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                                 input += "<br>";
                             }
                             console.log(ans_list)
-                            if(ans_list != null && ans_list.indexOf(i+1) > -1 && user_selections[questionCounter] != null 
+                            if(ans_list != null && ans_list.indexOf(i+1) > -1 && user_selections[questionCounter] != null
                                 && (user_selections[questionCounter].indexOf(i) == -1))
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
@@ -419,7 +419,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                 // console.log('index is : ' + index);
                 // console.log('selections is : ' + selections);
 
-                    var userAns = selections[index];
+                    var userAns = user_selections[index];
                     input = $('<input/>');
                     input.attr("type","text");
                     input.attr("name", "int_answer");
@@ -432,7 +432,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
                     radioList.append(item);
 
-                    var userAns = selections[index];
+                    var userAns = user_selections[index];
 
                 if(userAns !== undefined && userAns !=="")
                 {
@@ -511,8 +511,8 @@ jQuery(document).bind("contextmenu cut copy",function(e){
             // console.log(selections[questionCounter]);
             if(selections[questionCounter])
             {
-                console.log(questionCounter);
-                console.log(selections[questionCounter]);
+                // console.log(questionCounter);
+                // console.log(selections[questionCounter]);
                 document.getElementById('random' + questionCounter).setAttribute("class", document.getElementById('random' + questionCounter).getAttribute("class")+" lightseagreen");
             }
             else
@@ -526,7 +526,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
     function getQuestions(test_id) {
 
-console.log('called');
+// console.log('called');
         test_id = test_id.replace(/ /g, '');
 
         $.ajax({
@@ -545,12 +545,12 @@ console.log('called');
 
                 if(user_selections)
                 {
-                    console.log("first  : " + user_selections);
+                    // console.log("first  : " + user_selections);
                     user_selections = user_selections.replace(/None/g, '"None"');
                     user_selections = JSON.parse(user_selections);
 
-                    console.log('at user_selections[0]'+user_selections[0]);
-                    console.log('at user_selections[1]'+user_selections[1]);
+                    // console.log('at user_selections[0]'+user_selections[0]);
+                    // console.log('at user_selections[1]'+user_selections[1]);
 
 
                     // user_selections = user_selections.replace(/[\[\]']+/g,'').split(',');
@@ -559,7 +559,7 @@ console.log('called');
                 for(var i=0;i<user_selections.length;i++)
                 {
                     if(user_selections[i] && user_selections[i] !== "None"){
-                        console.log('user_selections[i] = ' + user_selections[i]);
+                        // console.log('user_selections[i] = ' + user_selections[i]);
                         document.getElementById('random' + i).setAttribute("class", document.getElementById('random' + i).getAttribute("class")+" lightseagreen");
                     }
                 }
@@ -567,7 +567,7 @@ console.log('called');
 
             $('.randomClass').removeClass("yellow");
 
-            console.log('yyy is : ' + yyy);
+            // console.log('yyy is : ' + yyy);
 
             var yyy = document.getElementById('random' + questionCounter).getAttribute("class");
 
@@ -618,7 +618,7 @@ var prev_color;
 
             $radio.prop('checked', false);
             $radio.data('waschecked', false);
-            console.log('coming here');
+            // console.log('coming here');
             if(questions[questionCounter].type === 2)
             {
 
@@ -633,18 +633,18 @@ var prev_color;
                     $('[name="answer2"]').prop('checked') ||
                     $('[name="answer3"]').prop('checked'))
                 {
-                    console.log('questype is 2');
+                    // console.log('questype is 2');
                     document.getElementById('random' + questionCounter).setAttribute("class", "randomClass lightseagreen");
                 }
                 else
                 {
-                    console.log('questype is 2 else ');
+                    // console.log('questype is 2 else ');
                     document.getElementById('random' + questionCounter).setAttribute("class", "randomClass none");
                 }
             }
             else
             {
-                console.log('questype is  not 2');
+                // console.log('questype is  not 2');
                 document.getElementById('random' + questionCounter).setAttribute("class", "randomClass none");
             }
 
@@ -752,7 +752,7 @@ var prev_color;
                         // console.log(user_selections[questionCounter]);
             if(user_selections[questionCounter] === 'None')
             {
-                console.log('None, not answered');
+                // console.log('None, not answered');
                 document.getElementById('timerCount').innerHTML = 'Not Answered';
             }
             else
