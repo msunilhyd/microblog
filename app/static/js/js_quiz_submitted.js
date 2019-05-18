@@ -377,25 +377,27 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                                 input += "<br>";
                             }
                             console.log(ans_list)
-                            if(ans_list != null && ans_list.indexOf(i+1) > -1 && user_selections[questionCounter] != null
-                                && (user_selections[questionCounter].indexOf(i) == -1))
+                            if(ans_list != null && ans_list.indexOf(i+1) > -1 )
                             {
+                                console.log(1);
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                                 input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                             }
                             else if( user_selections[questionCounter] != null && (user_selections[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i+1) > -1)
                             {
+                                console.log(2);
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
                             else if(user_selections[questionCounter] != null &&  (user_selections[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i+1) == -1)
                             {
+                                console.log(3);
                                  input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }else{
-
+                                    console.log(4);
                                 input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                                 input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                             }
@@ -434,7 +436,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
                     var userAns = user_selections[index];
 
-                if(userAns !== undefined && userAns !=="")
+                if(userAns !== undefined && userAns !=="" && userAns !=="None")
                 {
                     var input2 = $('<input/>');
                     var item2 = $('<li> style="height: 1.8em;"');
