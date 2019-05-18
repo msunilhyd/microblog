@@ -300,8 +300,10 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         var type_of_question = questions[index].type;
         item = $('<li> style="height: 1.8em;"');
 
+
         if(type_of_question != 3)
         {
+            
                 for (var i = 0; i < questions[index].choices.length; i++) {
 
                     if(type_of_question == 1)
@@ -328,22 +330,27 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         {
                             // console.log('user_selections is : ' + user_selections);
                             // console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
+                           
                             input = "";
                             if(i == 0)
                             {
                                 input = "<br>";
                             }
-                            if (i == questionsAns[index].correctAnswer - 1){
+                            if (i == questionsAns[index].correctAnswer - 1 && i != user_selections[questionCounter]){
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
+                                input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                             } else if ((i != questionsAns[index].correctAnswer - 1) &&
                                 (i == user_selections[questionCounter])) {
+                                input += '<span id="tick" style="color:red;visibility:hidden"> &#10003; </span>';
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
                             }
                             else if((i == questionsAns[index].correctAnswer - 1) && (i == user_selections[questionCounter]))
                             {
+                                input += '<span id="tick" style="color:green;"> &#10003; </span>';
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
                             else{
+                                input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                                 input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                             }
 
@@ -356,6 +363,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                         }
                         else if(type_of_question == 2)
                         {
+
                                 console.log('user_selections[questionCounter] is : ' + user_selections[questionCounter]);
 
                             // user_selections_ans[index];
@@ -368,23 +376,29 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                             {
                                 input += "<br>";
                             }
-                            if(ans_list != null && ans_list.indexOf(i+1) > -1)
+                            console.log(ans_list)
+                            if(ans_list != null && ans_list.indexOf(i+1) > -1 && user_selections[questionCounter] != null 
+                                && (user_selections[questionCounter].indexOf(i) == -1))
                             {
                                 input += '<span id="tick" style="color:green;"> &#10003; </span>';
+                                input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                             }
-                            if( user_selections[questionCounter] != null && (user_selections[questionCounter].indexOf(i+1) > -1)
+                            else if( user_selections[questionCounter] != null && (user_selections[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i+1) > -1)
                             {
+                                input += '<span id="tick" style="color:green;"> &#10003; </span>';
                                 input += '<span id="tick" style="color:red;"> &#10003; </span>';
                             }
                             else if(user_selections[questionCounter] != null &&  (user_selections[questionCounter].indexOf(i) > -1)
                                 && ans_list != null && ans_list.indexOf(i+1) == -1)
                             {
+                                 input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
                                 input += '<span id="cross" style="color:red;"> &#10005; </span>';
-                            }
+                            }else{
 
                                 input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
-
+                                input += '<span id="tick" style="color:green;visibility:hidden"> &#10003; </span>';
+                            }
 
                             input += '<input type="radio" name="answer' + i + '" + class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
                             input += '<label for=' + i + '>' + questions[index].choices[i] + '</label><br>';
