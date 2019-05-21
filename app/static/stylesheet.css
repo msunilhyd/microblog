@@ -55,6 +55,15 @@ a {
   display: block;
 }
 
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 0px solid transparent;
+}
+
+
 .main-nav a {
   color: #34495e;
   font-size: .99em;
