@@ -34,10 +34,10 @@
         var x = document.getElementById('submitQuiz');
         x.style.display = "none";
 
-    $(window).on('beforeunload', function() {
-        $('#submitQuiz').click();
-        return 'Are you sure you want to leave?';
-    });
+    // $(window).on('beforeunload', function() {
+    //     $('#submitQuiz').click();
+    //     return 'Are you sure you want to leave?';
+    // });
 
     var questions = [];
 
@@ -64,20 +64,20 @@
 jQuery(document).bind("contextmenu cut copy",function(e){
     e.preventDefault();
 });
-        $("a.nav-item").off('click').on('click', function(e) {
+        // $("a.nav-item").off('click').on('click', function(e) {
 
-            if ($('#timerCount').css('display') != 'none') {
-                var b = confirm("Your test will auto-submit if you leave with still time left. Select Cancel to go back to the test.");
-                if (!b) {
-                    e.preventDefault();
-                    return false;
-                } else {
-                    $('#submitQuiz').click();
-                }
-            } else {
-                console.log('timerCount is hidden');
-            }
-        });
+        //     if ($('#timerCount').css('display') != 'none') {
+        //         var b = confirm("Your test will auto-submit if you leave with still time left. Select Cancel to go back to the test.");
+        //         if (!b) {
+        //             e.preventDefault();
+        //             return false;
+        //         } else {
+        //             $('#submitQuiz').click();
+        //         }
+        //     } else {
+        //         console.log('timerCount is hidden');
+        //     }
+        // });
 
  // Click handler for the 'next' button
     $('#next').on('click', function(e) {
@@ -377,6 +377,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                                 input += "<br>";
                             }
                             console.log(ans_list)
+                            console.log('index of i+1 in ans_list is : ' + ans_list.indexOf(i+1));
                             if(ans_list != null && ans_list.indexOf(i+1) > -1 )
                             {
                                 console.log(1);

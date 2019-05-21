@@ -1,9 +1,5 @@
 (function() {
 
-    $(window).on('beforeunload', function() {
-        $('#submitQuiz').click();
-        return 'Are you sure you want to leave?';
-    });
 
     var questions = [];
 
@@ -695,9 +691,6 @@ var prev_color;
         getAnswers(test_id);
 
         e.preventDefault();
-        $(window).off('beforeunload');
-        window.location.href = test_id;
-
         return false;
     });
 
@@ -713,11 +706,14 @@ var prev_color;
             },
             success: function(data) {
                 let parsedData = JSON.parse(data);
+
                 questionsAns = parsedData;
                 var scoreElem = displayScore(questionsAns);
                 quiz.append(scoreElem).fadeIn();
                 document.getElementById('nav_for_questions').insertAdjacentHTML('afterbegin', "<h4 id='nav_for_questions'>You can use the below for " +
                     "correct answers </h4>");
+                // $(window).off('beforeunload');
+                window.location.href = test_id;
             },
             error: function(data) {
                 console.log("Error getting questions from server");
