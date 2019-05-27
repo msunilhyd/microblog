@@ -161,11 +161,11 @@ window.time = t--;
         for (var i = 0; i < questions.length; i++) {
             if (i == 0)
             {
-                item +=  '<div class="col-sm-4"><div id="">' + questions[i].section + '</div> ';
+                item +=  '<div class="col-sm-4"><div id="section_at_test">' + questions[i].section + '</div> ';
             }
             if(questions[i].section !== local_section)
             {
-                item +=  '</div><div id="">' + questions[i].section + '</div> <div class="col-sm-4">';
+                item +=  '</div><div class="col-sm-4"><div id="section_at_test">' + questions[i].section + '</div> ';
                 local_section = questions[i].section;
             }
 
@@ -176,7 +176,6 @@ window.time = t--;
 
             item += input;
         }
-        console.log('item is: ' + item);
         item += '<div/><div/>';
         document.getElementById('ques_buttons_div').innerHTML = item;
     }
