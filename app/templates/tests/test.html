@@ -6,18 +6,15 @@
 
         <h2 class="taken-test-p"> <strong> Test Name : <font color="darkslateblue"> {{ test.test_name }}</h2>
 
-      <p class="taken-test-p"> <strong>   Category : <font color="darkslateblue"> {{ test.category }}</p>
-
       {% if usertest == None %}
 
                   <div class='taken-test-btn' id='taken-test-btn'><a href="{{ url_for('tests.take_test', test_id=test.id) }}">Take Test</a></div>
 
       {% else %}
-          <p class="taken-test-p"> <strong> Status = <font color="darkslateblue"> Taken </strong> </p>
-          <p class="taken-test-p">
+          <p class="taken-test-p date-after-test">
             <strong> Date = <font color="darkslateblue">
                                     {{ moment(usertest.timestamp).format('LLL')}}
-                                    {{ moment.include_jquery() }}
+                                    <!-- {{ moment.include_jquery() }} -->
                                     {{ moment.include_moment() }}
               </strong>
           </p>
@@ -28,32 +25,32 @@
 
           <table id="score-sheet">
 
-            <tr>
-              <th>Total</th>
-              <th>Total Qs </th>
-              <th>Your Score</th>
-              <th>Postive </th>
-              <th>Negative </th>
-              <th>Attempted</th>
-              <th>Un-Attempted</th>
-              <th>Correct</th>
-              <th>Wrong</th>
-              <th>Time Taken(mins)</th>
+
+ <tr>
+    <th>Maths</th>
+    <th>Physics</th>
+    <th>Chemistry</th>
+    <th>Total</th>
+  </tr>
+  <tr>Correct
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+
 
             <tr>
+              <!-- <th>Percent</th> -->
+              <tr>Score</tr>
+              <tr>Correct</tr>
+              <tr>Wrong</tr>
+              <tr>N.A</td>
+            <tr>
 
-              <td>{{ test.total_marks }}</td>
-              <td>{{ test.total_no_of_questions }}</td>
               <td>{{ usertest.user_score }}</td>
-              <td>{{ usertest.positive_score }}</td>
-              <td>{{ usertest.negative_score }}</td>
-              <td>{{ usertest.attempted_ques }}</td>
-              <td>{{ usertest.no_answers }}</td>
               <td>{{ usertest.correct_answers }}</td>
               <td>{{ usertest.wrong_answers }}</td>
-              <td>{{ usertest.time_taken }}</td>
-
-
+              <td>{{ usertest.no_answers }}</td>
             </tr>
 
           </table>

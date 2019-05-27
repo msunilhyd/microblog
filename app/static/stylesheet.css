@@ -45,8 +45,12 @@ a {
 
 .main-nav {
   margin-top: 5px;
-
 }
+
+.date-after-test{
+  float: right;
+}
+
 .logo a,
 .main-nav a {
   padding: 10px 15px;
@@ -795,8 +799,8 @@ label {
   text-align: center;
 }
 
-#score-sheet tr:nth-child(odd){background-color: #3786bd; color: white}
-#score-sheet tr:nth-child(even){background-color: #ddd; color: black}
+/*#score-sheet tr:nth-child(odd){background-color: #3786bd; color: white}*/
+/*#score-sheet tr:nth-child(even){background-color: #ddd; color: black}*/
 
 #score-sheet th {
   padding-top: 12px;

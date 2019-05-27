@@ -157,31 +157,27 @@ window.time = t--;
         var input = '';
 
         var local_section = questions[0].section;
+        item += '<div class="row">';
         for (var i = 0; i < questions.length; i++) {
             if (i == 0)
             {
-                item +=  '<div id="section_at_test">' + questions[i].section + '</div> ';
+                item +=  '<div class="col-sm-4"><div id="">' + questions[i].section + '</div> ';
             }
             if(questions[i].section !== local_section)
             {
-                item +=  '<div id="section_at_test">' + questions[i].section + '</div> ';
+                item +=  '</div><div id="">' + questions[i].section + '</div> <div class="col-sm-4">';
                 local_section = questions[i].section;
             }
 
             var j = i + 1;
 
             input = '<input type="button" name="random" class="randomClass" id=random' + i +
-                ' value=' + j + ' onclick="randomQuesFun(' + i + ')"></div>';
+                ' value=' + j + ' onclick="randomQuesFun(' + i + ')">';
 
             item += input;
-
-
-            if((j % 10) == 0)
-            {
-                item += '<br>';
-            }
         }
-
+        console.log('item is: ' + item);
+        item += '<div/><div/>';
         document.getElementById('ques_buttons_div').innerHTML = item;
     }
 
@@ -309,15 +305,7 @@ window.time = t--;
                         input = '<br><input type="radio" name="answer' + i + '" + class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
                     }
 
-                    var str = questions[index].choices[i];
-                    var n = str.endsWith(".png");
-
-                    if (n === true) {
-                        var img_file = '<br><img src="/static/questions/' + questions[index].choices[i] + '"width="auto" height="auto">';
-                        input += '<label for=' + i + '>' + img_file + '</label>';
-                    } else {
-                        input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';
-                    }
+                    input += '<label for=' + i + '>' + questions[index].choices[i] + '</label>';
 
 
                     if (isSubmit === 1) {
