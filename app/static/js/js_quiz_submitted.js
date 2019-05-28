@@ -350,7 +350,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
                             }
 
 
-                            input += '<input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
+                            // input += '<br><input type="radio" name="answer" class="radioClass" id=' + i + ' value=' + i + ' onclick="selectradio(event)" />';
                             var str = questions[index].choices[i];
 
                             input += '<label for=' + i + '>' + questions[index].choices[i] + '</label><br>';
