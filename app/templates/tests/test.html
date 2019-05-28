@@ -23,137 +23,52 @@
 
           <h2 class="taken-test-p"><strong> Score Sheet Total </strong></h2>
 
-          <table id="score-sheet">
 
 
- <tr>
-    <th>Maths</th>
-    <th>Physics</th>
-    <th>Chemistry</th>
-    <th>Total</th>
-  </tr>
-  <tr>Correct
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-
-
-            <tr>
-              <!-- <th>Percent</th> -->
-              <tr>Score</tr>
-              <tr>Correct</tr>
-              <tr>Wrong</tr>
-              <tr>N.A</td>
-            <tr>
-
-              <td>{{ usertest.user_score }}</td>
-              <td>{{ usertest.correct_answers }}</td>
-              <td>{{ usertest.wrong_answers }}</td>
-              <td>{{ usertest.no_answers }}</td>
+    <table id="score-sheet">
+             <tr>
+              <th></th>
+              <th bgcolor="#3786bd"><font color="white">Maths</font> </th>
+              <th bgcolor="#3786bd"><font color="white">Physics</font></th>
+              <th bgcolor="#3786bd"><font color="white">Chemistry</font></th>
+              <th bgcolor="#3786bd"><font color="white">Total</font></th>
             </tr>
-
-          </table>
-<br>
-          <h2 class="taken-test-p"><strong> Score Sheet Sections </strong></h2>
-
-
-          <h3 class="taken-test-p"><strong> Maths </strong></h2>
-
-          <table id="score-sheet">
-
             <tr>
-              <th>Total</th>
-              <th>Total Qs </th>
-              <th>Your Score</th>
-              <th>Postive </th>
-              <th>Negative </th>
-              <th>Attempted</th>
-              <th>Un-Attempted</th>
-              <th>Correct</th>
-              <th>Wrong</th>
-
-            <tr>
-
-              <td>{{ test.marks_maths }}</td>
-              <td>{{ test.no_of_questions_maths }}</td>
-              <td>{{ usertest.total_score_maths }}</td>
-              <td>{{ usertest.positive_score_maths }}</td>
-              <td>{{ usertest.negative_score_maths }}</td>
-              <td>{{ usertest.attempted_maths }}</td>
-              <td>{{ usertest.un_attempted_maths }}</td>
-              <td>{{ usertest.correct_attempted_maths }}</td>
-              <td>{{ usertest.wrong_attempted_maths }}</td>
-
+                <th bgcolor="#3786bd"><font color="white">Score</font> </th>
+                <td>{{ usertest.total_score_maths }}</td>
+                <td>{{ usertest.total_score_physics }}</td>
+                <td>{{ usertest.total_score_chemistry }}</td>
+                <td>{{ usertest.user_score }}</td>
             </tr>
-
-          </table>
-
-
-<br>
-          <h3 class="taken-test-p"><strong> Physics </strong></h2>
-
-          <table id="score-sheet">
-
             <tr>
-              <th>Total</th>
-              <th>Total Qs </th>
-              <th>Your Score</th>
-              <th>Postive </th>
-              <th>Negative </th>
-              <th>Attempted</th>
-              <th>Un-Attempted</th>
-              <th>Correct</th>
-              <th>Wrong</th>
-
-            <tr>
-
-              <td>{{ test.marks_physics }}</td>
-              <td>{{ test.no_of_questions_physics }}</td>
-              <td>{{ usertest.total_score_physics }}</td>
-              <td>{{ usertest.positive_score_physics }}</td>
-              <td>{{ usertest.negative_score_physics }}</td>
-              <td>{{ usertest.attempted_physics }}</td>
-              <td>{{ usertest.un_attempted_physics }}</td>
-              <td>{{ usertest.correct_attempted_physics }}</td>
-              <td>{{ usertest.wrong_attempted_physics }}</td>
-
+                <th bgcolor="#3786bd"><font color="white">Correct</font> </th>
+                <td>{{ usertest.correct_attempted_maths }}</td>
+                <td>{{ usertest.correct_attempted_physics }}</td>
+                <td>{{ usertest.correct_attempted_chemistry }}</td>
+                <td>{{ usertest.correct_answers }}</td>
             </tr>
-
-          </table>
-
-
-<br>
-          <h3 class="taken-test-p"><strong> Chemistry </strong></h2>
-
-          <table id="score-sheet">
-
             <tr>
-              <th>Total</th>
-              <th>Total Qs </th>
-              <th>Your Score</th>
-              <th>Postive </th>
-              <th>Negative </th>
-              <th>Attempted</th>
-              <th>Un-Attempted</th>
-              <th>Correct</th>
-              <th>Wrong</th>
-
-            <tr>
-
-              <td>{{ test.marks_chemistry }}</td>
-              <td>{{ test.no_of_questions_chemistry }}</td>
-              <td>{{ usertest.total_score_chemistry }}</td>
-              <td>{{ usertest.positive_score_chemistry }}</td>
-              <td>{{ usertest.negative_score_chemistry }}</td>
-              <td>{{ usertest.attempted_chemistry }}</td>
-              <td>{{ usertest.un_attempted_chemistry }}</td>
-              <td>{{ usertest.correct_attempted_chemistry }}</td>
-              <td>{{ usertest.wrong_attempted_chemistry }}</td>
-
+                <th bgcolor="#3786bd"><font color="white">Wrong</font> </th>
+                <td>{{ usertest.wrong_attempted_maths }}</td>
+                <td>{{ usertest.wrong_attempted_physics }}</td>
+                <td>{{ usertest.wrong_attempted_chemistry }}</td>
+                <td>{{ usertest.wrong_answers }}</td>
             </tr>
-
-          </table>
+            <tr>
+                <th bgcolor="#3786bd"><font color="white">N.A</font> </th>
+                <td>{{ usertest.un_attempted_maths }}</td>
+                <td>{{ usertest.un_attempted_physics }}</td>
+                <td>{{ usertest.un_attempted_chemistry }}</td>
+                <td>{{ usertest.no_answers }}</td>
+            </tr>
+            <tr>
+                <th bgcolor="#3786bd"><font color="white">Percent </font> </th>
+                <td>{{ 100 * (usertest.total_score_maths/test.marks_maths)  | round(2) }}</td>
+                <td>{{ 100 * (usertest.total_score_physics/test.marks_physics) | round(2) }}</td>
+                <td>{{ 100 * (usertest.total_score_chemistry/test.marks_chemistry) | round(2) }}</td>
+                <td>{{ 100 * (usertest.user_score/test.total_marks) | round(2) }}</td>
+            </tr>
+        </table>
 
 
 <h1></h1>
@@ -185,7 +100,9 @@
         <div id='end_of_test_div' class='end_of_test_div' >Reached End of Test.
           </div>
         <div id='quiz' > </div>
-        <div class='button' id='checkQuiz'><a href='#'>Check Answers</a></div>
+        <div class='checkQuiz' id='checkQuiz'><a href='#'>Check Answers</a></div>
+        <div class='retryQuiz' id='retryQuiz'><a href='#'>Retake</a></div>
+
         <div class='prev_next' id='prev'><a href='#'>Prev</a></div>
         <div class='prev_next' id='next'><a href='#'>Next</a></div>
 
