@@ -4,28 +4,35 @@
   <article class="media content-section">
     <div class="media-body">
 
-        <h2 class="taken-test-p"> <strong> Test Name : <font color="darkslateblue"> {{ test.test_name }}</h2>
+        <h2 class="taken-test-p"> <strong> {{ test.test_name }}</h2>
 
       {% if usertest == None %}
 
                   <div class='taken-test-btn' id='taken-test-btn'><a href="{{ url_for('tests.take_test', test_id=test.id) }}">Take Test</a></div>
 
       {% else %}
-          <p class="taken-test-p date-after-test">
-            <strong> Date = <font color="darkslateblue">
-                                    {{ moment(usertest.timestamp).format('LLL')}}
-                                    <!-- {{ moment.include_jquery() }} -->
-                                    {{ moment.include_moment() }}
-              </strong>
-          </p>
+      <div>
+
+          <div class="date-right">
+            <p class="taken-test-p date-after-test">
+              <strong>
+                                      {{ moment(usertest.timestamp).format('LLL')}}
+                                      <!-- {{ moment.include_jquery() }} -->
+                                      {{ moment.include_moment() }}
+                </strong>
+            </p>
+        </div>
+<br>
+
+          <div class="score-left">
+            <h2 class="taken-test-p-sheet"><strong> Score Sheet  </strong></h2>
+          </div>
+</div>
+<br>
 
 
 
-          <h2 class="taken-test-p"><strong> Score Sheet Total </strong></h2>
-
-
-
-    <table id="score-sheet">
+    <table id="score-sheet" align="center">
              <tr>
               <th></th>
               <th bgcolor="#3786bd"><font color="white">Maths</font> </th>

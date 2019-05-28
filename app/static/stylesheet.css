@@ -273,9 +273,25 @@ background-color: #3786bd;
 }
 
 
+.date-right{
+  float: right;
+}
+
+.score-left{
+  float:left;
+}
+
 .taken-test-p{
   color: #3786bd;
   font-size: 20px;
+  text-align: center;
+}
+
+.taken-test-p-sheet{
+  color: #3786bd;
+  font-size: 20px;
+  float: left;
+  margin-top: -20px;
 }
 
 .navbar-nav{
@@ -806,7 +822,7 @@ label {
 
 #score-sheet {
   border-collapse: collapse;
-  width: 100%;
+  width: 60%;
 }
 
 #score-sheet td, #score-sheet th {
