@@ -159,31 +159,26 @@ jQuery(document).bind("contextmenu cut copy",function(e){
         var input = '';
 
         var local_section = questions[0].section;
+        item += '<div class="row">';
         for (var i = 0; i < questions.length; i++) {
             if (i == 0)
             {
-                item +=  '<div id="section_at_test">' + questions[i].section + '</div> ';
+                item +=  '<div class="col-sm-4"><div id="section_at_test">' + questions[i].section + '</div> ';
             }
             if(questions[i].section !== local_section)
             {
-                item +=  '<div id="section_at_test">' + questions[i].section + '</div> ';
+                item +=  '</div><div class="col-sm-4"><div id="section_at_test">' + questions[i].section + '</div> ';
                 local_section = questions[i].section;
             }
 
             var j = i + 1;
 
             input = '<input type="button" name="random" class="randomClass" id=random' + i +
-                ' value=' + j + ' onclick="randomQuesFun(' + i + ')"></div>';
+                ' value=' + j + ' onclick="randomQuesFun(' + i + ')">';
 
             item += input;
-
-
-            if((j % 10) == 0)
-            {
-                item += '<br>';
-            }
         }
-
+        item += '<div/><div/>';
         document.getElementById('ques_buttons_div').innerHTML = item;
     }
 
