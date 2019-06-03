@@ -28,7 +28,6 @@ jQuery(document).bind("contextmenu cut copy",function(e){
     e.preventDefault();
 });
         $("a.nav-item").off('click').on('click', function(e) {
-
             if ($('#timerCount').css('display') != 'none') {
                 var b = confirm("Your test will auto-submit if you leave with still time left. Select Cancel to go back to the test.");
                 if (!b) {
@@ -40,6 +39,7 @@ jQuery(document).bind("contextmenu cut copy",function(e){
             } else {
                 console.log('timerCount is hidden');
             }
+            return true;
         });
 
  // Click handler for the 'next' button
