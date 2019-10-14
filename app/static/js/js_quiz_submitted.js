@@ -556,8 +556,12 @@ jQuery(document).bind("contextmenu cut copy",function(e){
 
                 for(var i=0;i<user_selections.length;i++)
                 {
-                    if(user_selections[i] && user_selections[i] !== "None"){
-                        // console.log('user_selections[i] = ' + user_selections[i]);
+                    user_selections[i] = String(user_selections[i]);
+                    console.log('user_selections[i] = ' + user_selections[i]);
+                    console.log('user_selections[i].length = ' + user_selections[i].length);
+                    
+                    if(user_selections[i] && ( user_selections[i] !== 'None' || user_selections[i] === 0 ) ){
+                        console.log('Yes');
                         document.getElementById('random' + i).setAttribute("class", document.getElementById('random' + i).getAttribute("class")+" lightseagreen");
                     }
                 }
